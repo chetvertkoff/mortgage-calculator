@@ -1,0 +1,45 @@
+import gql from 'graphql-tag'
+
+export const typeDefs = gql`
+  schema {
+    query: Query
+  }
+  
+  type Query {
+    loanReasons: [LoanReasons!]!
+    hasSalaryCard: HasSalaryCard!
+    houseCost: HouseCost!
+    initialPayment: InitialPayment!
+    loanPeriod: LoanPeriod!
+  }
+  
+  type LoanReasons {
+    name: String!
+    rate: Float!
+  }
+  
+  type HasSalaryCard {
+    rate: Float!
+  }
+  
+  type HouseCost {
+    min: Int!
+    max: Int!
+    step: Int!
+    value: Int!
+  }
+  
+  type InitialPayment {
+    min: Int!
+    max: Int!
+    step: Int!
+    value: Int!
+  }
+  
+  type LoanPeriod {
+    min: Int!
+    max: Int!
+    step: Int!
+    value: Int!
+  }
+`

@@ -3,7 +3,7 @@
     <v-row no-gutters>
       <v-col :align-self="'start'">
         <v-card
-          class="pa-2"
+          class="pa-7"
           outlined
           tile
         >
@@ -17,9 +17,9 @@
 </template>
 
 <script lang="ts">
-  import Vue from "vue";
+import Vue from 'vue'
 
-  export default Vue.extend({
-    name: 'Layout'
-  })
+export default Vue.extend({
+  name: 'FormLayout'
+})
 </script>
