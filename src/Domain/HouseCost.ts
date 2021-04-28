@@ -1,6 +1,24 @@
+import { IsNumber } from 'class-validator'
+
 export class HouseCost {
-  min = 0
-  max = 0
-  step = 0
-  value = 0
+
+  @IsNumber()
+  min: number
+
+  @IsNumber()
+  max: number
+
+  @IsNumber()
+  step: number
+
+  @IsNumber()
+  value: number
+
+  constructor (props?: HouseCost) {
+    this.min = props?.min ?? 0
+    this.max = props?.max ?? 0
+    this.step = props?.step ?? 0
+    this.value = props?.value ?? 0
+  }
+
 }

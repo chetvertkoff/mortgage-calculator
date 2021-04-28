@@ -2,9 +2,12 @@ import gql from 'graphql-tag'
 
 export const GET_LOAN_REASONS = gql`
   query {
-    loanReasons {
-      name
-      rate
+    loanReasonsList {
+      value
+      list {
+        name
+        rate
+      }
     }
   }
 `

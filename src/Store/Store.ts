@@ -32,7 +32,7 @@ export class Store implements IStore {
 
     return new ApolloClient({
       cache,
-      link: new SchemaLink({ schema })
+      link: new SchemaLink({ schema }),
     })
   }
 }

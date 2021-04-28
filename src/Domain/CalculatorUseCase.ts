@@ -1,4 +1,4 @@
-import { Calculator } from '@/Domain/Calctulator'
+import { Calculator } from '@/Domain/Calculator'
 import { injectable } from 'inversify'
 
 export const CalculatorDI = Symbol.for('CalculatorDI')

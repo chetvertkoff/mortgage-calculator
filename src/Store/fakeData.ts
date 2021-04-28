@@ -1,4 +1,6 @@
-export const loanReasons = [
+export const loanReasons = {
+  "value": {name: "", rate: 0},
+  "list": [
   { name: 'Готовое жилье', rate: 7.3 },
   { name: 'Новостройка', rate: 0.9 },
   { name: 'Господдержка 2020', rate: 0.1 },
@@ -7,7 +9,7 @@ export const loanReasons = [
   { name: 'Строительство дома', rate: 0.9 },
   { name: 'Загородный дом, земля', rate: 8.8 },
   { name: 'Строительство дома', rate: 8 }
-]
+]}
 
 export const hasSalaryCard = {
   rate: 0.5

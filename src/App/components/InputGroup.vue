@@ -1,9 +1,12 @@
 <template>
   <v-col class="col-6" :align-self="'start'">
-    {{loanReasons}}
     <v-row>
       <v-col class="col-12">
-        <SelectListUI :label="'Цель кредита'" :hasBorder="true"/>
+        <SelectListUI
+            :data="loanReasonsListData"
+            :label="'Цель кредита'"
+            :hasBorder="true"
+        />
       </v-col>
       <v-spacer />
       <v-col class="col-12">
@@ -33,25 +36,29 @@ import SelectListUI from '@/App/UI/SelectListInputUI.vue'
 import SwitchInputUI from '@/App/UI/SwitchInputUI.vue'
 import SliderInputUI from '@/App/UI/SliderInputUI.vue'
 import { DocumentNode } from 'graphql'
-import { StoreDI } from '@/Store/Store'
+import { IStore, StoreDI } from '@/Store/Store'
 import { ICalculatorUseCase, CalculatorDI } from '@/Domain/CalculatorUseCase'
-import { LoanReasons } from '@/Domain/LoanReasons'
+import { LoanReasonList } from '@/Domain/LoanReasonList'
 
 @Component({
   components: { InputLayout, SelectListUI, SwitchInputUI, SliderInputUI },
   apollo: {
-    loanReasons: {
+    loanReasonsList: {
       query () { return this.queries.GET_LOAN_REASONS },
-      update ({ loanReasons }): LoanReasons[] {
-        this.calculator.loanReasons = loanReasons
-        return this.calculator.loanReasons
-      }
-    }
+      update ({ loanReasonsList }): LoanReasonList {
+        this.calculator.loanReasonList = loanReasonsList
+        this.loanReasonsListData = this.calculator.loanReasonList
+      },
+    },
   }
 })
 export default class InputGroup extends Vue {
   @Inject('container') private readonly containerDI!: Container
-  private readonly queries: { [key: string]: DocumentNode } = this.containerDI.get(StoreDI).queries
+  private readonly store: IStore = this.containerDI.get(StoreDI)
+  private readonly queries: { [key: string]: DocumentNode } = this.store.queries
   private readonly calculator: ICalculatorUseCase = this.containerDI.get(CalculatorDI)
+
+  private readonly loanReasonsListData: LoanReasonList = this.calculator.loanReasonList
+
 }
 </script>

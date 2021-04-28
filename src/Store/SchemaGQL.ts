@@ -6,14 +6,19 @@ export const typeDefs = gql`
   }
   
   type Query {
-    loanReasons: [LoanReasons!]!
+    loanReasonsList: LoanReasonList!
     hasSalaryCard: HasSalaryCard!
     houseCost: HouseCost!
     initialPayment: InitialPayment!
     loanPeriod: LoanPeriod!
   }
   
-  type LoanReasons {
+  type LoanReasonList {
+    value: LoanReason!
+    list: [LoanReason!]!
+  }
+  
+  type LoanReason {
     name: String!
     rate: Float!
   }

@@ -2,7 +2,7 @@ import { hasSalaryCard, houseCost, initialPayment, loanPeriod, loanReasons } fro
 
 export const mocks = {
   Query: () => ({
-    loanReasons: () => loanReasons,
+    loanReasonsList: () => loanReasons,
     hasSalaryCard: () => hasSalaryCard,
     houseCost: () => houseCost,
     initialPayment: () => initialPayment,

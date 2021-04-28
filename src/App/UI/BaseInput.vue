@@ -8,6 +8,9 @@ export default Vue.extend({
     hasBorder: {
       type: Boolean,
       default: false
+    },
+    data: {
+      type: Object
     }
   }
 })
