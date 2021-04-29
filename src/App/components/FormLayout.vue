@@ -7,7 +7,7 @@
           outlined
           tile
         >
-          <v-row no-gutters>
+          <v-row no-gutters >
             <slot></slot>
           </v-row>
         </v-card>

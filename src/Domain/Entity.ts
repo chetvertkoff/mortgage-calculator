@@ -1,6 +1,5 @@
 import { injectable } from 'inversify'
-
-import {validate} from 'class-validator'
+import { validate } from 'class-validator'
 
 @injectable()
 export class Entity {

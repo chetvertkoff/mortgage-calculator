@@ -17,7 +17,6 @@ export class InitialPayment {
     this.min = props?.min ?? 0
     this.max = props?.max ?? 0
     this.step = props?.step ?? 0
-    this.value = props?.value ?? 0
+    this.value = (this.min+this.max)/2
   }
-
 }

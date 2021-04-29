@@ -7,8 +7,11 @@ export class LoanReason {
   @IsNumber()
   rate: number
 
+  rateText: string
+
   constructor (props?: LoanReason) {
     this.name = props?.name ?? ''
     this.rate = props?.rate ?? 0
+    this.rateText = `от ${this.rate}%`
   }
 }

@@ -1,13 +1,15 @@
 <template>
   <v-card elevation="0">
     <div class="d-flex justify-space-between">
-      <p class="mb-0">{{label}}</p>
-      <v-switch
-        class="mt-0"
-        v-model="selected"
-        hide-details
-        label="as"
-      />
+      <p class="mb-0 custom-label align-self-end" >{{label}}</p>
+      <div class="d-flex">
+        <span class="align-self-end mr-5 custom-label blue--text font-weight-medium"> {{data.rateText}}</span>
+        <v-switch
+            class="mt-0"
+            hide-details
+            v-model="data.selected"
+        />
+      </div>
     </div>
   </v-card>
 </template>
@@ -18,6 +20,5 @@ import Component from 'vue-class-component'
 import BaseInput from '@/App/UI/BaseInput.vue'
 @Component
 export default class SwitchInputUI extends BaseInput {
-    selected = true
 }
 </script>

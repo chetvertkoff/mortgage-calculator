@@ -6,6 +6,7 @@ import { LoanReasonList } from '@/Domain/LoanReasonList'
 import { HasSalaryCard } from '@/Domain/HasSalaryCard'
 
 export class Calculator extends Entity {
+
   private _loanReasonList: LoanReasonList = new LoanReasonList()
   private _hasSalaryCard: HasSalaryCard = new HasSalaryCard()
   private _houseCost: HouseCost = new HouseCost()
@@ -51,5 +52,4 @@ export class Calculator extends Entity {
   get loanPeriod (): LoanPeriod {
     return this._loanPeriod
   }
-
 }

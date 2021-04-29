@@ -1,21 +1,22 @@
 <template>
   <v-card elevation="0" >
     <v-select
-        outlined
+        :outlined="hasBorder"
         :label="label"
         hide-details
-        :menu-props="{ bottom: true, offsetY: true }"
-        v-model="data.value.name"
+        :menu-props="{ bottom: true, offsetY: true, closeOnClick: true,  closeOnContentClick: true}"
+        v-model="data.value"
+        :items="data.list"
+        :item-text="'name'"
+        :item-value="x => x"
     >
-      <template v-slot:prepend-item>
-        <v-list-item
-            ripple
-            v-for="list in data.list"
-            @click="data.value.name = list.name"
-        >
-        {{list}}
+      <template v-slot:item="{ active, item, attrs, on }">
+        <v-list-item v-on="on" >
+          <v-row >
+            <v-col class="mb-0">{{item.name}}</v-col>
+            <v-col class="text-right grey--text">{{item.rateText}}</v-col>
+          </v-row>
         </v-list-item>
-        <v-divider class="mt-2"></v-divider>
       </template>
     </v-select>
   </v-card>
@@ -26,8 +27,5 @@ import BaseInput from '@/App/UI/BaseInput.vue'
 import Component from 'vue-class-component'
 
 @Component
-export default class SelectListUI extends BaseInput {
-
-
-}
+export default class SelectListUI extends BaseInput {}
 </script>
