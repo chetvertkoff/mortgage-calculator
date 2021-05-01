@@ -40,29 +40,29 @@ export default class SliderInputUI extends BaseInput {
   private step = 1
   private min = 1
 
-  @Watch('data.value')
-  changeVal(val) {
-    this.prvtextVal = val
-  }
-
-  get textVal() {
+  get textVal () {
     return this.prvtextVal
   }
 
-  set textVal(val) {
-    if(this.data.min >= val) {
+  set textVal (val) {
+    if (this.data.min >= val) {
       this.prvtextVal = val
       return
     }
     this.data.value = toNum(val)
   }
 
-  stepOn(val) {
+  @Watch('data.value')
+  changeVal (val) {
+    this.prvtextVal = val
+  }
+
+  stepOn (val) {
     this.step = this.data.step
     this.min = this.data.min
   }
 
-  stepOff() {
+  stepOff () {
     this.step = 1
     this.min = 1
   }

@@ -26,7 +26,6 @@ export default class App extends Vue {
   @Prop({ type: Object }) private readonly container!: Container;
   @Provide('container') containerDI = this.container
   @Provide('calculator') calculator: ICalculatorUseCase = this.containerDI.get(CalculatorDI)
-
 }
 </script>
 

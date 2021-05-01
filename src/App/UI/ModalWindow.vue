@@ -2,28 +2,24 @@
   <v-dialog
       v-model="dialog"
       max-width="80%"
+      scrollable
   >
     <v-card>
       <v-card-title class="headline lighten-2 d-flex">
-          <v-row>
-            <v-col class="col-11">
-
-            </v-col>
-            <v-col class="col-1 justify-end">
-              <v-icon
-                  medium
-                  color="grey darken-2 ml-auto"
-                  @click="dialog = false"
-              >
-                mdi-close
-              </v-icon>
+        <v-row>
+          <slot name="modal-header"/>
+          <v-col class="col-1 justify-end text-right">
+            <v-icon
+                color="grey darken-2 ml-auto"
+                medium
+                @click="dialog = false"
+            >
+              mdi-close
+            </v-icon>
           </v-col>
         </v-row>
       </v-card-title>
-
-      <v-card-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </v-card-text>
+      <slot name="modal-body"/>
 
       <v-divider></v-divider>
 
@@ -44,8 +40,25 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { Inject, Watch } from 'vue-property-decorator'
+import { ICalculatorUseCase } from '@/Domain/CalculatorUseCase'
+import { ChartUseCase } from '@/Domain/ChartUseСase'
+
 @Component
-  export default class ModalWindow extends Vue {
-    private dialog: boolean = false
+export default class ModalWindow extends Vue {
+  @Inject('calculator') private readonly calculator!: ICalculatorUseCase
+  private chart: ChartUseCase = this.calculator.chartList
+  private dialog = false
+
+  @Watch('dialog')
+  onDialogChange (val: boolean) {
+    this.$emit('on-modal-change', val)
   }
+}
 </script>
+
+<style >
+  .v-card__text, .v-dialog {
+    overflow: inherit !important;
+  }
+</style>

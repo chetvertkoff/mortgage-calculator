@@ -1,6 +1,7 @@
 import { IsNumber } from 'class-validator'
+import { Entity } from '@/Domain/Entity'
 
-export class LoanPeriod {
+export class LoanPeriod extends Entity {
   @IsNumber()
   min: number
 
@@ -14,9 +15,10 @@ export class LoanPeriod {
   value: number
 
   constructor (props?: LoanPeriod) {
+    super()
     this.min = props?.min ?? 0
     this.max = props?.max ?? 0
     this.step = props?.step ?? 1
-    this.value = (this.min+this.max)/2
+    this.value = (this.min + this.max) / 2
   }
 }

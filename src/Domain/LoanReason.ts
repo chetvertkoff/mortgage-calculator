@@ -1,6 +1,7 @@
 import { IsNumber, IsString } from 'class-validator'
+import { Entity } from '@/Domain/Entity'
 
-export class LoanReason {
+export class LoanReason extends Entity {
   @IsString()
   name: string
 
@@ -10,6 +11,7 @@ export class LoanReason {
   rateText: string
 
   constructor (props?: LoanReason) {
+    super()
     this.name = props?.name ?? ''
     this.rate = props?.rate ?? 0
     this.rateText = `от ${this.rate}%`
