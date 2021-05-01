@@ -1,32 +1,29 @@
 <template>
   <v-col class="col-5 ml-auto" :align-self="'start'">
     <v-card elevation="0">
-      {{calculator}}
+      {{calculator.overpayment}}
       <v-row>
         <v-col class="col-5 mr-auto">
-         <p class="transition-swing text-h6 font-weight-regular">Ежемесячный платеж</p>
-          {{calculator.totalLoanSum}}
+          <p class="transition-swing text-h6 font-weight-regular grey--text">Ежемесячный платеж</p>
+          <p class="text-h4 font-weight-medium">{{calculator.annuitet|formatNum}}</p>
         </v-col>
         <v-col class="col-6">
-          <p class="transition-swing text-h6 font-weight-regular">Процентная ставка</p>
-          {{calculator.totalRate}}
+          <p class="transition-swing text-h6 font-weight-regular grey--text">Процентная ставка</p>
+          <p class="text-h4 font-weight-medium blue--text">{{calculator.totalRate}} %</p>
         </v-col>
       </v-row>
       <v-row>
         <v-col class="col-5 mr-auto">
-          Ежемесячный платеж
+         <p class="transition-swing text-h6 font-weight-regular grey--text">Сумма кредита</p>
+          <p class="text-h5 font-weight-medium">{{calculator.totalSum|formatNum}} ₽</p>
         </v-col>
         <v-col class="col-6">
-          Процентная ставка
+          <p class="transition-swing text-h6 font-weight-regular grey--text">Необходимый доход</p>
+          <p class="text-h5 font-weight-medium">{{calculator.shouldEarn|formatNum}} ₽</p>
         </v-col>
       </v-row>
       <v-row>
-        <v-btn
-            class="col-12 pa-6"
-            depressed
-            color="primary"
-        >      Получить одобрение
-        </v-btn>
+        <ModalWindow/>
       </v-row>
     </v-card>
   </v-col>
@@ -37,11 +34,14 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Inject } from 'vue-property-decorator'
 import { ICalculatorUseCase } from '@/Domain/CalculatorUseCase'
+import ModalWindow from '@/App/UI/ModalWindow'
 
-@Component({})
+
+@Component({
+  components: {ModalWindow}
+})
 export default class Total extends Vue {
-  @Inject('calculator') private readonly calculator: ICalculatorUseCase
-
+  @Inject('calculator') private readonly calculator!: ICalculatorUseCase
 
 }
 </script>

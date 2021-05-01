@@ -24,8 +24,8 @@ export const houseCost = {
 }
 
 export const initialPayment = {
-  min: 91500,
-  max: 310000,
+  min: 91000,
+  max: 8000000,
   step: 10000,
   value: 0
 }

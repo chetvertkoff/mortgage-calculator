@@ -52,10 +52,9 @@ import SwitchInputUI from '@/App/UI/SwitchInputUI.vue'
 import SliderInputUI from '@/App/UI/SliderInputUI.vue'
 import { DocumentNode } from 'graphql'
 import { IStore, StoreDI } from '@/Store/Store'
-import { ICalculatorUseCase, CalculatorDI } from '@/Domain/CalculatorUseCase'
+import { ICalculatorUseCase } from '@/Domain/CalculatorUseCase'
 import { LoanReasonList } from '@/Domain/LoanReasonList'
 import { HasSalaryCard } from '@/Domain/HasSalaryCard'
-import { GET_HAS_SALARY_CARD } from '@/Store/QueryGQL'
 import { HouseCost } from '@/Domain/HouseCost'
 import { InitialPayment } from '@/Domain/InitialPayment'
 import { LoanPeriod } from '@/Domain/LoanPeriod'
@@ -102,7 +101,7 @@ import { LoanPeriod } from '@/Domain/LoanPeriod'
 })
 export default class InputGroup extends Vue {
   @Inject('container') private readonly containerDI!: Container
-  @Inject('calculator') private readonly calculator: ICalculatorUseCase
+  @Inject('calculator') private readonly calculator!: ICalculatorUseCase
   private readonly store: IStore = this.containerDI.get(StoreDI)
   private readonly queries: { [key: string]: DocumentNode } = this.store.queries
 

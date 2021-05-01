@@ -1,27 +1,25 @@
 <template>
   <v-card :flat="true" :outlined="hasBorder" class="pl-2 pt-2 pr-2 slider-input">
     <p class="mb-0 align-self-end" >{{label}}</p>
+    <v-text-field
+        class="pr-0 pl-0 custom-field"
+        v-model="textVal"
+        hide-details
+        solo
+        elevation="0"
+        single-line
+        :flat="true"
+    />
     <v-slider
       class="flex-column-reverse"
       v-model="data.value"
-      :step="data.step"
+      :step="step"
       :max="data.max"
-      :min="data.min"
+      :min="min"
+      @mousedown="stepOn"
+      @mouseup="stepOff"
       hide-details
     >
-      <template v-slot:append class="" class="pr-0 pl-0 ml-0" >
-        <v-text-field
-          class="pr-0 pl-0 custom-field"
-          v-model="formatVal"
-          @input.native="changeVal"
-          @keyup="keyhandler"
-          hide-details
-          solo
-          elevation="0"
-          single-line
-          :flat="true"
-        />
-      </template>
     </v-slider>
     <div class="d-flex justify-space-between">
       <div class="align-self-end">{{ data.min|shortNumCurrency }}</div>
@@ -34,34 +32,40 @@
 import Component from 'vue-class-component'
 import BaseInput from '@/App/UI/BaseInput.vue'
 import { Watch } from 'vue-property-decorator'
-import { formatNum, toNum } from '@/App/utils/numeric'
+import { toNum } from '@/App/utils/numeric'
 
 @Component
 export default class SliderInputUI extends BaseInput {
-  private formatVal: string = ''
-  private oldVal:string = ''
+  private prvtextVal: nuber = 0
+  private step = 1
+  private min = 1
 
   @Watch('data.value')
-  changeVal
-
-  keyhandler(event) {
-    const num = event?.target?.value
-    if(isNaN(toNum(num))) {
-      event.preventDefault()
-      this.formatVal = this.oldVal
-    }
+  changeVal(val) {
+    this.prvtextVal = val
   }
 
-  changeVal(e: DocumentEvent|number): string {
-    const num = e?.target?.value ?? e
-    if(isNaN(toNum(num))) {
+  get textVal() {
+    return this.prvtextVal
+  }
+
+  set textVal(val) {
+    if(this.data.min >= val) {
+      this.prvtextVal = val
       return
     }
-
-    this.formatVal = formatNum(toNum(num))
-    this.oldVal = this.formatVal
+    this.data.value = toNum(val)
   }
 
+  stepOn(val) {
+    this.step = this.data.step
+    this.min = this.data.min
+  }
+
+  stepOff() {
+    this.step = 1
+    this.min = 1
+  }
 }
 </script>
 
