@@ -1,9 +1,12 @@
+
 # mortgage-calculator
 
 ## Project layers
 
 App - Vue app layer
+
 Domain - domain, use case layer
+
 Store - data layer (Vue apollo usage)
 
 ## Project setup
