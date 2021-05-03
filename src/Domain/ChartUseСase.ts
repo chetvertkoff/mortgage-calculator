@@ -35,14 +35,17 @@ export class ChartUseCase {
   // расчет графика платежей
   private async calcChartList (): Promise<Chart[]> {
     const loanPeriodMonths = this.loanPeriodToMonth
-
     let now = new Date()
-
-    return Array.from({ length: loanPeriodMonths }).map(() => {
+    const list = Array.from({ length: loanPeriodMonths }).map((_, i) => {
       const { current, chartItem } = this.getChartItem(now)
+
+      if(i == 0) chartItem.year = new Date().getFullYear()
       now = current
+
       return chartItem
     })
+
+    return list
   }
 
   private getChartItem (now: Date): { current: Date, chartItem: Chart } {
