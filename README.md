@@ -1,5 +1,11 @@
 # mortgage-calculator
 
+## Project layers
+
+App - Vue app layer
+Domain - domain, use case layer
+Store - data layer (Vue apollo usage)
+
 ## Project setup
 ```
 yarn install
@@ -19,6 +25,3 @@ yarn build
 ```
 yarn lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
