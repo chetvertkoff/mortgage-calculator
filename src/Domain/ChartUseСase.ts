@@ -36,7 +36,7 @@ export class ChartUseCase {
   private async calcChartList (): Promise<Chart[]> {
     const loanPeriodMonths = this.loanPeriodToMonth
     let now = new Date()
-    const list = Array.from({ length: loanPeriodMonths }).map((_, i) => {
+    const list: Chart[] = Array.from({ length: loanPeriodMonths }).map((_, i) => {
       const { current, chartItem } = this.getChartItem(now)
 
       if(i == 0) chartItem.year = new Date().getFullYear()
