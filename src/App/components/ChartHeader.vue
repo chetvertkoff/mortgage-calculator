@@ -15,7 +15,7 @@
       </v-col>
       <v-col class="col-2 pl-1 pr-1">
         <p class="subtitle-2  mb-0 grey--text">Переплата</p>
-        <p class="text-h6 mb-0 font-weight-medium">{{ chart.overpayment|formatNum }} ₽</p>
+        <p class="text-h6 mb-0 font-weight-medium">{{ chart.overpayment|roundFormat }} ₽</p>
       </v-col>
     </v-row>
   </v-col>
@@ -29,6 +29,7 @@ import { ChartUseCase } from '@/Domain/ChartUseСase'
 
 @Component
 export default class ChartHeader extends Vue {
-  @Prop({ type: Object }) private readonly chart!: ChartUseCase
+  @Prop({ type: Object })
+  private readonly chart!: ChartUseCase
 }
 </script>

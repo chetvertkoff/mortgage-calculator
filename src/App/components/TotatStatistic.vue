@@ -2,8 +2,8 @@
   <div>
     <v-row>
       <v-col class="col-6 mr-auto">
-        <p class="transition-swing text-h6 font-weight-regular grey--text">Ежемесячный платеж ₽</p>
-        <p class="text-h4 font-weight-medium">{{ calculator.annuitet|formatNum }}</p>
+        <p class="transition-swing text-h6 font-weight-regular grey--text">Ежемесячный платеж </p>
+        <p class="text-h4 font-weight-medium">{{ calculator.annuitet|roundFormat }} ₽</p>
       </v-col>
       <v-col class="col-6">
         <p class="transition-swing text-h6 font-weight-regular grey--text">Процентная ставка</p>

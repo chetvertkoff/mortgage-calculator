@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { Container } from 'inversify'
 // store
-import { StoreDI, Store } from './Store/Store'
+import { StoreDI, Store } from '../Store/Store'
 // entity
 import { CalculatorDI, CalculatorUseCase } from '@/Domain/CalculatorUseCase'
 

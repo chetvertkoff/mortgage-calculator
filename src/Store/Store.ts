@@ -1,4 +1,4 @@
-import { inject, injectable } from 'inversify'
+import { injectable } from 'inversify'
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory'
 import { makeExecutableSchema } from '@graphql-tools/schema'

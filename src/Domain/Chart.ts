@@ -18,16 +18,13 @@ export class Chart extends Entity {
   @IsInt()
   leftToPay = 0 // оставшийся долг
 
-  constructor (month: string, year: number, annuitet: number) {
+  constructor (month: string, year: number, annuitet: number, rateSum: number, loanSum: number, leftToPay: number) {
     super()
     this.month = month
     this.year = year
     this.annuitet = annuitet
+    this.rateSum = Math.round(rateSum)
+    this.loanSum = Math.round(loanSum)
+    this.leftToPay = Math.round(leftToPay)
   }
-
-// - Месяц, год
-// - Сумма платежа (везде одинаковая, так как платеж аннуитетный)
-// - Часть суммы, которая идет на погашение процентов
-// - Часть суммы, которая идет на погашение основного долга
-// - Остаток долга
 }

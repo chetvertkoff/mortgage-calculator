@@ -1,10 +1,15 @@
 <template>
-  <v-card :flat="true" :outlined="hasBorder" class="pl-2 pt-2 pr-2 slider-input">
+  <v-card :flat="true" :outlined="hasBorder" class="pl-2 pt-2 pr-2 slider-input" :class="{'validate-error': hasErr}">
     <p class="mb-0 align-self-end" >{{label}}</p>
     <v-text-field
+        pre
+        ref="field"
         class="pr-0 pl-0 custom-field"
         v-model="textVal"
+        :rules="textFieldRule"
+        type="number"
         hide-details
+        @update:error="updateError"
         solo
         elevation="0"
         single-line
@@ -29,40 +34,62 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
 import Component from 'vue-class-component'
 import BaseInput from '@/App/UI/BaseInput.vue'
-import { Watch } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import { toNum } from '@/App/utils/numeric'
 
 @Component
 export default class SliderInputUI extends BaseInput {
-  private prvtextVal: nuber = 0
+  @Prop({ type: Function })
+  private readonly submitValidate!: () => void
+
+  private hasErr = false
+  private privtextVal = 0
   private step = 1
   private min = 1
 
-  get textVal () {
-    return this.prvtextVal
+  private textFieldRule = [
+    (v: string): boolean => !!v,
+    (v: string): boolean => this.data.min <= (+v)
+  ]
+
+  get textVal (): number {
+    return this.privtextVal
   }
 
-  set textVal (val) {
+  set textVal (val: number) {
+    if (this.submitValidate && this.hasErr) this.hasErr = false
     if (this.data.min >= val) {
-      this.prvtextVal = val
+      this.privtextVal = val
       return
     }
-    this.data.value = toNum(val)
+    this.data.value = val
+  }
+
+  @Watch('submitValidate')
+  validateForm (): void {
+    this.hasErr = !(this.$refs.field as Vue & { validate: () => boolean }).validate()
   }
 
   @Watch('data.value')
-  changeVal (val) {
-    this.prvtextVal = val
+  changeVal (val: number): void {
+    this.privtextVal = val
   }
 
-  stepOn (val) {
+  private updateError (val: boolean) {
+    if (!!this.submitValidate) return
+    this.hasErr = val
+  }
+
+  private stepOn () {
+    if (this.submitValidate && this.hasErr) this.hasErr = false
     this.step = this.data.step
     this.min = this.data.min
   }
 
-  stepOff () {
+  private stepOff () {
     this.step = 1
     this.min = 1
   }
@@ -87,5 +114,8 @@ export default class SliderInputUI extends BaseInput {
         padding-bottom: 0 !important;
       }
     }
+  }
+  .validate-error {
+    border-color: #ff5252 !important;
   }
 </style>

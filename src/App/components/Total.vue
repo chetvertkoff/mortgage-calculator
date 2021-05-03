@@ -3,12 +3,22 @@
     <v-card elevation="0">
       <TotalStatistic :calculator="calculator"/>
       <v-row>
-        <ModalWindow @on-modal-change="onModalOpen">
+        <ModalWindow @on-modal-change="onModalClose" :dialog="dialog">
           <template v-slot:modal-header>
             <ChartHeader :chart="chart"/>
           </template>
           <template v-slot:modal-body>
             <ChartTable :chart="chart"/>
+          </template>
+          <template v-slot:modal-button>
+            <v-btn
+                class="col-12 pa-6"
+                depressed
+                color="primary"
+                @click="submitForm"
+            >
+              График платежей
+            </v-btn>
           </template>
         </ModalWindow>
       </v-row>
@@ -36,12 +46,24 @@ import ChartTable from '@/App/components/ChartTable.vue'
   }
 })
 export default class Total extends Vue {
-  @Inject('calculator') private readonly calculator!: ICalculatorUseCase
-  private chart: ChartUseCase = this.calculator.chartList
+  @Inject('calculator')
+  private readonly calculator!: ICalculatorUseCase
 
-  onModalOpen (val: boolean) {
-    if (!val) return
-    this.chart = this.calculator.chartList
+  private chart: ChartUseCase = this.calculator.chartList
+  private dialog = false
+
+  submitForm (): void|undefined {
+    this.$emit('on-submit-form', (val: boolean) => {
+      if (!val) return
+      this.chart = this.calculator.chartList
+      this.dialog = true
+    })
+  }
+
+  onModalClose (val: boolean): void {
+    if (!val) {
+      this.dialog = val
+    }
   }
 }
 </script>

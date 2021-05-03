@@ -1,14 +1,12 @@
 import { Chart } from '@/Domain/Chart'
 
 export class ChartUseCase {
-  static months = ['Январь', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ]
   totalSum: number
   annuitet: number
   loanPeriod: number
   totalRate: number
   overpayment: number
+  leftToPay = 0
 
   constructor (totalSum: number, totalRate: number, loanPeriod: number, overpayment: number, annuitet: number) {
     this.totalSum = totalSum
@@ -18,43 +16,80 @@ export class ChartUseCase {
     this.overpayment = overpayment
   }
 
-  // график платежей
-  get list (): Chart[] | unknown {
-    if (!this.loanPeriod) return
-    return this.calcChartList()
-  }
-
   // общий период (года) в месяцы
   get loanPeriodToMonth (): number {
     return this.loanPeriod * 12
   }
 
+  // Месячная ставка
+  get monthRate (): number {
+    return this.totalRate / 1200
+  }
+
+  // получить график платежей
+  public async getChartlist (): Promise<Promise<Chart[]> | undefined> {
+    if (!this.loanPeriod) return
+    return this.calcChartList()
+  }
+
   // расчет графика платежей
-  private calcChartList (): Chart[] | any {
+  private async calcChartList (): Promise<Chart[]> {
     const loanPeriodMonths = this.loanPeriodToMonth
 
     let now = new Date()
-    return Array.from({ length: loanPeriodMonths }).map(_ => {
-      let current
-      let chartItem
-      if (now.getMonth() == 11) {
-        current = new Date(now.getFullYear() + 1, 0, 1)
-        chartItem = new Chart(
-          current.toLocaleString('ru-RU', { month: 'long' }),
-          current.getFullYear(),
-          this.annuitet
-        )
-      } else {
-        current = new Date(now.getFullYear(), now.getMonth() + 1, 1)
-        chartItem = new Chart(
-          current.toLocaleString('ru-RU', { month: 'long' }),
-          0,
-          this.annuitet
-        )
-      }
 
+    return Array.from({ length: loanPeriodMonths }).map(() => {
+      const { current, chartItem } = this.getChartItem(now)
       now = current
       return chartItem
     })
+  }
+
+  private getChartItem (now: Date): { current: Date, chartItem: Chart } {
+    let current
+    let chartItem
+
+    const { rateSum, mainDebt, leftToPay } = this.calcLeftToPay()
+
+    if (now.getMonth() === 11) {
+      current = new Date(now.getFullYear() + 1, 0, 1)
+      chartItem = new Chart(
+        current.toLocaleString('ru-RU', { month: 'long' }),
+        current.getFullYear(),
+        this.annuitet,
+        rateSum,
+        mainDebt,
+        leftToPay
+      )
+      return { current, chartItem }
+    }
+
+    current = new Date(now.getFullYear(), now.getMonth() + 1, 1)
+
+    chartItem = new Chart(
+      current.toLocaleString('ru-RU', { month: 'long' }),
+      0,
+      this.annuitet,
+      rateSum,
+      mainDebt,
+      leftToPay
+    )
+
+    return { current, chartItem }
+  }
+
+  // Расчет остатка долга
+  private calcLeftToPay (): { [n: string]: number } {
+    if (!this.leftToPay) this.leftToPay = this.totalSum
+    const rateSum = this.leftToPay * this.monthRate
+    const mainDebt = this.annuitet - rateSum
+    this.leftToPay = this.leftToPay - mainDebt
+    const leftToPay = this.leftToPay
+
+    return { rateSum, mainDebt, leftToPay }
+  }
+
+  private roundTwoDecimal (num: number): number {
+    return Math.round((num + Number.EPSILON) * 100) / 100
   }
 }

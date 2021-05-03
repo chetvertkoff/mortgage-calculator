@@ -24,9 +24,13 @@ function shortNumCurrency (num: any): any {
     .toString()
     .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
     .split(' ')
-  if (arr.length == 1) return num
-  if (arr.length == 2) return `${arr[0]} тыс ₽.`
+  if (arr.length === 1) return num
+  if (arr.length === 2) return `${arr[0]} тыс ₽.`
   return `${arr[0]} млн ₽.`
 }
+// round+format
+function roundFormat (num: number): string|unknown {
+  return formatNum(Math.round(num))
+}
 
-export { shortNumCurrency, formatNum, toNum }
+export { shortNumCurrency, formatNum, toNum, roundFormat }

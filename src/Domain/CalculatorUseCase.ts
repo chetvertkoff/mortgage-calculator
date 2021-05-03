@@ -27,11 +27,7 @@ export interface ICalculatorUseCase {
 
 @injectable()
 export class CalculatorUseCase extends Calculator implements ICalculatorUseCase {
-  constructor () {
-    super()
-  }
-
-  get chartList () {
+  get chartList (): ChartUseCase {
     return new ChartUseCase(
       this.totalSum,
       this.totalRate,
@@ -95,7 +91,6 @@ export class CalculatorUseCase extends Calculator implements ICalculatorUseCase 
     const monthCount = this.loanPeriod.value * 12
     const sum = this.totalSum
 
-    const res = sum * r / (1 - Math.pow(1 + r, -monthCount))
-    return Math.round(res)
+    return sum * r / (1 - Math.pow(1 + r, -monthCount))
   }
 }

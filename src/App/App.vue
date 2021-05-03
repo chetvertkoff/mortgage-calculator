@@ -2,8 +2,8 @@
   <v-app>
     <v-main>
       <FormLayout>
-        <InputGroup/>
-        <Total/>
+        <InputGroup :eventCallback="eventCallback" />
+        <Total @on-submit-form="val => eventCallback = val" />
       </FormLayout>
     </v-main>
   </v-app>
@@ -23,9 +23,16 @@ import { CalculatorDI, ICalculatorUseCase } from '@/Domain/CalculatorUseCase'
   components: { FormLayout, Total, InputGroup }
 })
 export default class App extends Vue {
-  @Prop({ type: Object }) private readonly container!: Container;
-  @Provide('container') containerDI = this.container
-  @Provide('calculator') calculator: ICalculatorUseCase = this.containerDI.get(CalculatorDI)
+  @Prop({ type: Object })
+  private readonly container!: Container;
+
+  @Provide('container')
+  containerDI = this.container
+
+  @Provide('calculator')
+  calculator: ICalculatorUseCase = this.containerDI.get(CalculatorDI)
+
+  public eventCallback: () => void = () => ({})
 }
 </script>
 

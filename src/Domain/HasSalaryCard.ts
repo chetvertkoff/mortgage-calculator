@@ -16,7 +16,7 @@ export class HasSalaryCard extends Entity {
     this.selected = false
   }
 
-  get value () {
+  get value (): number {
     if (this.selected) return this.rate
     return 0
   }
