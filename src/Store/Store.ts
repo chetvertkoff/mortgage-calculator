@@ -8,18 +8,18 @@ import { SchemaLink } from 'apollo-link-schema'
 import { typeDefs } from '@/Store/SchemaGQL'
 import { mocks } from '@/Store/MockGQL'
 import { GET_LOAN_REASONS, GET_HAS_SALARY_CARD, GET_HOUSE_COST, GET_INITIAL_PAYMENT, GET_LOAN_PERIOD } from '@/Store/QueryGQL'
-import { DocumentNode } from 'graphql'
+
 
 export const StoreDI = Symbol.for('StoreDI')
 
 export interface IStore {
   initApolloClient(): ApolloClient<NormalizedCacheObject>
-  queries: { [key: string]: DocumentNode }
+  queries: { [key: string]: any }
 }
 
 @injectable()
 export class Store implements IStore {
-  get queries (): { [key: string]: DocumentNode } {
+  get queries (): { [key: string]: any } {
     return { GET_LOAN_REASONS, GET_HAS_SALARY_CARD, GET_HOUSE_COST, GET_INITIAL_PAYMENT, GET_LOAN_PERIOD }
   }
 
