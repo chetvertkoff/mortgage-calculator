@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VuetifyLoaderPlugin } = require('vuetify-loader')
 
 
 const PATHS = {
@@ -31,8 +32,8 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            'scss': 'vue-style-loader!css-loader!sass-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+            'scss': 'vue-style-loader!css-loader!sass-loader!vuetify-loader',
+            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax!vuetify-loader',
           }
         },
         exclude: /node_modules/
@@ -85,6 +86,7 @@ module.exports = {
 
   plugins: [
     new VueLoaderPlugin(),
+    new VuetifyLoaderPlugin(),
     new CleanWebpackPlugin(),
     // new CopyWebpackPlugin({
     //   patterns: [
