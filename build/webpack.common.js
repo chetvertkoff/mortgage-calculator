@@ -3,8 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const os = require('os');
-const cores = os.cpus().length;
+
 
 const PATHS = {
   src: path.join(__dirname, '../src'),
