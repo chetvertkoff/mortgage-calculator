@@ -1,10 +1,9 @@
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const { VuetifyLoaderPlugin } = require('vuetify-loader')
-
 
 const PATHS = {
   src: path.join(__dirname, '../src'),
@@ -13,6 +12,10 @@ const PATHS = {
 }
 
 module.exports = {
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(__dirname,'../node_modules', '.cache')
+  },
   // BASE config
   externals: {
     paths: PATHS
@@ -29,20 +32,24 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            'scss': 'vue-style-loader!style-loader!css-loader!sass-loader!vuetify-loader',
-            'sass': 'vue-style-loader!style-loader!css-loader!sass-loader?indentedSyntax!vuetify-loader',
-          }
-        },
-        exclude: /node_modules/
+        use: [
+          'thread-loader',
+          {
+            loader: 'vue-loader',
+            options: {
+              loaders: {
+                'scss': 'vue-style-loader!style-loader!css-loader!sass-loader',
+              }
+            },
+          },
+        ],
+        exclude: '/node_modules/'
       },
       {
         test: /\.tsx?$/,
         use: [
           'thread-loader',
-          'babel-loader',
+
           {
             loader: 'ts-loader',
             options: {
@@ -56,13 +63,18 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|svg|ttf|eot|woff|svg|woff2)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]'
-        }
-      },  {
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+            }
+          }
+        ]
+      }, {
         test: /\.(scss|sass|css)$/,
         use: [
+          'thread-loader',
           'style-loader',
           {
             loader: 'css-loader',
@@ -79,7 +91,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
-      "@": path.join(__dirname, "../src"),
+      '@': path.join(__dirname, '../src'),
       'vue$': 'vue/dist/vue.esm.js'
     }
   },

@@ -57,6 +57,7 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
             safari10: true
           }
         },
+        cache: true,
         parallel: true,
         extractComments: false
       }
