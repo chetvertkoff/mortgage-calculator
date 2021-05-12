@@ -39,7 +39,7 @@ export class ChartUseCase {
     const list: Chart[] = Array.from({ length: loanPeriodMonths }).map((_, i) => {
       const { current, chartItem } = this.getChartItem(now)
 
-      if(i == 0) chartItem.year = new Date().getFullYear()
+      if (i == 0) chartItem.year = new Date().getFullYear()
       now = current
 
       return chartItem

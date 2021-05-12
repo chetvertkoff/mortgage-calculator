@@ -79,7 +79,7 @@ export default class SliderInputUI extends BaseInput {
   }
 
   private updateError (val: boolean) {
-    if (!!this.submitValidate) return
+    if (this.submitValidate) return
     this.hasErr = val
   }
 

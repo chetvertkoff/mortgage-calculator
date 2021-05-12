@@ -18,7 +18,7 @@ export class Chart extends Entity {
   @IsInt()
   leftToPay = 0 // оставшийся долг
 
-  constructor (month: string, year: number, annuitet: number = 0, rateSum: number = 0, loanSum: number = 0, leftToPay: number = 0) {
+  constructor (month: string, year: number, annuitet = 0, rateSum = 0, loanSum = 0, leftToPay = 0) {
     super()
     this.month = month
     this.year = year
