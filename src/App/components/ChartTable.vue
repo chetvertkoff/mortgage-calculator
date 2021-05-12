@@ -15,7 +15,7 @@
           <th
               v-for="(header, i) in tableHeader"
               :key="i"
-              class="text-left subtitle-2 font-weight-medium"
+              class="text-left subtitle-2 font-weight-bold"
               :class="{'text-right': i !== 0}"
           >
             {{ header }}

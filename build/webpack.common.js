@@ -32,8 +32,8 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            'scss': 'vue-style-loader!css-loader!sass-loader!vuetify-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax!vuetify-loader',
+            'scss': 'vue-style-loader!style-loader!css-loader!sass-loader!vuetify-loader',
+            'sass': 'vue-style-loader!style-loader!css-loader!sass-loader?indentedSyntax!vuetify-loader',
           }
         },
         exclude: /node_modules/
@@ -55,7 +55,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|ttf|eot|woff|svg|woff2)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]'
