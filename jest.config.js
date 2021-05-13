@@ -1,6 +1,7 @@
 module.exports = async () => {
   return {
     verbose: true,
+    collectCoverage: true,
     rootDir: 'src',
     moduleFileExtensions: [
       'js',

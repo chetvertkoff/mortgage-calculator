@@ -16,7 +16,7 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn dev
 ```
 
 ### Compiles and minifies for production
@@ -27,4 +27,12 @@ yarn build
 ### Lints and fixes files
 ```
 yarn lint
+```
+### Unit(Jest) testing 
+```
+yarn test
+```
+### E2E(Cypress) testing
+```
+yarn test:e2e
 ```
