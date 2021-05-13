@@ -1,3 +1,3 @@
-import 'vuetify/dist/vuetify.css'
-import './assets/test.sass'
+import 'vuetify/dist/vuetify.min.css'
+import './assets/test.scss'
 import './App'

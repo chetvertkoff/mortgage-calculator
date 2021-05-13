@@ -57,7 +57,6 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
             safari10: true
           }
         },
-        cache: true,
         parallel: true,
         extractComments: false
       }
@@ -65,30 +64,30 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
   },
   module: {
     rules: [
-    {
-      test: /\.vue$/,
-      loader: "vue-loader",
-      options: {
-        loader: {
-          scss: 'vue-style-loader!css-loader!sass-loader'
+      {
+        test: /\.vue$/,
+        loader: "vue-loader",
+        options: {
+          loader: {
+            scss: 'vue-style-loader!css-loader!sass-loader'
+          }
         }
-      }
-    }, {
-      test: /\.scss$/,
-      use: [
-        MiniCssExtractPlugin.loader,
-        {
-          loader: 'css-loader',
-          options: { sourceMap: true }
-        }, {
-          loader: 'sass-loader',
-          options: { sourceMap: true }
-        },{
-          loader: 'postcss-loader',
-          options: { sourceMap: true, postcssOptions: { config: `./build/postcss.config.js` } }
-        }
-      ]
-    }]
+      }, {
+        test: /\.(scss|sass|css)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true }
+          }, {
+            loader: 'sass-loader',
+            options: { sourceMap: true }
+          },{
+            loader: 'postcss-loader',
+            options: { sourceMap: true, postcssOptions: { config: `./build/postcss.config.js` } }
+          }
+        ]
+      }]
   },
   plugins: [
     // new BundleAnalyzerPlugin(),

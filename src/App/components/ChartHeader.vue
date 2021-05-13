@@ -37,7 +37,6 @@ export default class ChartHeader extends Vue {
   @Prop({ type: Object })
   private chart!: ChartUseCase
 
-
   get chartHeader (): ChartUseCase {
     return this.chart ?? this.calculator.chartList
   }

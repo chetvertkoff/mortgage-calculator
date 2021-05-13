@@ -1,9 +1,8 @@
 const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+// const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const { VuetifyLoaderPlugin } = require('vuetify-loader')
 
 const PATHS = {
   src: path.join(__dirname, '../src'),
@@ -14,7 +13,7 @@ const PATHS = {
 module.exports = {
   cache: {
     type: 'filesystem',
-    cacheDirectory: path.resolve(__dirname,'../node_modules', '.cache')
+    cacheDirectory: path.resolve(__dirname, '../node_modules', '.cache')
   },
   // BASE config
   externals: {
@@ -38,7 +37,8 @@ module.exports = {
             loader: 'vue-loader',
             options: {
               loaders: {
-                'scss': 'vue-style-loader!style-loader!css-loader!sass-loader',
+                'scss': 'vue-style-loader!css-loader!sass-loader',
+                'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
               }
             },
           },
@@ -49,7 +49,6 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           'thread-loader',
-
           {
             loader: 'ts-loader',
             options: {
@@ -78,11 +77,11 @@ module.exports = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { sourceMap: true }
+            // options: { sourceMap: true }
           },
           {
             loader: 'sass-loader',
-            options: { sourceMap: true }
+            // options: { sourceMap: true }
           }
         ]
       }]
@@ -98,7 +97,6 @@ module.exports = {
 
   plugins: [
     new VueLoaderPlugin(),
-    new VuetifyLoaderPlugin(),
     new CleanWebpackPlugin(),
     // new CopyWebpackPlugin({
     //   patterns: [
@@ -109,6 +107,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: `${PATHS.src}/index.html`,
       filename: 'index.html',
-    }),
+    })
   ],
 }

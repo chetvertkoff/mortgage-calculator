@@ -2,7 +2,7 @@ module.exports = {
   plugins: [
     require("postcss-import"),
     require('autoprefixer'),
-    require('sort-css-media-queries'),
+    require('postcss-sort-media-queries'),
     require('cssnano')({
       preset:[
         'default',{
