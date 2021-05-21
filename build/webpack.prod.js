@@ -63,18 +63,10 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
     )],
   },
   module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: "vue-loader",
-        options: {
-          loader: {
-            scss: 'vue-style-loader!css-loader!sass-loader'
-          }
-        }
-      }, {
+    rules: [{
         test: /\.(scss|sass|css)$/,
         use: [
+          'style-loader',
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
