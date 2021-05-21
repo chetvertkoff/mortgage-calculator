@@ -5,7 +5,7 @@
       <div class="d-flex">
         <span class="align-self-end mr-5 custom-label blue--text font-weight-medium"> {{data.rateText}}</span>
         <v-switch
-            class="mt-0"
+            class="mt-0 switchInput"
             hide-details
             v-model="data.selected"
         />

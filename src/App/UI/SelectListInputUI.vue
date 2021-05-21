@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" >
+  <v-card elevation="0" class="selectInput">
     <v-select
         :outlined="hasBorder"
         :label="label"
@@ -10,9 +10,9 @@
         :item-text="'name'"
         :item-value="x => x"
     >
-      <template v-slot:item="{ active, item, attrs, on }">
-        <v-list-item v-on="on" >
-          <v-row >
+      <template v-slot:item="{ active, item, attrs, on }" >
+        <v-list-item v-on="on">
+          <v-row  class="listItem">
             <v-col class="mb-0">{{item.name}}</v-col>
             <v-col class="text-right grey--text">{{item.rateText}}</v-col>
           </v-row>

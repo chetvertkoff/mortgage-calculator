@@ -14,6 +14,7 @@
         elevation="0"
         single-line
         :flat="true"
+        data-test="sliderTextField"
     />
     <v-slider
       class="flex-column-reverse"
