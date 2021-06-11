@@ -3,6 +3,7 @@ const baseWebpackConfig = require('./webpack.common');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
   // BUILD config
@@ -66,7 +67,6 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
     rules: [{
         test: /\.(scss|sass|css)$/,
         use: [
-          'style-loader',
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
@@ -83,6 +83,16 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     // new BundleAnalyzerPlugin(),
+    new CssMinimizerPlugin({
+      minimizerOptions: {
+        preset: [
+          'default',
+          {
+            discardComments: { removeAll: true }
+          },
+        ],
+      },
+    }),
     new MiniCssExtractPlugin({
       filename: `${baseWebpackConfig.externals.paths.assets}css/[name].[contenthash].css`,
     }),
