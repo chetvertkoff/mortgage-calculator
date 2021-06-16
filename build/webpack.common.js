@@ -49,6 +49,7 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           'thread-loader',
+          'babel-loader',
           {
             loader: 'ts-loader',
             options: {
