@@ -1,9 +1,10 @@
 const { merge } = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.common');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require("terser-webpack-plugin");
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
   // BUILD config
@@ -65,21 +66,21 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
   },
   module: {
     rules: [{
-        test: /\.(scss|sass|css)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: { sourceMap: true }
-          }, {
-            loader: 'sass-loader',
-            options: { sourceMap: true }
-          },{
-            loader: 'postcss-loader',
-            options: { sourceMap: true, postcssOptions: { config: `./build/postcss.config.js` } }
-          }
-        ]
-      }]
+      test: /\.(scss|sass|css)$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        {
+          loader: 'css-loader',
+          options: { sourceMap: true }
+        }, {
+          loader: 'sass-loader',
+          options: { sourceMap: true }
+        },{
+          loader: 'postcss-loader',
+          options: { sourceMap: true, postcssOptions: { config: `./build/postcss.config.js` } }
+        }
+      ]
+    }]
   },
   plugins: [
     // new BundleAnalyzerPlugin(),

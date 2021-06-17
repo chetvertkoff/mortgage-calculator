@@ -3,7 +3,7 @@
     "module": "ESNext",
     "target": "ESNext",
     "strict": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
@@ -12,7 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["webpack-env", "@types/jest", "cypress"],
+    "types": ["webpack-env", "@types/jest"],
     "paths": {
       "@/*": [
         "src/*"
@@ -28,7 +28,6 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
     "__unit__/**/*.ts",
     "__unit__/**/*.tsx"
   ],

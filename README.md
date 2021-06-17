@@ -1,14 +1,13 @@
 
-# mortgage-calculator
+<h1>mortgage-calculator</h1>
 
 ## Project layers
 
-App - Vue app layer
+App - React app layer (Vue variable https://github.com/chetvertkoff/mortgage-calculator)
 
 Domain - domain, use case layer
 
 Store - data layer (Vue apollo usage)
-
 ## Project setup
 ```
 yarn install
@@ -27,12 +26,4 @@ yarn build
 ### Lints and fixes files
 ```
 yarn lint
-```
-### Unit(Jest) testing 
-```
-yarn test
-```
-### E2E(Cypress) testing
-```
-yarn test:e2e
 ```

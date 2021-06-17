@@ -6,16 +6,16 @@ module.exports = async () => {
     moduleFileExtensions: [
       'js',
       'ts',
+      'tsx',
       'json',
-      'vue'
     ],
     transform: {
-      '.*\\.(vue)$': 'vue-jest',
       '^.+\\.tsx?$': 'ts-jest'
     },
     moduleNameMapper: {
       '^@/(.*)$': '<rootDir>/$1'
     },
-    testRegex: '(/__unit__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$'
-  }
-}
+    testRegex: '(/__unit__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+    testEnvironment: 'jsdom'
+  };
+};
