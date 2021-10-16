@@ -10,8 +10,8 @@ import { StoreProvider } from '@/App/HOC/StoreProvider';
 const calculator = container.get<ICalculatorUseCase>(CalculatorDI);
 
 ReactDOM.render(
-  <ApolloProvider client={Store.initApolloClient()}>
-    <StoreProvider value={calculator}>
+  <ApolloProvider client={ Store.initApolloClient() }>
+    <StoreProvider value={ calculator }>
       <App />
     </StoreProvider>
   </ApolloProvider>,

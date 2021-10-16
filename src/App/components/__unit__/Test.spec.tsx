@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import { Test } from '../Test'
+import { render } from '@testing-library/react';
+import {Total} from "@/App/components/Total";
 
-test('render test', () => {
-  render(<Test />)
+test('Can render total', () => {
+  render(<Total />)
 })

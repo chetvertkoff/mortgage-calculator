@@ -8,7 +8,15 @@
     "no-console": "error",
     "import/first": "error",
     "react/prop-types": "off",
-    "max-len": ["error", { "code": 120 }]
+    "max-len": ["error", { "code": 120 }],
+    "react/jsx-curly-spacing": [2, "always"],
+    "@typescript-eslint/object-curly-spacing": [2, "always"],
+    "react/jsx-tag-spacing": ["error", {
+      "closingSlash": "never",
+      "beforeSelfClosing": "always",
+      "afterOpening": "never",
+      "beforeClosing": "allow"
+    }]
   },
   "extends": [
     "react-app",

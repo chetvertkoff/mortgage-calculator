@@ -16,7 +16,7 @@ export const BaseInput = <ChildProps extends BaseInputProps> (InputComponent: Re
 
     return (
       <>
-        <InputComponent {...defaultInputProps} {...(props as ChildProps)} />
+        <InputComponent { ...defaultInputProps } { ...(props as ChildProps) } />
       </>
     );
   }

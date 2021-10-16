@@ -3,6 +3,6 @@ import { ICalculatorUseCase } from '@/Domain/CalculatorUseCase';
 
 export const Context = React.createContext({});
 
-export const StoreProvider: React.FC<{children: ReactNode, value: ICalculatorUseCase }> = (
+export const StoreProvider: React.FC<{ children: ReactNode, value: ICalculatorUseCase }> = (
   { children, value },
-) => (<Context.Provider value={value}>{children}</Context.Provider>);
+) => (<Context.Provider value={ value }>{children}</Context.Provider>);
