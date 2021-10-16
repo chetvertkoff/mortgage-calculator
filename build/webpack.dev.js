@@ -9,8 +9,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devServer: {
     historyApiFallback: true,
     contentBase: baseWebpackConfig.externals.paths.dist,
+    host: '0.0.0.0',
+    port: 8080,
     hot: true,
-    port: 8080
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
