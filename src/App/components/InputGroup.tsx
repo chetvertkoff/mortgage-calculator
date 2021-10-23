@@ -19,16 +19,13 @@ export const InputGroup: React.FC = () => {
   const { loading, error, data } = useQuery(queries.GET_LOAN_REASONS);
 
 
-
-  // setTimeout(() => {
-  //   update({ houseCost: { value: 1 } });
-  // }, 100);
-
   return (
     <Grid xs={ 6 } item>
       <Box p={ 2 }>
         <form>
-          <SelectItemInput />
+          {
+            data && <SelectItemInput />
+          }
           <SliderInput />
         </form>
       </Box>
