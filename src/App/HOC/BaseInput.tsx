@@ -19,7 +19,7 @@ export const BaseInput = <ChildProps extends BaseInputProps> (InputComponent: Re
         <InputComponent { ...defaultInputProps } { ...(props as ChildProps) } />
       </>
     );
-  }
+  };
 
   return WrappedInputComponent;
 };

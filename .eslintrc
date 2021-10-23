@@ -16,7 +16,8 @@
       "beforeSelfClosing": "always",
       "afterOpening": "never",
       "beforeClosing": "allow"
-    }]
+    }],
+    "semi": [2, "always"]
   },
   "extends": [
     "react-app",

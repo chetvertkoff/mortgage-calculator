@@ -4,16 +4,21 @@ import App from '@/App/App';
 import { ApolloProvider } from '@apollo/client';
 import { container } from '@/App/сontainer-DI';
 import { Store } from '@/Store/Store';
-import { CalculatorDI, ICalculatorUseCase } from '@/Domain/CalculatorUseCase';
-import { StoreProvider } from '@/App/HOC/StoreProvider';
+import { DiProvider } from '@/App/HOC/Provider';
+import { initStore } from "@/App/store/CalcStoreProvider";
+import { CalculatorDI, ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
 
-const calculator = container.get<ICalculatorUseCase>(CalculatorDI);
+const entity = container.get<ICalculatorUseCase>(CalculatorDI);
+
+const CalcStoreProvider = initStore<ICalculatorUseCase>(entity);
 
 ReactDOM.render(
   <ApolloProvider client={ Store.initApolloClient() }>
-    <StoreProvider value={ calculator }>
-      <App />
-    </StoreProvider>
+    <DiProvider container={ container }>
+      <CalcStoreProvider>
+        <App />
+      </CalcStoreProvider>
+    </DiProvider>
   </ApolloProvider>,
   document.getElementById('root'),
 );
