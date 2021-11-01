@@ -3,13 +3,13 @@ import { isNotEmpty } from "@/App/utils/utils";
 import { ChangeInputEvent } from "@/App/types/types";
 
 export type RequiredProps = {
-  items: ReadonlyArray<any> | undefined
   value: any | null
   label: string
   onChange: (val: any) => any
 };
 
 type AdditionalProps = {
+  items?: ReadonlyArray<any> | undefined
   itemValue?: string
   itemText?: string
   returnObject?: boolean
@@ -28,7 +28,6 @@ export const baseInput = <ChildProps extends BaseInputProps> (InputComponent: Re
 	(props: Omit<ChildProps, keyof BaseInputProps> & BaseInputProps): JSX.Element => {
 		const defaultInputProps: RequiredProps = {
 			label: '',
-			items: [],
 			value: '',
 			onChange: (e) => e
 		};
