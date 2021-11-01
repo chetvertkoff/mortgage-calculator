@@ -1,0 +1,17 @@
+overwrite: true
+schema: "./src/Store/SchemaGQL.ts"
+documents:
+  - ./src/App/graphql/**/*.{graphql,gql}
+generates:
+  src/App/types/graphql-types.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
+    config:
+      immutableTypes: true
+      nonOptionalTypename: true
+      skipTypeNameForRoot: true
+      namingConvention:
+        typeNames: "change-case#pascalCase"
+        transformUnderscore: true

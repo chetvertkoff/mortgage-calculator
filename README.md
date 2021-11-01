@@ -7,7 +7,7 @@ App - React app layer (Vue variable https://github.com/chetvertkoff/mortgage-cal
 
 Domain - domain, use case layer
 
-Store - data layer (Vue apollo usage)
+ApolloStore - data layer (Vue apollo usage)
 ## Project setup
 ```
 yarn install

@@ -11,9 +11,9 @@ export class LoanReason extends Entity {
   rateText: string;
 
   constructor(props?: LoanReason) {
-    super();
-    this.name = props?.name ?? '';
-    this.rate = props?.rate ?? 0;
-    this.rateText = `от ${this.rate}%`;
+  	super();
+  	this.name = props?.name ?? '';
+  	this.rate = props?.rate ?? 0;
+  	this.rateText = `от ${this.rate}%`;
   }
 }

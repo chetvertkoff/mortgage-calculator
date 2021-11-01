@@ -1,0 +1,8 @@
+query LOAN_PERIOD {
+  loanPeriod {
+    min
+    max
+    step
+    value
+  }
+}

@@ -6,6 +6,10 @@
   },
   "rules": {
     "no-console": "error",
+    "indent": ["error", "tab"],
+    "no-trailing-spaces": ["error"],
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+    "no-multi-spaces": "error",
     "import/first": "error",
     "react/prop-types": "off",
     "max-len": ["error", { "code": 120 }],
@@ -19,7 +23,9 @@
       "afterOpening": "never",
       "beforeClosing": "allow"
     }],
-    "semi": [2, "always"]
+    "semi": [2, "always"],
+    "no-mixed-spaces-and-tabs": [0],
+    "react-hooks/exhaustive-deps": [0]
   },
   "extends": [
     "react-app",

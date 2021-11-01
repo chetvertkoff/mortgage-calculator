@@ -1,0 +1,9 @@
+query LOAN_REASONS_LIST {
+  loanReasonsList {
+    list {
+      id
+      name
+      rate
+    }
+  }
+}

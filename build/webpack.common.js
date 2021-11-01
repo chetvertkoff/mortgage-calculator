@@ -51,17 +51,21 @@ module.exports = {
         name: '[name].[ext]'
       }
     }, {
-        test: /\.(scss|sass|css)$/,
-        use: [
-          'thread-loader',
-          'style-loader',
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'sass-loader',
-          }
-        ]
+      test: /\.(scss|sass|css)$/,
+      use: [
+        'thread-loader',
+        'style-loader',
+        {
+          loader: 'css-loader',
+        },
+        {
+          loader: 'sass-loader',
+        }
+      ]
+    },{
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      loader: 'graphql-tag/loader',
     }]
   },
 

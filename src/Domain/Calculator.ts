@@ -17,42 +17,42 @@ export class Calculator extends Entity {
   private _loanPeriod: LoanPeriod = new LoanPeriod();
 
   set loanReasonList(loanReasons: LoanReasonList) {
-    this._loanReasonList = new LoanReasonList(loanReasons);
+  	this._loanReasonList = new LoanReasonList(loanReasons);
   }
 
   get loanReasonList(): LoanReasonList {
-    return this._loanReasonList;
+  	return this._loanReasonList;
   }
 
   set hasSalaryCard(hasSalaryCard: HasSalaryCard) {
-    this._hasSalaryCard = new HasSalaryCard(hasSalaryCard);
+  	this._hasSalaryCard = new HasSalaryCard(hasSalaryCard);
   }
 
   get hasSalaryCard(): HasSalaryCard {
-    return this._hasSalaryCard;
+  	return this._hasSalaryCard;
   }
 
   set houseCost(houseCost: HouseCost) {
-    this._houseCost = new HouseCost(houseCost);
+  	this._houseCost = new HouseCost(houseCost);
   }
 
   get houseCost(): HouseCost {
-    return this._houseCost;
+  	return this._houseCost;
   }
 
   set initialPayment(initialPayment: InitialPayment) {
-    this._initialPayment = new InitialPayment(initialPayment);
+  	this._initialPayment = new InitialPayment(initialPayment);
   }
 
   get initialPayment(): InitialPayment {
-    return this._initialPayment;
+  	return this._initialPayment;
   }
 
   set loanPeriod(loanPeriod: LoanPeriod) {
-    this._loanPeriod = new LoanPeriod(loanPeriod);
+  	this._loanPeriod = new LoanPeriod(loanPeriod);
   }
 
   get loanPeriod(): LoanPeriod {
-    return this._loanPeriod;
+  	return this._loanPeriod;
   }
 }

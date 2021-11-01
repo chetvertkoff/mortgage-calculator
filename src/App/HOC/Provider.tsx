@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react';
 import { interfaces } from 'inversify';
-import { Context } from "@/App/HOC/Context";
 
-export const AppContext = Context;
+export const AppContext = React.createContext<interfaces.Container|null>(null);
 
 type Props = {
   container: interfaces.Container;
@@ -10,4 +9,4 @@ type Props = {
 };
 
 export const DiProvider: React.FC<Props> = ({ children, container }: Props) => (
-  <AppContext.Provider value={ container }>{children}</AppContext.Provider>);
+	<AppContext.Provider value={ container }>{children}</AppContext.Provider>);

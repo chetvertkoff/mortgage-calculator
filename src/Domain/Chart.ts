@@ -19,12 +19,12 @@ export class Chart extends Entity {
   leftToPay = 0; // оставшийся долг
 
   constructor(month: string, year: number, annuitet = 0, rateSum = 0, loanSum = 0, leftToPay = 0) {
-    super();
-    this.month = month;
-    this.year = year;
-    this.annuitet = annuitet;
-    this.rateSum = Math.round(rateSum);
-    this.loanSum = Math.round(loanSum);
-    this.leftToPay = Math.round(leftToPay);
+  	super();
+  	this.month = month;
+  	this.year = year;
+  	this.annuitet = annuitet;
+  	this.rateSum = Math.round(rateSum);
+  	this.loanSum = Math.round(loanSum);
+  	this.leftToPay = Math.round(leftToPay);
   }
 }

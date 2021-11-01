@@ -15,10 +15,10 @@ export class LoanPeriod extends Entity {
   value: number;
 
   constructor(props?: LoanPeriod) {
-    super();
-    this.min = props?.min ?? 0;
-    this.max = props?.max ?? 0;
-    this.step = props?.step ?? 1;
-    this.value = (this.min + this.max) / 2;
+  	super();
+  	this.min = props?.min ?? 0;
+  	this.max = props?.max ?? 0;
+  	this.step = props?.step ?? 1;
+  	this.value = (this.min + this.max) / 2;
   }
 }

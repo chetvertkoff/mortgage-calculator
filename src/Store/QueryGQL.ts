@@ -3,8 +3,8 @@ import { gql } from '@apollo/client/core';
 export const GET_LOAN_REASONS = gql`
   query {
     loanReasonsList {
-      value
       list {
+        id
         name
         rate
       }

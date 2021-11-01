@@ -1,0 +1,8 @@
+query HOUSE_COST {
+  houseCost {
+    min
+    max
+    step
+    value
+  }
+}

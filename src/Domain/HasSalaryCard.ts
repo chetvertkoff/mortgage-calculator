@@ -10,14 +10,14 @@ export class HasSalaryCard extends Entity {
   selected: boolean;
 
   constructor(props?: HasSalaryCard) {
-    super();
-    this.rate = props?.rate ?? 0;
-    this.rateText = `- ${this.rate}%`;
-    this.selected = false;
+  	super();
+  	this.rate = props?.rate ?? 0;
+  	this.rateText = `- ${this.rate}%`;
+  	this.selected = false;
   }
 
   get value(): number {
-    if (this.selected) return 1;
-    return 0;
+  	if (this.selected) return 1;
+  	return 0;
   }
 }

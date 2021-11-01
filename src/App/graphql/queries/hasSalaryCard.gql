@@ -1,0 +1,5 @@
+query HAS_SALARY_CARD {
+  hasSalaryCard {
+    rate
+  }
+}

@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
-import { FormLayout } from '@/App/HOC/FormLayout';
-import { InputGroup } from "@/App/components/InputGroup";
-import { Total } from "@/App/components/Total";
+import React from 'react';
+import { CalculatorLayout } from '@/App/HOC/CalculatorLayout';
+import { CalculatorForm } from "@/App/components/CalculatorForm";
+import { CalculatorTotal } from "@/App/components/CalculatorTotal";
 
 const App: React.FC = () => {
-  return (
-    <FormLayout>
-      <InputGroup  />
-      <Total />
-    </FormLayout>
-  );
+	return (
+		<>
+			<CalculatorLayout
+				form={ <CalculatorForm /> }
+				total={ <CalculatorTotal /> }
+			/>
+		</>
+	);
 };
 
 export default App;

@@ -1,37 +1,30 @@
 import React, {
-  Dispatch,
-  DispatchWithoutAction,
-  ProviderProps,
-  ReactElement,
-  ReactNode,
-  ReducerStateWithoutAction,
-  useReducer
+	DispatchWithoutAction,
+	ProviderProps,
+	ReactElement,
+	ReactNode,
+	ReducerStateWithoutAction,
+	useReducer
 } from "react";
 import { calcReducer } from "@/App/store/CalcReducer";
 import { ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
 import { CalculatorViewModel } from "@/App/model/CalculatorViewModel";
-import { CalcContext } from "@/App/types";
-
-type Props = {
-  children: ReactNode
-}
+import { CalcContext } from "@/App/types/types";
 
 export const CalcStoreProvider = React.createContext<CalcContext>({
-  state: new CalculatorViewModel(),
-  dispatch: () => null
+	state: new CalculatorViewModel(),
+	dispatch: () => null
 });
 
-
-export const initStore = <T extends ICalculatorUseCase>(entity: T) => ({ children }: Props):
+export const initStore = <T extends ICalculatorUseCase>(entity: T) => ({ children }: { children: ReactNode }):
   ReactElement<ProviderProps<[ReducerStateWithoutAction<any>, DispatchWithoutAction]>> => {
+	const initialState = CalculatorViewModel.fromModel(entity);
 
-    const initialState = CalculatorViewModel.fromModel(entity);
+	const [state, dispatch] = useReducer(calcReducer(entity), initialState);
 
-    const [state, dispatch] = useReducer(calcReducer(entity), initialState);
-
-  return (
-    <CalcStoreProvider.Provider value={ { state, dispatch } }>
-      {children}
-    </CalcStoreProvider.Provider>
-  );
+	return (
+		<CalcStoreProvider.Provider value={ { state, dispatch } }>
+			{children}
+		</CalcStoreProvider.Provider>
+	);
 };

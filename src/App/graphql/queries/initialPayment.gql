@@ -1,0 +1,8 @@
+query INITIAL_PAYMENT {
+  initialPayment {
+    min
+    max
+    step
+    value
+  }
+}

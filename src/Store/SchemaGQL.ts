@@ -5,7 +5,7 @@ export const typeDefs = gql`
     query: Query
   }
 
-  type Query {
+   type Query {
     loanReasonsList: LoanReasonList!
     hasSalaryCard: HasSalaryCard!
     houseCost: HouseCost!
@@ -19,6 +19,7 @@ export const typeDefs = gql`
   }
 
   type LoanReason {
+    id: Int!
     name: String!
     rate: Float!
   }

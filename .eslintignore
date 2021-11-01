@@ -1,3 +1,4 @@
 build
 dist
 e2e
+src/App/types/graphql-types.ts
