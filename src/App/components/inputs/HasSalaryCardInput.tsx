@@ -1,23 +1,19 @@
-import React, { useCallback, useContext, useEffect, useMemo } from "react";
+import React, { memo, useCallback, useEffect, useMemo } from "react";
 import { SwitchInput } from "@/App/UI/inputs/SwitchInput";
-import { CalcContext } from "@/App/types/types";
-import { CalcStoreProvider } from "@/App/store/CalcStoreProvider";
 import { useQuery } from "@apollo/client";
 import { HasSalaryCard, HasSalaryCardDocument } from "@/App/types/graphql-types";
-import { CalculatorViewModel } from "@/App/model/CalculatorViewModel";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { isNullish } from "@/App/utils/utils";
+import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
 
-export const HasSalaryCardInput: React.FC = (props) => {
-	const { state, dispatch } = useContext<CalcContext>(CalcStoreProvider);
-
+export const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	const { loading, error, data } = useQuery<{ hasSalaryCard: HasSalaryCard }>(HasSalaryCardDocument);
 
-	const onChange = useCallback((val: CalculatorViewModel["hasSalaryCard"]) => {
-		dispatch({ type: "HAS_SALARY_CARD", payload: val });
-	}, [state.hasSalaryCard.selected]);
+	const val = useMemo(() => (state.hasSalaryCard), [state.hasSalaryCard]);
 
-	const val = useMemo(() => (state.hasSalaryCard.selected), [state.hasSalaryCard.selected]);
+	const onChange = useCallback((val: boolean) => {
+		dispatch({ type: "HAS_SALARY_CARD_SELECTED", payload: val });
+	}, [state.hasSalaryCard]);
 
 	useEffect(() => {
 		if (isNullish(data?.hasSalaryCard)) return;
@@ -28,10 +24,19 @@ export const HasSalaryCardInput: React.FC = (props) => {
 	return (
 		<ApolloRequest loading={ loading } error={ error }>
 			<SwitchInput
-				label="Есть зарплатная карта"
-				value={ val }
-				onChange={ onChange }
-			/>
+				value={ val.selected }
+				prevNode="Есть зарплатная карта"
+				label={ val.rateText }
+				onChange={ onChange } />
 		</ApolloRequest>
 	);
 };
+
+const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => (
+	(prevProps.state.hasSalaryCard.rate === nextProps.state.hasSalaryCard.rate
+	&&
+	prevProps.state.hasSalaryCard.selected === nextProps.state.hasSalaryCard.selected
+	)
+);
+
+export const HasSalaryCardInput = withStoreContext(memo(Component, optimization));

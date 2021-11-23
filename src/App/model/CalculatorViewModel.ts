@@ -12,7 +12,12 @@ export class CalculatorViewModel {
   	rate: 0
   }
 
-  public houseCost = 0
+  public houseCost = {
+  	min: 0,
+  	max: 0,
+  	step: 0,
+  	value: 0
+  }
 
   public initialPayment = {
   	min: 0,

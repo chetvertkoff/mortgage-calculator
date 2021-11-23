@@ -8,7 +8,7 @@ import { ChangeInputEvent } from "@/App/types/types";
 export const SelectItemInput: React.FC<BaseInputProps> = baseInput((
 	{ items, onChange, label, value, itemValue, getItemValue, getItemText, getValue }
 ) => {
-	const val = useMemo(() => (
+	const val = useMemo<string>(() => (
   	(isNotEmpty(value) && isNotEmpty(itemValue) ? (value[itemValue] || 0) : value)
 	), [itemValue, value]);
 
@@ -18,10 +18,11 @@ export const SelectItemInput: React.FC<BaseInputProps> = baseInput((
 
 	return (
 		<FormControl fullWidth sx={ { m: 1, minWidth: 120 } }>
-			<InputLabel> { label } </InputLabel>
+			<InputLabel id="select-item-input-label" > { label } </InputLabel>
 			<Select
+				labelId="select-item-input-label"
 				label={ label }
-				defaultValue=''
+				defaultValue=""
 				value={ val }
 				onChange={ changeVal }
 			>

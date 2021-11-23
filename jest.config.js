@@ -17,6 +17,6 @@ module.exports = async () => {
       '^@/(.*)$': '<rootDir>/$1'
     },
     testRegex: '(/__unit__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
-    testEnvironment: 'jsdom'
+    testEnvironment: 'jsdom',
   };
 };

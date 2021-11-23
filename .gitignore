@@ -23,3 +23,4 @@ pnpm-debug.log*
 # e2e
 e2e/screenshots
 e2e/videos
+/.coverage
