@@ -1,38 +1,21 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { baseInput, BaseInputProps } from '@/App/HOC/baseInput';
 import { Box, FormControl, Slider, TextField, Typography } from "@mui/material";
-import { isNotEmpty } from "@/App/utils/utils";
 import { formatNum, shortNumCurrency } from "@/App/utils/format";
 
-type SliderInputProps = {
-  value: {
-    min: number,
-    max: number,
-    value: number,
-    step: number
-  }
+export type SliderInputProps = {
+  min: number,
+  max: number,
+  value: number,
+  step: number
 }
 
 export const SliderInput: React.FC<BaseInputProps & SliderInputProps> = baseInput( (
-	{ label, value, onChange }: BaseInputProps & SliderInputProps
+	{ label, value, max, min, step, onChange }: BaseInputProps & SliderInputProps
 ) => {
-	const val = useMemo<number>(() => ((
-		 isNotEmpty(value.value) ? value.value : 0
-	)), [value.value]);
 
-	const max = useMemo<number>(() => ((
-		isNotEmpty(value.max) ? value.max : 10
-	)), [value.max]);
-
-	const min = useMemo<number>(() => ((
-		isNotEmpty(value.min) ? value.min : 0
-	)), [value.min]);
-
-	const step = useMemo<number>(() => ((
-		isNotEmpty(value.step) ? value.step : 1
-	)), [value.step]);
-
-	const onSliderChange = useCallback((e: Event, newVal: typeof val[] | typeof val) => {
+	const onSliderChange = useCallback((e: Event, newVal: typeof value[] | typeof value) => {
+		if(newVal === value) return;
 		onChange(newVal);
 	}, [onChange]);
 
@@ -40,21 +23,23 @@ export const SliderInput: React.FC<BaseInputProps & SliderInputProps> = baseInpu
 		onChange(+e.target.value);
 	}, [onChange]);
 
-	const formatSliderValue = (sliderVal: typeof value.value): string => (`${formatNum(sliderVal)} ₽`);
+	const formatSliderValue = (sliderVal: typeof value): string => (`${formatNum(sliderVal)} ₽`);
 
 	return (
 		<FormControl fullWidth sx={ { m: 1, minWidth: 120 } }>
 			<TextField
+				data-testid="slider-input__text-field"
 				required
-				value={ val }
+				value={ value }
 				label={ label }
 				type="number"
 				variant="outlined"
 				onChange={ onTextFieldChange }
 			/>
 			<Slider
+				data-testid="slider-input__slider"
 				sx={ { paddingTop: 0 } }
-				value={ val }
+				value={ value }
 				max={ max }
 				min={ min }
 				step={ step }

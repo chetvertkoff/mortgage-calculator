@@ -4,7 +4,7 @@ import { CalcContext } from "@/App/types/types";
 import { CalcStoreProvider } from "@/App/store/CalcStoreProvider";
 import { useQuery } from "@apollo/client";
 import { HouseCost, HouseCostDocument } from "@/App/types/graphql-types";
-import { isNullish } from "@/App/utils/utils";
+import { isNotEmpty, isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 
 export const HouseCostInput: React.FC = (props) => {
@@ -12,12 +12,21 @@ export const HouseCostInput: React.FC = (props) => {
 
 	const { loading, error, data } = useQuery<{ houseCost: HouseCost }>(HouseCostDocument);
 
-	const val = useMemo(() => ({
-		max: state.houseCost.max,
-		min: state.houseCost.min,
-		step: state.houseCost.step,
-		value: state.houseCost.value
-	}), [state.houseCost.value]);
+	const val = useMemo<number>(() => ((
+		isNotEmpty(state.houseCost.value) ? state.houseCost.value : 0
+	)), [state.houseCost.value]);
+
+	const max = useMemo<number>(() => ((
+		isNotEmpty(state.houseCost.max) ? state.houseCost.max : 0
+	)), [state.houseCost.max]);
+
+	const min = useMemo<number>(() => ((
+		isNotEmpty(state.houseCost.min) ? state.houseCost.min : 0
+	)), [state.houseCost.min]);
+
+	const step = useMemo<number>(() => ((
+		isNotEmpty(state.houseCost.step) ? state.houseCost.step : 0
+	)), [state.houseCost.step]);
 
 	const onChange = useCallback((value: number) => {
 		dispatch({ type: "HOUSE_COST_VALUE", payload: value });
@@ -33,6 +42,9 @@ export const HouseCostInput: React.FC = (props) => {
 		<ApolloRequest loading={ loading } error={ error }>
 			<SliderInput
 				value={ val }
+				max={ max }
+				min={ min }
+				step={ step }
 				label="Стоимость недвижимости"
 				onChange={ onChange }
 			/>
