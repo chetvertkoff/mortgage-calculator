@@ -23,6 +23,7 @@ export const SwitchInput: React.FC<BaseInputProps & SwitchInputProps> = baseInpu
 				<Box sx={ { display: "flex", alignItems: 'center' } }>
 					<Typography>{ label }</Typography>
 					<Switch
+						data-testid="switch-input"
 						checked={ val }
 						onChange={ e => onChange(e.target.checked) }
 					/>

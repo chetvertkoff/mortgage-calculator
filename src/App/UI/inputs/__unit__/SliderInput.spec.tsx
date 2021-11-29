@@ -22,7 +22,6 @@ const withPropsComponent = (Component: ComponentType<BaseInputProps & SliderInpu
 	};
 
 describe('Test SliderInput component', () => {
-
 	const setup = () => {
 		const Component = withPropsComponent(SliderInput);
 
@@ -47,8 +46,6 @@ describe('Test SliderInput component', () => {
 		const trigger = utils.getByTestId('slider-input__slider') as HTMLElement;
 
 		fireEvent.mouseDown(trigger, { clientX: 10 });
-
-		expect(trigger).toMatchSnapshot();
 
 		const input = within(utils.getByTestId('slider-input__text-field')).getByDisplayValue(10);
 

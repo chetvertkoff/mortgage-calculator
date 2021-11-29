@@ -1,15 +1,12 @@
-import React, { useCallback, useContext, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { SliderInput } from "@/App/UI/inputs/SliderInput";
-import { CalcContext } from "@/App/types/types";
-import { CalcStoreProvider } from "@/App/store/CalcStoreProvider";
 import { useQuery } from "@apollo/client";
 import { HouseCost, HouseCostDocument } from "@/App/types/graphql-types";
 import { isNotEmpty, isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
+import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
 
-export const HouseCostInput: React.FC = (props) => {
-	const { state, dispatch } = useContext<CalcContext>(CalcStoreProvider);
-
+const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	const { loading, error, data } = useQuery<{ houseCost: HouseCost }>(HouseCostDocument);
 
 	const val = useMemo<number>(() => ((
@@ -51,3 +48,5 @@ export const HouseCostInput: React.FC = (props) => {
 		</ApolloRequest>
 	);
 };
+
+export const HouseCostInput = withStoreContext(Component);

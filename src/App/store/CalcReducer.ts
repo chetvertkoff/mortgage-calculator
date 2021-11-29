@@ -26,8 +26,20 @@ export const calcReducer = (calcEntity: ICalculatorUseCase): CalcReducer<Calcula
 			return { ...state, houseCost: calcEntity.houseCost };
 
 		case "INITIAL_PAYMENT":
+			calcEntity.initialPayment = action.payload;
+			return { ...state, initialPayment: calcEntity.initialPayment };
+
+		case "INITIAL_PAYMENT_VALUE":
 			calcEntity.initialPayment.value = action.payload;
 			return { ...state, initialPayment: calcEntity.initialPayment };
+
+		case "LOAN_PERIOD":
+			calcEntity.loanPeriod = action.payload;
+			return { ...state, loanPeriod: calcEntity.loanPeriod };
+
+		case "LOAN_PERIOD_VALUE":
+			calcEntity.loanPeriod.value = action.payload;
+			return { ...state, loanPeriod: calcEntity.loanPeriod };
 
 		default:
 			return state;

@@ -1,15 +1,11 @@
-import React, { useCallback, useContext } from "react";
+import React, { memo, useCallback } from "react";
 import { SelectItemInput } from "@/App/UI/inputs/SelectItemInput";
 import { useQuery } from "@apollo/client";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
-import { CalcStoreProvider } from "@/App/store/CalcStoreProvider";
 import { LoanReasonsListDocument, LoanReasonList, LoanReason } from "@/App/types/graphql-types";
-import { CalcContext } from "@/App/types/types";
+import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
 
-export const LoanReasonInput: React.FC = () => {
-
-	const { state, dispatch } = useContext<CalcContext>(CalcStoreProvider);
-
+const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	const { loading, error, data } = useQuery<{ loanReasonsList: LoanReasonList }>(LoanReasonsListDocument);
 
 	const onChange = useCallback((val: LoanReason) => {
@@ -30,3 +26,5 @@ export const LoanReasonInput: React.FC = () => {
 		</ApolloRequest>
 	);
 };
+
+export const LoanReasonInput = withStoreContext(memo(Component));

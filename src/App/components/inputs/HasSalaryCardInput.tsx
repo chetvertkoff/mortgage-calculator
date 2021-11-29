@@ -27,7 +27,8 @@ export const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 				value={ val.selected }
 				prevNode="Есть зарплатная карта"
 				label={ val.rateText }
-				onChange={ onChange } />
+				onChange={ onChange }
+			/>
 		</ApolloRequest>
 	);
 };
@@ -39,4 +40,6 @@ const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps
 	)
 );
 
-export const HasSalaryCardInput = withStoreContext(memo(Component, optimization));
+export const HasSalaryCardInput = withStoreContext(
+	memo(Component, optimization)
+);

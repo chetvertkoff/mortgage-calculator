@@ -1,6 +1,7 @@
 import { ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
 
 export class CalculatorViewModel {
+
   public loanReason = {
   	name: '',
   	rate: 0,
@@ -21,7 +22,16 @@ export class CalculatorViewModel {
 
   public initialPayment = {
   	min: 0,
-  	max: 0
+  	max: 0,
+  	step: 0,
+  	value: 0
+  }
+
+  public loanPeriod = {
+  	min: 0,
+  	max: 0,
+  	step: 0,
+  	value: 0
   }
 
   public static fromModel(entity: ICalculatorUseCase): CalculatorViewModel {
@@ -31,6 +41,8 @@ export class CalculatorViewModel {
   		loanReason: entity.loanReasonList.value,
   		houseCost: entity.houseCost.value,
   		hasSalaryCard: entity.hasSalaryCard,
+  		initialPayment: entity.initialPayment,
+  		loanPeriod: entity.loanPeriod,
   	});
 
   	return state;
