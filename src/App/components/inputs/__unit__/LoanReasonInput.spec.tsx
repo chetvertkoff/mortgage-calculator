@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { LoanReasonInput } from "@/App/components/inputs/LoanReasonInput";
 import { Bootstrap } from "@/App/Bootstrap";
 import { MockedProvider } from "@apollo/client/testing";
@@ -12,10 +12,12 @@ const mock = {
 	},
 	result: {
 		data: {
-			list: [
-				{ id: 0, name: 'Готовое жилье', rate: 7.3, },
-				{ id: 1, name: 'Новостройка', rate: 0.9 },
-			]
+			loanReasonsList: {
+				list: [
+					{ id: 0, name: 'Готовое жилье', rate: 7.3, },
+					{ id: 1, name: 'Новостройка', rate: 0.9 },
+				]
+			}
 		},
 	},
 };
@@ -38,14 +40,12 @@ describe('Loan reason input component testing', () => {
 
 		const trigger = await utils.findByText('Готовое жилье');
 
-		expect(trigger).toMatchSnapshot();
-
 		userEvent.click(trigger);
 
 		userEvent.click(screen.getByText('Новостройка'));
 
-		const input = utils.getByDisplayValue('Готовое жилье') as HTMLInputElement;
+		const input = within(utils.getByTestId('select-item-input')).getByText('Новостройка') as HTMLInputElement;
 
-		expect(input.value).toBe('Готовое жилье');
+		expect(input).toBeTruthy();
 	});
 });

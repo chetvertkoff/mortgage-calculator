@@ -5,25 +5,10 @@ import { isNotEmpty, isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { InitialPaymentDocument, InitialPayment } from "@/App/types/graphql-types";
 import { SliderInput } from "@/App/UI/inputs/SliderInput";
+import { baseSliderInput, BaseSliderInputProps } from "@/App/components/inputs/HOC/baseSliderInput";
 
-const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
+const Component: React.FC<BaseSliderInputProps> = ({ value, dispatch, min, max, step }) => {
 	const { loading, error, data } = useQuery<{ initialPayment: InitialPayment }>(InitialPaymentDocument);
-
-	const val = useMemo<number>(() => ((
-		isNotEmpty(state.initialPayment.value) ? state.initialPayment.value : 0
-	)), [state.initialPayment.value]);
-
-	const max = useMemo<number>(() => ((
-		isNotEmpty(state.initialPayment.max) ? state.initialPayment.max : 0
-	)), [state.initialPayment.max]);
-
-	const min = useMemo<number>(() => ((
-		isNotEmpty(state.initialPayment.min) ? state.initialPayment.min : 0
-	)), [state.initialPayment.min]);
-
-	const step = useMemo<number>(() => ((
-		isNotEmpty(state.initialPayment.step) ? state.initialPayment.step : 0
-	)), [state.initialPayment.step]);
 
 	const onChange = useCallback((value: number) => {
 		dispatch({ type: "INITIAL_PAYMENT_VALUE", payload: value });
@@ -38,7 +23,7 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	return (
 		<ApolloRequest loading={ loading } error={ error }>
 			<SliderInput
-				value={ val }
+				value={ value }
 				max={ max }
 				min={ min }
 				step={ step }
@@ -49,8 +34,14 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	);
 };
 
-const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => {
+const optimization = (prevProps: BaseSliderInputProps, nextProps: BaseSliderInputProps): boolean => {
 	return (prevProps.state.initialPayment.value === nextProps.state.initialPayment.value);
 };
 
-export const InitialPaymentInput = withStoreContext(memo(Component, optimization));
+export const InitialPaymentInput =
+  withStoreContext(
+  	baseSliderInput(
+  		memo(Component, optimization),
+  		'initialPayment'
+  	)
+  );

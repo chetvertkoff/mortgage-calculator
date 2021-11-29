@@ -1,29 +1,14 @@
-import React, { memo, useCallback, useEffect, useMemo } from "react";
+import React, { memo, useCallback, useEffect } from "react";
 import { SliderInput } from "@/App/UI/inputs/SliderInput";
 import { useQuery } from "@apollo/client";
 import { HouseCost, HouseCostDocument } from "@/App/types/graphql-types";
-import { isNotEmpty, isNullish } from "@/App/utils/utils";
+import { isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
+import { baseSliderInput, BaseSliderInputProps } from "@/App/components/inputs/HOC/baseSliderInput";
 
-const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
+const Component: React.FC<BaseSliderInputProps> = ({ value, dispatch, min, max, step }) => {
 	const { loading, error, data } = useQuery<{ houseCost: HouseCost }>(HouseCostDocument);
-
-	const val = useMemo<number>(() => ((
-		isNotEmpty(state.houseCost.value) ? state.houseCost.value : 0
-	)), [state.houseCost.value]);
-
-	const max = useMemo<number>(() => ((
-		isNotEmpty(state.houseCost.max) ? state.houseCost.max : 0
-	)), [state.houseCost.max]);
-
-	const min = useMemo<number>(() => ((
-		isNotEmpty(state.houseCost.min) ? state.houseCost.min : 0
-	)), [state.houseCost.min]);
-
-	const step = useMemo<number>(() => ((
-		isNotEmpty(state.houseCost.step) ? state.houseCost.step : 0
-	)), [state.houseCost.step]);
 
 	const onChange = useCallback((value: number) => {
 		dispatch({ type: "HOUSE_COST_VALUE", payload: value });
@@ -38,7 +23,7 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	return (
 		<ApolloRequest loading={ loading } error={ error }>
 			<SliderInput
-				value={ val }
+				value={ value }
 				max={ max }
 				min={ min }
 				step={ step }
@@ -53,4 +38,10 @@ const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps
 	return (prevProps.state.houseCost.value === nextProps.state.houseCost.value);
 };
 
-export const HouseCostInput = withStoreContext(memo(Component, optimization));
+export const HouseCostInput =
+  withStoreContext(
+  	baseSliderInput(
+  		memo(Component, optimization),
+  		'houseCost'
+  	)
+  );

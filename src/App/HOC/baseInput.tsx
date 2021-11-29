@@ -51,14 +51,12 @@ export const baseInput = <ChildProps extends BaseInputProps> (InputComponent: Re
 		};
 
 		return (
-			<>
-				<InputComponent
-					{ ...defaultInputProps }
-					{ ...(props as ChildProps) }
-					getItemText={ getItemText }
-					getItemValue={ getItemValue }
-					getValue={ getValue }
-				/>
-			</>
+			<InputComponent
+				{ ...defaultInputProps }
+				{ ...(props as ChildProps) }
+				getItemText={ getItemText }
+				getItemValue={ getItemValue }
+				getValue={ getValue }
+			/>
 		);
 	});

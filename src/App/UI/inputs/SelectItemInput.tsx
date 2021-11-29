@@ -20,6 +20,7 @@ export const SelectItemInput: React.FC<BaseInputProps> = baseInput((
 		<FormControl fullWidth sx={ { m: 1, minWidth: 120 } }>
 			<InputLabel id="select-item-input-label" > { label } </InputLabel>
 			<Select
+				data-testid="select-item-input"
 				labelId="select-item-input-label"
 				label={ label }
 				defaultValue=""
