@@ -19,6 +19,6 @@ export class LoanPeriod extends Entity {
   	this.min = props?.min ?? 0;
   	this.max = props?.max ?? 0;
   	this.step = props?.step ?? 1;
-  	this.value = (this.min + this.max) / 2;
+  	this.value = Math.round((this.min + this.max) / 2);
   }
 }

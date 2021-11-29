@@ -27,4 +27,8 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	);
 };
 
-export const LoanReasonInput = withStoreContext(memo(Component));
+const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => (
+	(prevProps.state.loanReason.rate === nextProps.state.loanReason.rate)
+);
+
+export const LoanReasonInput = withStoreContext(memo(Component, optimization));

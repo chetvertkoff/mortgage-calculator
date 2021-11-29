@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { baseInput, BaseInputProps } from '@/App/HOC/baseInput';
 import { Box, FormControl, Slider, TextField, Typography } from "@mui/material";
 import { formatNum, shortNumCurrency } from "@/App/utils/format";
@@ -7,11 +7,12 @@ export type SliderInputProps = {
   min: number,
   max: number,
   value: number,
+  append?: ReactNode,
   step: number
 }
 
 export const SliderInput: React.FC<BaseInputProps & SliderInputProps> = baseInput( (
-	{ label, value, max, min, step, onChange }: BaseInputProps & SliderInputProps
+	{ label, value, max, min, step, onChange, append }: BaseInputProps & SliderInputProps
 ) => {
 
 	const onSliderChange = useCallback((e: Event, newVal: typeof value[] | typeof value) => {
@@ -47,10 +48,14 @@ export const SliderInput: React.FC<BaseInputProps & SliderInputProps> = baseInpu
 				valueLabelFormat={ formatSliderValue }
 				onChange={ onSliderChange }
 			/>
-			<Box sx={ { display: "flex", justifyContent: "space-between" } }>
-				<Typography>{ shortNumCurrency(min) }</Typography>
-				<Typography>{ shortNumCurrency(max) }</Typography>
-			</Box>
+			{
+				append ?? (
+					<Box sx={ { display: "flex", justifyContent: "space-between" } }>
+						<Typography>{ shortNumCurrency(min) }</Typography>
+						<Typography>{ shortNumCurrency(max) }</Typography>
+					</Box>
+				)
+			}
 		</FormControl>
 	);
 });

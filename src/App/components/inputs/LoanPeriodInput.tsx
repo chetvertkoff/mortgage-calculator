@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { memo, useCallback, useEffect, useMemo } from "react";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
 import { useQuery } from "@apollo/client";
 import { isNotEmpty, isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { SliderInput } from "@/App/UI/inputs/SliderInput";
 import { LoanPeriodDocument, LoanPeriod } from "@/App/types/graphql-types";
+import { Box, Typography } from "@mui/material";
+import { yearPlural } from "@/App/utils/yearPlurals";
 
 const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	const { loading, error, data } = useQuery<{ loanPeriod: LoanPeriod }>(LoanPeriodDocument);
@@ -35,6 +37,13 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 		dispatch({ type: "LOAN_PERIOD", payload: data?.loanPeriod });
 	}, [data?.loanPeriod]);
 
+	const append = (
+		<Box sx={ { display: "flex", justifyContent: "space-between" } }>
+			<Typography>{ yearPlural(min) }</Typography>
+			<Typography>{ yearPlural(max) }</Typography>
+		</Box>
+	);
+
 	return (
 		<ApolloRequest loading={ loading } error={ error }>
 			<SliderInput
@@ -44,9 +53,14 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 				step={ step }
 				label="Срок Кредита"
 				onChange={ onChange }
+				append={ append }
 			/>
 		</ApolloRequest>
 	);
 };
 
-export const LoanPeriodInput = withStoreContext(Component);
+const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => {
+	return (prevProps.state.loanPeriod.value === nextProps.state.loanPeriod.value);
+};
+
+export const LoanPeriodInput = withStoreContext(memo(Component, optimization));

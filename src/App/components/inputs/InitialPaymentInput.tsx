@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { memo, useCallback, useEffect, useMemo } from "react";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
 import { useQuery } from "@apollo/client";
 import { isNotEmpty, isNullish } from "@/App/utils/utils";
@@ -49,4 +49,8 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	);
 };
 
-export const InitialPaymentInput = withStoreContext(Component);
+const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => {
+	return (prevProps.state.initialPayment.value === nextProps.state.initialPayment.value);
+};
+
+export const InitialPaymentInput = withStoreContext(memo(Component, optimization));

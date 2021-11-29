@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { memo, useCallback, useEffect, useMemo } from "react";
 import { SliderInput } from "@/App/UI/inputs/SliderInput";
 import { useQuery } from "@apollo/client";
 import { HouseCost, HouseCostDocument } from "@/App/types/graphql-types";
@@ -49,4 +49,8 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	);
 };
 
-export const HouseCostInput = withStoreContext(Component);
+const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => {
+	return (prevProps.state.houseCost.value === nextProps.state.houseCost.value);
+};
+
+export const HouseCostInput = withStoreContext(memo(Component, optimization));
