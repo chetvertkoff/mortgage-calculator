@@ -5,12 +5,10 @@ import { CalculatorTotal } from "@/App/components/CalculatorTotal";
 
 const App: React.FC = () => {
 	return (
-		<>
-			<CalculatorLayout
-				form={ <CalculatorForm /> }
-				total={ <CalculatorTotal /> }
-			/>
-		</>
+		<CalculatorLayout
+			form={ <CalculatorForm /> }
+			total={ <CalculatorTotal /> }
+		/>
 	);
 };
 

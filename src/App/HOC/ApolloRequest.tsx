@@ -20,5 +20,4 @@ export const ApolloRequest: React.FC<Props> = ({ children, error, loading }) => 
 	);
 
 	return <>{ children }</>;
-
 };

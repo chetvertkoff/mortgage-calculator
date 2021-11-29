@@ -2,6 +2,14 @@ import { ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
 
 export class CalculatorViewModel {
 
+  public annuitet = 0
+
+  public totalRate = 0
+
+  public totalSum = 0
+
+  public shouldEarn = 0
+
   public loanReason = {
   	name: '',
   	rate: 0,
@@ -43,6 +51,7 @@ export class CalculatorViewModel {
   		hasSalaryCard: entity.hasSalaryCard,
   		initialPayment: entity.initialPayment,
   		loanPeriod: entity.loanPeriod,
+  		annuitet: entity.annuitet
   	});
 
   	return state;

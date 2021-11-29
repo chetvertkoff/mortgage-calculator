@@ -9,7 +9,7 @@ import { Box, Typography } from "@mui/material";
 import { yearPlural } from "@/App/utils/yearPlurals";
 import { baseSliderInput, BaseSliderInputProps } from "@/App/components/inputs/HOC/baseSliderInput";
 
-const Component: React.FC<BaseSliderInputProps> = ({ value, dispatch, min, max, step }) => {
+const Component: React.FC<BaseSliderInputProps> = ({ state, value, dispatch, min, max, step }) => {
 	const { loading, error, data } = useQuery<{ loanPeriod: LoanPeriod }>(LoanPeriodDocument);
 
 	const onChange = useCallback((value: number) => {

@@ -39,6 +39,7 @@ export const calcReducer = (calcEntity: ICalculatorUseCase): CalcReducer<Calcula
 
 		case "LOAN_PERIOD_VALUE":
 			calcEntity.loanPeriod.value = action.payload;
+			console.log(calcEntity);
 			return { ...state, loanPeriod: { ...calcEntity.loanPeriod } };
 
 		default:
