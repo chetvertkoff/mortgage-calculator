@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useEffect } from "react";
 import { SelectItemInput } from "@/App/UI/inputs/SelectItemInput";
 import { useQuery } from "@apollo/client";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
@@ -11,6 +11,12 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	const onChange = useCallback((val: LoanReason) => {
 		dispatch({ type: "LOAN_REASON", payload: val });
 	}, [state.loanReason]);
+
+	useEffect(() => {
+		if (state.loanReason.rate === 0 && data?.loanReasonsList.list.length) { // default value
+			dispatch({ type: "LOAN_REASON", payload: data?.loanReasonsList.list[0] });
+		}
+	}, [data?.loanReasonsList.list]);
 
 	return (
 		<ApolloRequest error={ error } loading={ loading }>

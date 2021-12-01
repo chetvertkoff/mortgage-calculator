@@ -22,7 +22,7 @@ export interface ICalculatorUseCase {
   shouldEarn: number
   overpayment: number
   chartList: ChartUseCase,
-  loanPeriodToMonth: number
+  loanPeriodToMonth: number,
 }
 
 @injectable()
@@ -93,6 +93,6 @@ export class CalculatorUseCase extends Calculator implements ICalculatorUseCase 
 		const monthCount = this.loanPeriod.value * 12;
 		const sum = this.totalSum;
 
-		return ((sum * r) / (1 - (1 + r ** -monthCount)));
+		return sum * r / (1 - Math.pow(1 + r, -monthCount));
 	}
 }

@@ -1,46 +1,45 @@
-import { CalculatorViewModel } from "@/App/model/CalculatorViewModel";
+import { CalculatorVM } from "@/App/model/CalculatorVM";
 import { ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
 import { ActionReducer, CalcReducer } from "@/App/types/types";
 
-export const calcReducer = (calcEntity: ICalculatorUseCase): CalcReducer<CalculatorViewModel> =>
-	(state: CalculatorViewModel, action: ActionReducer): CalculatorViewModel => {
+export const calcReducer = (calcEntity: ICalculatorUseCase): CalcReducer<CalculatorVM> =>
+	(state: CalculatorVM, action: ActionReducer): CalculatorVM => {
 		switch (action.type) {
 		case "LOAN_REASON":
 			calcEntity.loanReasonList.value = action.payload;
-			return { ...state, loanReason: calcEntity.loanReasonList.value };
+			return CalculatorVM.fromModel(calcEntity);
 
 		case "HAS_SALARY_CARD":
 			calcEntity.hasSalaryCard = action.payload;
-			return { ...state, hasSalaryCard: { ...calcEntity.hasSalaryCard } };
+			return CalculatorVM.fromModel(calcEntity);
 
 		case "HAS_SALARY_CARD_SELECTED":
 			calcEntity.hasSalaryCard.selected = action.payload;
-			return { ...state, hasSalaryCard: { ...calcEntity.hasSalaryCard } };
+			return CalculatorVM.fromModel(calcEntity);
 
 		case "HOUSE_COST":
 			calcEntity.houseCost = action.payload;
-			return { ...state, houseCost: { ...calcEntity.houseCost } };
+			return CalculatorVM.fromModel(calcEntity);
 
 		case "HOUSE_COST_VALUE":
 			calcEntity.houseCost.value = action.payload;
-			return { ...state, houseCost: { ...calcEntity.houseCost } };
+			return CalculatorVM.fromModel(calcEntity);
 
 		case "INITIAL_PAYMENT":
 			calcEntity.initialPayment = action.payload;
-			return { ...state, initialPayment: { ...calcEntity.initialPayment } };
+			return CalculatorVM.fromModel(calcEntity);
 
 		case "INITIAL_PAYMENT_VALUE":
 			calcEntity.initialPayment.value = action.payload;
-			return { ...state, initialPayment: { ...calcEntity.initialPayment } };
+			return CalculatorVM.fromModel(calcEntity);
 
 		case "LOAN_PERIOD":
 			calcEntity.loanPeriod = action.payload;
-			return { ...state, loanPeriod: { ...calcEntity.loanPeriod } };
+			return CalculatorVM.fromModel(calcEntity);
 
 		case "LOAN_PERIOD_VALUE":
 			calcEntity.loanPeriod.value = action.payload;
-			console.log(calcEntity);
-			return { ...state, loanPeriod: { ...calcEntity.loanPeriod } };
+			return CalculatorVM.fromModel(calcEntity);
 
 		default:
 			return state;

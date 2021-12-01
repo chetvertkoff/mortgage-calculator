@@ -1,10 +1,10 @@
 import React, { ComponentType, Dispatch, useContext } from "react";
 import { ActionReducer, CalcContext } from "@/App/types/types";
 import { CalcStoreProvider } from "@/App/store/CalcStoreProvider";
-import { CalculatorViewModel } from "@/App/model/CalculatorViewModel";
+import { CalculatorVM } from "@/App/model/CalculatorVM";
 
 export type StoreContextProps = {
-  state: CalculatorViewModel,
+  state: CalculatorVM,
   dispatch: Dispatch<ActionReducer>
 }
 

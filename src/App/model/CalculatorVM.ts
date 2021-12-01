@@ -1,6 +1,6 @@
 import { ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
 
-export class CalculatorViewModel {
+export class CalculatorVM {
 
   public annuitet = 0
 
@@ -42,15 +42,19 @@ export class CalculatorViewModel {
   	value: 0
   }
 
-  public static fromModel(entity: ICalculatorUseCase): CalculatorViewModel {
-  	const state = new this();
+  public static defaultValue(): CalculatorVM {
+  	return new this();
+  }
+
+  public static fromModel(entity: ICalculatorUseCase): CalculatorVM {
+  	const state = this.defaultValue();
 
   	Object.assign(state, {
-  		loanReason: entity.loanReasonList.value,
-  		houseCost: entity.houseCost.value,
-  		hasSalaryCard: entity.hasSalaryCard,
-  		initialPayment: entity.initialPayment,
-  		loanPeriod: entity.loanPeriod,
+  		loanReason: { ...entity.loanReasonList.value },
+  		houseCost: { ...entity.houseCost },
+  		hasSalaryCard: { ...entity.hasSalaryCard },
+  		initialPayment: { ...entity.initialPayment },
+  		loanPeriod: { ...entity.loanPeriod },
   		annuitet: entity.annuitet
   	});
 

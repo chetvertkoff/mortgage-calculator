@@ -13,8 +13,7 @@ export type BaseSliderInputProps = SliderProps & StoreContextProps;
 
 export const baseSliderInput = <ChildProps extends BaseSliderInputProps>(
 	AbstractSliderComponent: React.ComponentType<ChildProps>,
-	entityName: "houseCost" | "initialPayment" | "loanPeriod"
-) => (
+	entityName: "houseCost" | "initialPayment" | "loanPeriod" ) => (
 		(props: Omit<ChildProps, keyof BaseSliderInputProps> & BaseSliderInputProps): JSX.Element => {
 
 			const entity: SliderProps = props.state[entityName];
