@@ -1,4 +1,4 @@
-import { Chart } from '@/Domain/Chart';
+import { Chart } from "@/Domain/Chart";
 
 export class ChartUseCase {
   totalSum: number;
@@ -68,7 +68,7 @@ export class ChartUseCase {
   	if (now.getMonth() === 11) {
   		current = new Date(now.getFullYear() + 1, 0, 1);
   		chartItem = new Chart(
-  			current.toLocaleString('ru-RU', { month: 'long' }),
+  			current.toLocaleString("ru-RU", { month: "long" }),
   			current.getFullYear(),
   			this.annuitet,
   			rateSum,
@@ -81,7 +81,7 @@ export class ChartUseCase {
   	current = new Date(now.getFullYear(), now.getMonth() + 1, 1);
 
   	chartItem = new Chart(
-  		current.toLocaleString('ru-RU', { month: 'long' }),
+  		current.toLocaleString("ru-RU", { month: "long" }),
   		0,
   		this.annuitet,
   		rateSum,

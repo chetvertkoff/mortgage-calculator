@@ -1,5 +1,5 @@
-import React, { ReactNode, useCallback } from 'react';
-import { baseInput, BaseInputProps } from '@/App/HOC/baseInput';
+import React, { ReactNode, useCallback } from "react";
+import { baseInput, BaseInputProps } from "@/App/HOC/baseInput";
 import { Box, FormControl, Slider, TextField, Typography } from "@mui/material";
 import { formatNum, shortNumCurrency } from "@/App/utils/format";
 

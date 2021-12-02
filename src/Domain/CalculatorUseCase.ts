@@ -1,13 +1,13 @@
-import { Calculator } from '@/Domain/Calculator';
-import { injectable } from 'inversify';
-import { LoanReasonList } from '@/Domain/LoanReasonList';
-import { HasSalaryCard } from '@/Domain/HasSalaryCard';
-import { HouseCost } from '@/Domain/HouseCost';
-import { InitialPayment } from '@/Domain/InitialPayment';
-import { LoanPeriod } from '@/Domain/LoanPeriod';
-import { ChartUseCase } from '@/Domain/ChartUseСase';
+import { Calculator } from "@/Domain/Calculator";
+import { injectable } from "inversify";
+import { LoanReasonList } from "@/Domain/LoanReasonList";
+import { HasSalaryCard } from "@/Domain/HasSalaryCard";
+import { HouseCost } from "@/Domain/HouseCost";
+import { InitialPayment } from "@/Domain/InitialPayment";
+import { LoanPeriod } from "@/Domain/LoanPeriod";
+import { ChartUseCase } from "@/Domain/ChartUseСase";
 
-export const CalculatorDI = Symbol.for('CalculatorDI');
+export const CalculatorDI = Symbol.for("CalculatorDI");
 
 export interface ICalculatorUseCase {
   loanReasonList: LoanReasonList
@@ -78,7 +78,7 @@ export class CalculatorUseCase extends Calculator implements ICalculatorUseCase 
 		if (this.loanReasonList.value.rate <= this.hasSalaryCard.value) {
 			return this.loanReasonList.value.rate;
 		}
-		return this.loanReasonList.value.rate - this.hasSalaryCard.value;
+		return this.loanReasonList.value.rate - this.hasSalaryCard.rate;
 	}
 
 	// расчет суммы требуемого кредита

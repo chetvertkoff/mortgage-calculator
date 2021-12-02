@@ -1,6 +1,6 @@
 import {
 	hasSalaryCard, houseCost, initialPayment, loanPeriod, loanReasons,
-} from './fakeData';
+} from "./fakeData";
 
 export const mocks = {
 	Query: () => ({

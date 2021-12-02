@@ -1,5 +1,5 @@
-import { injectable } from 'inversify';
-import { validate } from 'class-validator';
+import { injectable } from "inversify";
+import { validate } from "class-validator";
 
 @injectable()
 export class Entity {

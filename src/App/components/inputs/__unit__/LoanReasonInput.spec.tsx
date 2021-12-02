@@ -14,15 +14,15 @@ const mock = {
 		data: {
 			loanReasonsList: {
 				list: [
-					{ id: 0, name: 'Готовое жилье', rate: 7.3, },
-					{ id: 1, name: 'Новостройка', rate: 0.9 },
+					{ id: 0, name: "Готовое жилье", rate: 7.3, },
+					{ id: 1, name: "Новостройка", rate: 0.9 },
 				]
 			}
 		},
 	},
 };
 
-describe('Loan reason input component testing', () => {
+describe("Loan reason input component testing", () => {
 	const setup = () => {
 		const utils = render(
 			<Bootstrap>
@@ -35,16 +35,16 @@ describe('Loan reason input component testing', () => {
 		return { utils };
 	};
 
-	test('Can change value', async () => {
+	test("Can change value", async () => {
 		const { utils } = setup();
 
-		const trigger = await utils.findByText('Готовое жилье');
+		const trigger = await utils.findByText("Готовое жилье");
 
 		userEvent.click(trigger);
 
-		userEvent.click(screen.getByText('Новостройка'));
+		userEvent.click(screen.getByText("Новостройка"));
 
-		const input = within(utils.getByTestId('select-item-input')).getByText('Новостройка') as HTMLInputElement;
+		const input = within(utils.getByTestId("select-item-input")).getByText("Новостройка") as HTMLInputElement;
 
 		expect(input).toBeTruthy();
 	});

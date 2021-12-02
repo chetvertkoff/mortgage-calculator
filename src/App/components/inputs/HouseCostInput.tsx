@@ -42,6 +42,6 @@ export const HouseCostInput =
   withStoreContext(
   	baseSliderInput(
   		memo(Component, optimization),
-  		'houseCost'
+  		"houseCost"
   	)
   );

@@ -10,7 +10,7 @@ export const Component: React.FC<StoreContextProps> = ({ state }) => {
 				<Typography>Ежемесячный платеж { roundFormat(state.annuitet) }</Typography>
 			</Grid>
 			<Grid item xs={ 6 }>
-				<Typography>{ }</Typography>
+				<Typography>{ state.totalRate }</Typography>
 			</Grid>
 		</Grid>
 	);

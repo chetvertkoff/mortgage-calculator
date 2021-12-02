@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import { TotalStatistic } from "@/App/components/total/TotalStatistic";
 
 export const CalculatorTotal: React.FC = () => {

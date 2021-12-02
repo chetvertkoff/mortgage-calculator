@@ -11,13 +11,13 @@ export class CalculatorVM {
   public shouldEarn = 0
 
   public loanReason = {
-  	name: '',
+  	name: "",
   	rate: 0,
   }
 
   public hasSalaryCard = {
   	selected: false,
-  	rateText: '',
+  	rateText: "",
   	rate: 0
   }
 
@@ -55,7 +55,8 @@ export class CalculatorVM {
   		hasSalaryCard: { ...entity.hasSalaryCard },
   		initialPayment: { ...entity.initialPayment },
   		loanPeriod: { ...entity.loanPeriod },
-  		annuitet: entity.annuitet
+  		annuitet: entity.annuitet,
+  		totalRate: entity.totalRate
   	});
 
   	return state;

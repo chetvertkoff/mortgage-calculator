@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { isNotEmpty } from "@/App/utils/utils";
 import { ChangeInputEvent } from "@/App/types/types";
 
@@ -27,8 +27,8 @@ export type BaseInputProps = RequiredProps & AdditionalProps & BaseProps;
 export const baseInput = <ChildProps extends BaseInputProps> (InputComponent: React.ComponentType<ChildProps>) => (
 	(props: Omit<ChildProps, keyof BaseInputProps> & BaseInputProps): JSX.Element => {
 		const defaultInputProps: RequiredProps = {
-			label: '',
-			value: '',
+			label: "",
+			value: "",
 			onChange: (e) => e
 		};
 

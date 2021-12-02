@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode } from "react";
 import { Box, Card, Container, Grid } from "@mui/material";
 
 export const CalculatorLayout: React.FC<{ total: ReactNode, form: ReactNode }> = ({ total, form }) => {

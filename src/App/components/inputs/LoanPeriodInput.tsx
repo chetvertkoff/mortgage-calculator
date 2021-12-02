@@ -52,6 +52,6 @@ export const LoanPeriodInput =
   withStoreContext(
   	baseSliderInput(
   		memo(Component, optimization),
-  		'loanPeriod'
+  		"loanPeriod"
   	)
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { container } from "@/App/сontainer-DI";
 import { CalculatorDI, CalculatorUseCase, ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
 import { initStore } from "@/App/store/CalcStoreProvider";

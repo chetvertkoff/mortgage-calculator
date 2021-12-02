@@ -1,9 +1,9 @@
-import { Entity } from '@/Domain/Entity';
-import { LoanPeriod } from '@/Domain/LoanPeriod';
-import { InitialPayment } from '@/Domain/InitialPayment';
-import { HouseCost } from '@/Domain/HouseCost';
-import { LoanReasonList } from '@/Domain/LoanReasonList';
-import { HasSalaryCard } from '@/Domain/HasSalaryCard';
+import { Entity } from "@/Domain/Entity";
+import { LoanPeriod } from "@/Domain/LoanPeriod";
+import { InitialPayment } from "@/Domain/InitialPayment";
+import { HouseCost } from "@/Domain/HouseCost";
+import { LoanReasonList } from "@/Domain/LoanReasonList";
+import { HasSalaryCard } from "@/Domain/HasSalaryCard";
 
 export class Calculator extends Entity {
   private _loanReasonList: LoanReasonList = new LoanReasonList();

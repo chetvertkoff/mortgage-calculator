@@ -18,9 +18,9 @@ export const SwitchInput: React.FC<BaseInputProps & SwitchInputProps> = baseInpu
 
 	return (
 		<FormControl fullWidth sx={ { m: 1, minWidth: 120 } }>
-			<Box sx={ { display: "flex", alignItems: 'center', justifyContent: 'space-between' } }>
+			<Box sx={ { display: "flex", alignItems: "center", justifyContent: "space-between" } }>
 				<Typography>{ prevNode }</Typography>
-				<Box sx={ { display: "flex", alignItems: 'center' } }>
+				<Box sx={ { display: "flex", alignItems: "center" } }>
 					<Typography>{ label }</Typography>
 					<Switch
 						data-testid="switch-input"

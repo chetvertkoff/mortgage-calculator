@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { LoanReasonInput } from "@/App/components/inputs/LoanReasonInput";
 import { HasSalaryCardInput } from "@/App/components/inputs/HasSalaryCardInput";
 import { HouseCostInput } from "@/App/components/inputs/HouseCostInput";

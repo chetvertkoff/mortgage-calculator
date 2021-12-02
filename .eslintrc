@@ -25,7 +25,9 @@
     }],
     "semi": [2, "always"],
     "no-mixed-spaces-and-tabs": [0],
-    "react-hooks/exhaustive-deps": [0]
+    "react-hooks/exhaustive-deps": [0],
+    "quotes": ["error", "double"],
+    "no-unused-vars": "error"
   },
   "extends": [
     "react-app",

@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 import React from "react";
 import {
 	HouseCostDocument,
@@ -28,7 +28,7 @@ const mock = {
 	},
 };
 
-describe('Initial payment input component testing', () => {
+describe("Initial payment input component testing", () => {
 	const setup = () => {
 		const utils = render(
 			<Bootstrap>
@@ -41,28 +41,28 @@ describe('Initial payment input component testing', () => {
 		return { utils };
 	};
 
-	test('Can change loan period value', async () => {
+	test("Can change loan period value", async () => {
 		const { utils } = setup();
 
 		const startVal = Math.round((1+30)/2);
 
 		const newVal = startVal+1;
 
-		const from = await utils.findByText('1 год');
+		const from = await utils.findByText("1 год");
 
-		const to = await utils.findByText('30 лет');
+		const to = await utils.findByText("30 лет");
 
 		expect(from).toBeTruthy();
 
 		expect(to).toBeTruthy();
 
-		const textFieldInput = within(utils.getByTestId('slider-input__text-field')).getByDisplayValue(startVal);
+		const textFieldInput = within(utils.getByTestId("slider-input__text-field")).getByDisplayValue(startVal);
 
 		userEvent.clear(textFieldInput);
 
 		userEvent.type(textFieldInput, newVal.toString());
 
-		const slider = within(utils.getByTestId('slider-input__slider')).getByDisplayValue(newVal);
+		const slider = within(utils.getByTestId("slider-input__slider")).getByDisplayValue(newVal);
 
 		expect(slider).toBeTruthy();
 	});

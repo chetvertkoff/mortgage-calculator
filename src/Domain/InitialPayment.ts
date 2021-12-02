@@ -1,5 +1,5 @@
-import { IsNumber } from 'class-validator';
-import { Entity } from '@/Domain/Entity';
+import { IsNumber } from "class-validator";
+import { Entity } from "@/Domain/Entity";
 
 export class InitialPayment extends Entity {
   @IsNumber()

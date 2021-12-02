@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { interfaces } from 'inversify';
+import React, { ReactNode } from "react";
+import { interfaces } from "inversify";
 
 export const AppContext = React.createContext<interfaces.Container|null>(null);
 

@@ -4,9 +4,17 @@ import { useQuery } from "@apollo/client";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { LoanReasonsListDocument, LoanReasonList, LoanReason } from "@/App/types/graphql-types";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
+import { Box, Typography } from "@mui/material";
 
 const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	const { loading, error, data } = useQuery<{ loanReasonsList: LoanReasonList }>(LoanReasonsListDocument);
+
+	const customItem = (item: LoanReason) => (
+		<Box className='LoanReasonInput__menuItem'>
+			<Typography>{ item.name }</Typography>
+			<Typography>от { item.rate } %</Typography>
+		</Box>
+	);
 
 	const onChange = useCallback((val: LoanReason) => {
 		dispatch({ type: "LOAN_REASON", payload: val });
@@ -28,6 +36,7 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 				label="Цель кредита"
 				returnObject
 				onChange={ onChange }
+				customItem={ customItem }
 			/>
 		</ApolloRequest>
 	);

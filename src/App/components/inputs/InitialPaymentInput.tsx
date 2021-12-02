@@ -42,6 +42,6 @@ export const InitialPaymentInput =
   withStoreContext(
   	baseSliderInput(
   		memo(Component, optimization),
-  		'initialPayment'
+  		"initialPayment"
   	)
   );

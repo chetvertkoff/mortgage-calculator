@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { HasSalaryCardInput } from "@/App/components/inputs/HasSalaryCardInput";
@@ -20,7 +20,7 @@ const mock = {
 	},
 };
 
-describe('Has salary card component testing', () => {
+describe("Has salary card component testing", () => {
 	const setup = () => {
 		const utils = render(
 			<Bootstrap>
@@ -33,16 +33,16 @@ describe('Has salary card component testing', () => {
 		return { utils };
 	};
 
-	test('Can render has salary card input component', async () => {
+	test("Can render has salary card input component", async () => {
 		const { utils } = setup();
 
-		const label = await screen.findByText('- 0.5%');
+		const label = await screen.findByText("- 0.5%");
 
 		expect(label).toBeTruthy();
 
-		const checkbox = utils.getByTestId('switch-input') as HTMLElement;
+		const checkbox = utils.getByTestId("switch-input") as HTMLElement;
 
-		const input = checkbox.querySelector('input') as HTMLInputElement;
+		const input = checkbox.querySelector("input") as HTMLInputElement;
 
 		userEvent.click(input);
 

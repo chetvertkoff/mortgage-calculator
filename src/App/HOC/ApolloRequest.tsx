@@ -14,7 +14,7 @@ export const ApolloRequest: React.FC<Props> = ({ children, error, loading }) => 
 	);
 
 	if (loading) return (
-		<Box sx={ { display: 'flex', justifyContent: 'center' } }>
+		<Box sx={ { display: "flex", justifyContent: "center" } }>
 			<CircularProgress />
 		</Box>
 	);

@@ -21,47 +21,47 @@ const withPropsComponent = (Component: ComponentType<BaseInputProps & SliderInpu
 		/>;
 	};
 
-describe('Test SliderInput component', () => {
+describe("Test SliderInput component", () => {
 	const setup = () => {
 		const Component = withPropsComponent(SliderInput);
 
-		const utils = render(<Component value={ null } label={ '' } onChange={ () => null } />);
+		const utils = render(<Component value={ null } label={ "" } onChange={ () => null } />);
 
 		return { utils };
 	};
 
-	test('Can render SliderInput component', () => {
+	test("Can render SliderInput component", () => {
 		const { utils } = setup();
 
-		const input = utils.getByTestId('slider-input__text-field') as HTMLElement;
+		const input = utils.getByTestId("slider-input__text-field") as HTMLElement;
 
 		const val = within(input).getByDisplayValue(value) as HTMLInputElement;
 
 		expect(val.value).toBe(value.toString());
 	});
 
-	test('Can change value by move slider', async () => {
+	test("Can change value by move slider", async () => {
 		const { utils } = setup();
 
-		const trigger = utils.getByTestId('slider-input__slider') as HTMLElement;
+		const trigger = utils.getByTestId("slider-input__slider") as HTMLElement;
 
 		fireEvent.mouseDown(trigger, { clientX: 10 });
 
-		const input = within(utils.getByTestId('slider-input__text-field')).getByDisplayValue(10);
+		const input = within(utils.getByTestId("slider-input__text-field")).getByDisplayValue(10);
 
 		expect(input).toBeTruthy();
 	});
 
-	test('Can change value by text input', () => {
+	test("Can change value by text input", () => {
 		const { utils } = setup();
 
-		const textField = utils.getByTestId('slider-input__text-field');
+		const textField = utils.getByTestId("slider-input__text-field");
 
 		const input = within(textField).getByDisplayValue(value);
 
-		userEvent.type(input, '10');
+		userEvent.type(input, "10");
 
-		const slider = within(utils.getByTestId('slider-input__slider')).getByDisplayValue(10);
+		const slider = within(utils.getByTestId("slider-input__slider")).getByDisplayValue(10);
 
 		expect(slider).toBeTruthy();
 	});

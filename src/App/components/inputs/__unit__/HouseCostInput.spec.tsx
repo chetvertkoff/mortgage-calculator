@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 import React from "react";
 import { HouseCostDocument } from "@/App/types/graphql-types";
 import { render, within } from "@testing-library/react";
@@ -23,7 +23,7 @@ const mock = {
 	},
 };
 
-describe('House cost input component testing', () => {
+describe("House cost input component testing", () => {
 	const setup = () => {
 		const utils = render(
 			<Bootstrap>
@@ -36,28 +36,28 @@ describe('House cost input component testing', () => {
 		return { utils };
 	};
 
-	test('Can change value', async () => {
+	test("Can change value", async () => {
 		const { utils } = setup();
 
 		const startVal = (353000+30000000)/2;
 
 		const newVal = startVal+1;
 
-		const from = await utils.findByText('353 тыс ₽.');
+		const from = await utils.findByText("353 тыс ₽.");
 
-		const to = await utils.findByText('30 млн ₽.');
+		const to = await utils.findByText("30 млн ₽.");
 
 		expect(from).toBeTruthy();
 
 		expect(to).toBeTruthy();
 
-		const textFieldInput = within(utils.getByTestId('slider-input__text-field')).getByDisplayValue(startVal);
+		const textFieldInput = within(utils.getByTestId("slider-input__text-field")).getByDisplayValue(startVal);
 
 		userEvent.clear(textFieldInput);
 
 		userEvent.type(textFieldInput, newVal.toString());
 
-		const slider = within(utils.getByTestId('slider-input__slider')).getByDisplayValue(newVal);
+		const slider = within(utils.getByTestId("slider-input__slider")).getByDisplayValue(newVal);
 
 		expect(slider).toBeTruthy();
 	});

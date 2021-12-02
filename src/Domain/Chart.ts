@@ -1,8 +1,8 @@
-import { Entity } from '@/Domain/Entity';
-import { IsInt } from 'class-validator';
+import { Entity } from "@/Domain/Entity";
+import { IsInt } from "class-validator";
 
 export class Chart extends Entity {
-  month = '';
+  month = "";
 
   year: number = new Date().getFullYear();
 

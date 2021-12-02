@@ -1,8 +1,8 @@
-import 'reflect-metadata';
-import { Container } from 'inversify';
+import "reflect-metadata";
+import { Container } from "inversify";
 // store
-import { CalculatorDI, CalculatorUseCase } from '@/Domain/CalculatorUseCase';
-import { StoreDI, ApolloStore } from '../Store/ApolloStore';
+import { CalculatorDI, CalculatorUseCase } from "@/Domain/CalculatorUseCase";
+import { StoreDI, ApolloStore } from "../Store/ApolloStore";
 // entity
 
 const container = new Container();

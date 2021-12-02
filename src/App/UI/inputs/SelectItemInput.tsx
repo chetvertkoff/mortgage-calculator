@@ -1,12 +1,24 @@
-import React, { useCallback, useMemo } from 'react';
-import { baseInput, BaseInputProps } from '@/App/HOC/baseInput';
-import Select from '@mui/material/Select';
-import { FormControl, InputLabel, MenuItem } from "@mui/material";
+import React, { ReactNode, useCallback, useMemo } from "react";
+import { baseInput, BaseInputProps } from "@/App/HOC/baseInput";
+import Select from "@mui/material/Select";
+import { FormControl, InputLabel, MenuItem, Typography } from "@mui/material";
 import { isNotEmpty } from "@/App/utils/utils";
 import { ChangeInputEvent } from "@/App/types/types";
 
-export const SelectItemInput: React.FC<BaseInputProps> = baseInput((
-	{ items, onChange, label, value, itemValue, getItemValue, getItemText, getValue }
+type SelectItemInputProps = {
+  customItem?: (item: any) => ReactNode
+}
+
+export const SelectItemInput: React.FC<BaseInputProps & SelectItemInputProps> = baseInput(({
+	items,
+	onChange,
+	label,
+	value,
+	itemValue,
+	getItemValue,
+	getItemText,
+	getValue,
+	customItem }: BaseInputProps & SelectItemInputProps
 ) => {
 	const val = useMemo<string>(() => (
   	(isNotEmpty(value) && isNotEmpty(itemValue) ? (value[itemValue] || 0) : value)
@@ -29,7 +41,12 @@ export const SelectItemInput: React.FC<BaseInputProps> = baseInput((
 			>
 				{
 					items?.length && items.map((item, i) => (
-						<MenuItem key={ i } value={ getItemValue?.(item) }>{ getItemText?.(item) }</MenuItem>
+						<MenuItem key={ i } value={ getItemValue?.(item) }>
+							{ customItem
+								? customItem(item)
+								: <Typography>{ getItemText?.(item) }</Typography>
+							}
+						</MenuItem>
 					))
 				}
 			</Select>

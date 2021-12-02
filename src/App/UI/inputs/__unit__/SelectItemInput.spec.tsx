@@ -1,10 +1,10 @@
-import React, { ComponentType, useState } from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import React, { ComponentType, useState } from "react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { SelectItemInput } from "@/App/UI/inputs/SelectItemInput";
 import { BaseInputProps } from "@/App/HOC/baseInput";
 
-const items = ['test-1', 'test-2', 'test-3'];
+const items = ["test-1", "test-2", "test-3"];
 
 const withPropsComponent = (
 	Component: ComponentType<BaseInputProps>,
@@ -23,19 +23,19 @@ const withPropsComponent = (
 	/>;
 };
 
-describe('Test SelectItemInput Component', () => {
+describe("Test SelectItemInput Component", () => {
 
 	const setup = () => {
 		const Component = withPropsComponent(SelectItemInput, items, items[0]);
 
-		const utils = render(<Component value={ null } label={ '' } onChange={ () => null } />);
+		const utils = render(<Component value={ null } label={ "" } onChange={ () => null } />);
 
 		return {
 			utils
 		};
 	};
 
-	test('Can render SelectItemInput', () => {
+	test("Can render SelectItemInput", () => {
 		const { utils } = setup();
 
 		const input = utils.getByDisplayValue(items[0]) as HTMLInputElement;
@@ -43,10 +43,10 @@ describe('Test SelectItemInput Component', () => {
 		expect(input.value).toBe(items[0]);
 	});
 
-	test('Can select other value', () => {
+	test("Can select other value", () => {
 		const { utils } = setup();
 
-		const trigger = utils.getByRole('button');
+		const trigger = utils.getByRole("button");
 
 		userEvent.click(trigger);
 

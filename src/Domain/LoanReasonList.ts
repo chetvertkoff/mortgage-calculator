@@ -1,5 +1,5 @@
-import { LoanReason } from '@/Domain/LoanReason';
-import { Entity } from '@/Domain/Entity';
+import { LoanReason } from "@/Domain/LoanReason";
+import { Entity } from "@/Domain/Entity";
 
 export class LoanReasonList extends Entity {
   value: LoanReason;

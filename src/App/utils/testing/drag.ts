@@ -1,6 +1,6 @@
 // https://testing-library.com/docs/example-drag/
 
-import { fireEvent } from '@testing-library/dom';
+import { fireEvent } from "@testing-library/dom";
 
 function getElementClientCenter(element: HTMLElement) {
 	const { left, top, width, height } = element.getBoundingClientRect();
