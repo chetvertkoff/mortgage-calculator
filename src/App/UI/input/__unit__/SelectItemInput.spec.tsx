@@ -1,7 +1,7 @@
 import React, { ComponentType, useState } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { SelectItemInput } from "@/App/UI/inputs/SelectItemInput";
+import { SelectItemInput } from "@/App/UI/input/SelectItemInput";
 import { BaseInputProps } from "@/App/HOC/baseInput";
 
 const items = ["test-1", "test-2", "test-3"];

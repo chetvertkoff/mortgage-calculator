@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
-import { TotalStatistic } from "@/App/components/total/TotalStatistic";
+import { TotalStatisticCard } from "@/App/components/card/TotalStatisticCard";
+import { TotalDialog } from "@/App/components/dialog/TotalDialog";
 
 export const CalculatorTotal: React.FC = () => {
 	// const { state } = useContext(CalcStoreProvider);
 
 	return (
 		<>
-			<TotalStatistic />
+			<TotalStatisticCard />
+			<div>
+				<TotalDialog />
+			</div>
 		</>
 	);
 };

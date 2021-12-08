@@ -22,73 +22,73 @@ export interface ICalculatorUseCase {
   shouldEarn: number
   overpayment: number
   chartList: ChartUseCase,
-  loanPeriodToMonth: number,
+  loanPeriodToMonth: number
 }
 
 @injectable()
 export class CalculatorUseCase extends Calculator implements ICalculatorUseCase {
-	get chartList(): ChartUseCase {
+	get chartList (): ChartUseCase {
 		return new ChartUseCase(
 			this.totalSum,
 			this.totalRate,
 			this.loanPeriod.value,
 			this.overpayment,
-			this.annuitet,
+			this.annuitet
 		);
 	}
 
 	// переплата
-	get overpayment(): number {
+	get overpayment (): number {
 		return this.totalLoanSum - this.totalSum;
 	}
 
 	// необходимый ежемесячный доход
-	get shouldEarn(): number {
-		const { annuitet } = this;
-		return Math.round((annuitet + ((annuitet / 100) * 30)));
+	get shouldEarn (): number {
+		const annuitet = this.annuitet;
+		return Math.round((annuitet + (annuitet / 100 * 30)));
 	}
 
 	// конечная процентная ставка
-	get totalRate(): number {
+	get totalRate (): number {
 		return this.calcRate();
 	}
 
 	// полная сумма с процентами, необходимую выплатить
-	get totalLoanSum(): number {
+	get totalLoanSum (): number {
 		return this.annuitet * this.loanPeriodToMonth;
 	}
 
 	// ежемесячная сумма выплаты
-	get annuitet(): number {
+	get annuitet (): number {
 		return this.calcAnnuitet();
 	}
 
 	// сумма требуемого кредита
-	get totalSum(): number {
+	get totalSum (): number {
 		return this.calcTotalSum();
 	}
 
 	// общий период (года) в месяцы
-	get loanPeriodToMonth(): number {
+	get loanPeriodToMonth (): number {
 		return this.loanPeriod.value * 12;
 	}
 
 	// подсчет конечной процентной ставки
-	private calcRate(): number {
-		if (this.loanReasonList.value.rate <= this.hasSalaryCard.value) {
+	private calcRate (): number {
+		if (!this.hasSalaryCard.value || this.loanReasonList.value.rate <= this.hasSalaryCard.rate) {
 			return this.loanReasonList.value.rate;
 		}
 		return this.loanReasonList.value.rate - this.hasSalaryCard.rate;
 	}
 
 	// расчет суммы требуемого кредита
-	private calcTotalSum(): number {
+	private calcTotalSum (): number {
 		if (this.initialPayment.value >= this.houseCost.value) return this.houseCost.value;
 		return this.houseCost.value - this.initialPayment.value;
 	}
 
 	// аннуитетный платеж по кредиту
-	private calcAnnuitet(): number {
+	private calcAnnuitet (): number {
 		const r = this.totalRate / 1200;
 		const monthCount = this.loanPeriod.value * 12;
 		const sum = this.totalSum;

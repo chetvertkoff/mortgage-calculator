@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo } from "react";
-import { SwitchInput } from "@/App/UI/inputs/SwitchInput";
+import { SwitchInput } from "@/App/UI/input/SwitchInput";
 import { useQuery } from "@apollo/client";
 import { HasSalaryCard, HasSalaryCardDocument } from "@/App/types/graphql-types";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
@@ -22,7 +22,7 @@ export const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	}, [data?.hasSalaryCard.rate]);
 
 	return (
-		<ApolloRequest loading={ loading } error={ error }>
+		<ApolloRequest value={ val } loading={ loading } error={ error }>
 			<SwitchInput
 				value={ val.selected }
 				prevNode="Есть зарплатная карта"

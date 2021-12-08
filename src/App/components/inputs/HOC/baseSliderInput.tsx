@@ -3,10 +3,10 @@ import { StoreContextProps } from "@/App/HOC/withStoreContext";
 import { isNotEmpty } from "@/App/utils/utils";
 
 type SliderProps = {
-  min: number,
-  max: number,
-  step: number,
-  value: number
+  min?: number,
+  max?: number,
+  step?: number,
+  value?: number
 }
 
 export type BaseSliderInputProps = SliderProps & StoreContextProps;

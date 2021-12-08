@@ -1,4 +1,5 @@
 import { ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
+import { LoanReasonVM } from "@/App/model/LoanReasonVM";
 
 export class CalculatorVM {
 
@@ -10,10 +11,9 @@ export class CalculatorVM {
 
   public shouldEarn = 0
 
-  public loanReason = {
-  	name: "",
-  	rate: 0,
-  }
+  public overpayment = 0
+
+  public loanReason = new LoanReasonVM()
 
   public hasSalaryCard = {
   	selected: false,
@@ -50,13 +50,19 @@ export class CalculatorVM {
   	const state = this.defaultValue();
 
   	Object.assign(state, {
-  		loanReason: { ...entity.loanReasonList.value },
+  		loanReason: LoanReasonVM.fromModel({
+  			list: entity.loanReasonList.list,
+  			value: entity.loanReasonList.value
+  		}),
   		houseCost: { ...entity.houseCost },
   		hasSalaryCard: { ...entity.hasSalaryCard },
   		initialPayment: { ...entity.initialPayment },
   		loanPeriod: { ...entity.loanPeriod },
   		annuitet: entity.annuitet,
-  		totalRate: entity.totalRate
+  		totalRate: entity.totalRate,
+  		totalSum: entity.totalSum,
+  		shouldEarn: entity.shouldEarn,
+  		overpayment: entity.overpayment,
   	});
 
   	return state;

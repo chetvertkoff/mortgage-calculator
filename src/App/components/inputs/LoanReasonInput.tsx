@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect } from "react";
-import { SelectItemInput } from "@/App/UI/inputs/SelectItemInput";
+import { SelectItemInput } from "@/App/UI/input/SelectItemInput";
 import { useQuery } from "@apollo/client";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { LoanReasonsListDocument, LoanReasonList, LoanReason } from "@/App/types/graphql-types";
@@ -17,20 +17,21 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	);
 
 	const onChange = useCallback((val: LoanReason) => {
-		dispatch({ type: "LOAN_REASON", payload: val });
-	}, [state.loanReason]);
+		dispatch({ type: "LOAN_REASON_VALUE", payload: val });
+	}, [state.loanReason.value]);
 
 	useEffect(() => {
-		if (state.loanReason.rate === 0 && data?.loanReasonsList.list.length) { // default value
-			dispatch({ type: "LOAN_REASON", payload: data?.loanReasonsList.list[0] });
+		if (state.loanReason.value.rate === 0 && data?.loanReasonsList.list.length) { // default value
+			dispatch({ type: "LOAN_REASON_LIST", payload: data?.loanReasonsList.list });
+			dispatch({ type: "LOAN_REASON_VALUE", payload: data?.loanReasonsList.list[0] });
 		}
 	}, [data?.loanReasonsList.list]);
 
 	return (
-		<ApolloRequest error={ error } loading={ loading }>
+		<ApolloRequest value={ state.loanReason.list?.length } error={ error } loading={ loading }>
 			<SelectItemInput
-				items={ data?.loanReasonsList.list }
-				value={ state.loanReason }
+				items={ state.loanReason.list }
+				value={ state.loanReason.value }
 				itemValue="id"
 				itemText="name"
 				label="Цель кредита"
@@ -42,8 +43,10 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	);
 };
 
-const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => (
-	(prevProps.state.loanReason.rate === nextProps.state.loanReason.rate)
-);
+const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => {
+	return (
+		(prevProps.state.loanReason.value.rate === nextProps.state.loanReason.value.rate)
+	);
+};
 
 export const LoanReasonInput = withStoreContext(memo(Component, optimization));

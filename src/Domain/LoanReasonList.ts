@@ -9,6 +9,6 @@ export class LoanReasonList extends Entity {
   constructor(props?: LoanReasonList) {
   	super();
   	this.value = new LoanReason(props?.list?.slice(0, 1)[0]);
-  	this.list = props?.list?.map((el) => new LoanReason(el)) ?? [];
+  	this.list = props?.list?.map((el) => new LoanReason(el)) ?? [new LoanReason()];
   }
 }

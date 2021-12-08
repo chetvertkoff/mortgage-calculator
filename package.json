@@ -69,6 +69,7 @@
     "@apollo/client": "^3.3.20",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.2.0",
     "@mui/material": "^5.0.6",
     "caniuse-lite": "^1.0.30001283",
     "class-validator": "^0.13.1",

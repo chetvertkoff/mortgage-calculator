@@ -5,15 +5,16 @@ import { Alert, Box, CircularProgress } from "@mui/material";
 type Props = {
   children: ReactNode,
   loading: boolean,
+  value: unknown,
   error?: ApolloError
 }
 
-export const ApolloRequest: React.FC<Props> = ({ children, error, loading }) => {
+export const ApolloRequest: React.FC<Props> = ({ children, error, loading, value }) => {
 	if (error instanceof ApolloError) return (
 		<Alert severity="error">Ошибка загруки данных</Alert>
 	);
 
-	if (loading) return (
+	if (loading || !value) return (
 		<Box sx={ { display: "flex", justifyContent: "center" } }>
 			<CircularProgress />
 		</Box>

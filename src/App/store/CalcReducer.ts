@@ -5,8 +5,12 @@ import { ActionReducer, CalcReducer } from "@/App/types/types";
 export const calcReducer = (calcEntity: ICalculatorUseCase): CalcReducer<CalculatorVM> =>
 	(state: CalculatorVM, action: ActionReducer): CalculatorVM => {
 		switch (action.type) {
-		case "LOAN_REASON":
+		case "LOAN_REASON_VALUE":
 			calcEntity.loanReasonList.value = action.payload;
+			return CalculatorVM.fromModel(calcEntity);
+
+		case "LOAN_REASON_LIST":
+			calcEntity.loanReasonList.list = action.payload;
 			return CalculatorVM.fromModel(calcEntity);
 
 		case "HAS_SALARY_CARD":

@@ -1,13 +1,20 @@
 import React, { memo, useCallback, useEffect } from "react";
-import { SliderInput } from "@/App/UI/inputs/SliderInput";
+import { SliderInput } from "@/App/UI/input/SliderInput";
 import { useQuery } from "@apollo/client";
 import { HouseCost, HouseCostDocument } from "@/App/types/graphql-types";
 import { isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
-import { baseSliderInput, BaseSliderInputProps } from "@/App/components/inputs/HOC/baseSliderInput";
+import { baseSliderInput } from "@/App/components/inputs/HOC/baseSliderInput";
 
-const Component: React.FC<BaseSliderInputProps> = ({ value, dispatch, min, max, step }) => {
+type Props = {
+  min: number,
+  max: number,
+  step: number,
+  value: number
+} & StoreContextProps
+
+const Component: React.FC<Props> = ({ value, dispatch, min, max, step }) => {
 	const { loading, error, data } = useQuery<{ houseCost: HouseCost }>(HouseCostDocument);
 
 	const onChange = useCallback((value: number) => {
@@ -21,7 +28,7 @@ const Component: React.FC<BaseSliderInputProps> = ({ value, dispatch, min, max, 
 	}, [data?.houseCost]);
 
 	return (
-		<ApolloRequest loading={ loading } error={ error }>
+		<ApolloRequest value={ value } loading={ loading } error={ error }>
 			<SliderInput
 				value={ value }
 				max={ max }
