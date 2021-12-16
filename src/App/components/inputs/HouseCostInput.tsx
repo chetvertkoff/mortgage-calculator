@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect } from "react";
-import { SliderInput } from "@/App/UI/input/SliderInput";
+import { SliderInput } from "@/App/components/UI/input/SliderInput";
 import { useQuery } from "@apollo/client";
 import { HouseCost, HouseCostDocument } from "@/App/types/graphql-types";
 import { isNullish } from "@/App/utils/utils";

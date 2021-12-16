@@ -6,6 +6,7 @@ import { HouseCost } from "@/Domain/HouseCost";
 import { InitialPayment } from "@/Domain/InitialPayment";
 import { LoanPeriod } from "@/Domain/LoanPeriod";
 import { ChartUseCase } from "@/Domain/ChartUseСase";
+import { Chart } from "@/Domain/Chart";
 
 export const CalculatorDI = Symbol.for("CalculatorDI");
 
@@ -22,7 +23,8 @@ export interface ICalculatorUseCase {
   shouldEarn: number
   overpayment: number
   chartList: ChartUseCase,
-  loanPeriodToMonth: number
+  loanPeriodToMonth: number,
+  getChartList: () => Promise<Chart[] | null>
 }
 
 @injectable()
@@ -94,5 +96,9 @@ export class CalculatorUseCase extends Calculator implements ICalculatorUseCase 
 		const sum = this.totalSum;
 
 		return sum * r / (1 - Math.pow(1 + r, -monthCount));
+	}
+
+	public getChartList(): Promise<Chart[] | null> {
+		return this.chartList.getChartlist();
 	}
 }

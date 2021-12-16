@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo } from "react";
-import { SwitchInput } from "@/App/UI/input/SwitchInput";
+import { SwitchInput } from "@/App/components/UI/input/SwitchInput";
 import { useQuery } from "@apollo/client";
 import { HasSalaryCard, HasSalaryCardDocument } from "@/App/types/graphql-types";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";

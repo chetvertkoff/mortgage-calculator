@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect } from "react";
-import { SelectItemInput } from "@/App/UI/input/SelectItemInput";
+import { SelectItemInput } from "@/App/components/UI/input/SelectItemInput";
 import { useQuery } from "@apollo/client";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { LoanReasonsListDocument, LoanReasonList, LoanReason } from "@/App/types/graphql-types";

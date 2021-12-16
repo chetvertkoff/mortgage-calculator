@@ -3,7 +3,7 @@ import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext"
 import { useQuery } from "@apollo/client";
 import { isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
-import { SliderInput } from "@/App/UI/input/SliderInput";
+import { SliderInput } from "@/App/components/UI/input/SliderInput";
 import { LoanPeriodDocument, LoanPeriod } from "@/App/types/graphql-types";
 import { Box, Typography } from "@mui/material";
 import { yearPlural } from "@/App/utils/yearPlurals";

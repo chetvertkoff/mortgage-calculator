@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { InitialPaymentDocument, InitialPayment } from "@/App/types/graphql-types";
-import { SliderInput } from "@/App/UI/input/SliderInput";
+import { SliderInput } from "@/App/components/UI/input/SliderInput";
 import { baseSliderInput, BaseSliderInputProps } from "@/App/components/inputs/HOC/baseSliderInput";
 
 type Props = {

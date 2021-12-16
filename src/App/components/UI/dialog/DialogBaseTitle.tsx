@@ -1,7 +1,7 @@
 import React from "react";
 import { DialogTitle, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { BaseDialogProps } from "@/App/UI/dialog/DialogBase";
+import { BaseDialogProps } from "@/App/components/UI/dialog/DialogBase";
 
 type Props = {
   handleClose: () => void;
@@ -24,7 +24,7 @@ export const DialogBaseTitle: React.FC<Props> = ({
 					position: "absolute",
 					right: 8,
 					top: 8,
-					color: (theme) => theme.palette.grey[500],
+					color: "text.grey",
 				} }
 			>
 				<CloseIcon />

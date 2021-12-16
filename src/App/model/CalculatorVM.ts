@@ -1,5 +1,6 @@
 import { ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
 import { LoanReasonVM } from "@/App/model/LoanReasonVM";
+import { Chart } from "@/Domain/Chart";
 
 export class CalculatorVM {
 
@@ -42,6 +43,10 @@ export class CalculatorVM {
   	value: 0
   }
 
+  public getChartList(): Promise<Chart[] | null> | null {
+  	return null;
+  }
+
   public static defaultValue(): CalculatorVM {
   	return new this();
   }
@@ -63,6 +68,7 @@ export class CalculatorVM {
   		totalSum: entity.totalSum,
   		shouldEarn: entity.shouldEarn,
   		overpayment: entity.overpayment,
+  		getChartList: entity.chartList.getChartlist.bind(entity.chartList),
   	});
 
   	return state;

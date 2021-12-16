@@ -5,21 +5,21 @@ import { formatNum, roundFormat } from "@/App/utils/format";
 
 export const Component: React.FC<StoreContextProps> = ({ state }) => {
 	return (
-		<Grid container spacing={ 3 }>
+		<Grid container spacing={ 2 }>
 			<Grid item xs={ 2 }>
-				<Typography>Сумма кредита</Typography>
+				<Typography variant="caption" sx={ { color: "text.grey" } }>Сумма кредита</Typography>
 				<Typography>{ formatNum(state.totalSum )} ₽</Typography>
 			</Grid>
 			<Grid item xs={ 2 }>
-				<Typography>Процентная ставка</Typography>
+				<Typography variant="caption" sx={ { color: "text.grey" } }>Процентная ставка</Typography>
 				<Typography>{ state.totalRate } %</Typography>
 			</Grid>
 			<Grid item xs={ 2 }>
-				<Typography>Срок кредита</Typography>
+				<Typography variant="caption" sx={ { color: "text.grey" } }>Срок кредита</Typography>
 				<Typography>{ state.loanPeriod.value } лет</Typography>
 			</Grid>
 			<Grid item xs={ 2 }>
-				<Typography>Срок кредита</Typography>
+				<Typography variant="caption" sx={ { color: "text.grey" } }>Срок кредита</Typography>
 				<Typography>{ roundFormat(state.overpayment) } ₽</Typography>
 			</Grid>
 		</Grid>

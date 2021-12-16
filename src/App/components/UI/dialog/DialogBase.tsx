@@ -1,9 +1,12 @@
 import React, { ReactNode } from "react";
 import { Dialog, DialogContent } from "@mui/material";
-import { DialogActivator } from "@/App/UI/dialog/DialogActivator";
-import { DialogBaseTitle } from "@/App/UI/dialog/DialogBaseTitle";
+import { DialogProps } from "@mui/material/Dialog/Dialog";
+import { DialogActivator } from "@/App/components/UI/dialog/DialogActivator";
+import { DialogBaseTitle } from "@/App/components/UI/dialog/DialogBaseTitle";
 
 export type BaseDialogProps = {
+  dialogOptions?: Omit<DialogProps, "open">
+
   activatorNode?: ReactNode,
   noActivator?: boolean,
   activatorTitle?: string,
@@ -14,6 +17,8 @@ export type BaseDialogProps = {
   actionNode?: ReactNode,
   noActions?: boolean,
 
+  onOpen?: () => any,
+
   children: ReactNode
 }
 
@@ -23,6 +28,7 @@ export const DialogBase: React.FC<BaseDialogProps> = (props) => {
 
 	const handleClickOpen = () => {
 		setOpen(true);
+		props.hasOwnProperty.call(props, "onOpen") && props.onOpen?.();
 	};
 
 	const handleClose = () => {
@@ -36,6 +42,7 @@ export const DialogBase: React.FC<BaseDialogProps> = (props) => {
 				onClose={ handleClose }
 				aria-labelledby="customized-dialog-title"
 				open={ open }
+				{ ...props.dialogOptions }
 			>
 				<DialogBaseTitle { ...props } handleClose={ handleClose } />
 				<DialogContent dividers>

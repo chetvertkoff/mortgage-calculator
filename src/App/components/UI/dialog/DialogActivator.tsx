@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { BaseDialogProps } from "@/App/UI/dialog/DialogBase";
+import { BaseDialogProps } from "@/App/components/UI/dialog/DialogBase";
 
 type Props = {
   handleClickOpen: () => void
@@ -18,7 +18,12 @@ export const DialogActivator: React.FC<Props> = ({
 		<>
 			{
 				activatorNode ? activatorNode : (
-					<Button variant="contained" fullWidth onClick={ handleClickOpen }>
+					<Button
+						variant="contained"
+						size="large"
+						fullWidth
+						onClick={ handleClickOpen }
+					>
 						{ activatorTitle }
 					</Button>
 				)

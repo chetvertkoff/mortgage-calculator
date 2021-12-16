@@ -1,6 +1,6 @@
 import React, { ComponentType, useState } from "react";
 import { BaseInputProps } from "@/App/HOC/baseInput";
-import { SliderInput, SliderInputProps } from "@/App/UI/input/SliderInput";
+import { SliderInput, SliderInputProps } from "@/App/components/UI/input/SliderInput";
 import { render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { fireEvent } from "@testing-library/dom";

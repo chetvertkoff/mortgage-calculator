@@ -8,9 +8,7 @@ export const CalculatorTotal: React.FC = () => {
 	return (
 		<>
 			<TotalStatisticCard />
-			<div>
-				<TotalDialog />
-			</div>
+			<TotalDialog />
 		</>
 	);
 };

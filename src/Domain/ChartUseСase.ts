@@ -38,7 +38,7 @@ export class ChartUseCase {
   }
 
   // получить график платежей
-  public async getChartlist(): Promise<Promise<Chart[]> | null> {
+  public async getChartlist(): Promise<Chart[] | null> {
   	if (!this.loanPeriod) return null;
   	return this.calcChartList();
   }
@@ -46,8 +46,10 @@ export class ChartUseCase {
   // расчет графика платежей
   private async calcChartList(): Promise<Chart[]> {
   	const loanPeriodMonths = this.loanPeriodToMonth;
+
   	let now = new Date();
-  	const list: Chart[] = Array.from({ length: loanPeriodMonths }).map((_, i) => {
+
+  	return Array.from({ length: loanPeriodMonths }).map((_, i) => {
   		const { current, chartItem } = this.getChartItem(now);
 
   		if (i === 0) chartItem.year = new Date().getFullYear();
@@ -55,8 +57,6 @@ export class ChartUseCase {
 
   		return chartItem;
   	});
-
-  	return list;
   }
 
   private getChartItem(now: Date): { current: Date, chartItem: Chart } {
