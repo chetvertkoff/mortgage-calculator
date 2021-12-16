@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { tableHeaderData } from "@/App/data/table-header.data";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
 import { Chart } from "@/Domain/Chart";
@@ -24,7 +24,9 @@ export const Component: React.FC<StoreContextProps> = ({ state }) => {
 				<TableHead>
 					<TableRow>
 						{ tableHeaderData.map((header, i) => (
-							<TableCell key={ i }>{ header }</TableCell>
+							<TableCell key={ i }>
+								<Typography variant="h6">{ header }</Typography>
+							</TableCell>
 						)) }
 					</TableRow>
 				</TableHead>
