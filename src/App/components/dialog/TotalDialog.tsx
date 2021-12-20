@@ -3,7 +3,6 @@ import { ChartHeader } from "@/App/components/ChartHeader";
 import { withStoreContext } from "@/App/HOC/withStoreContext";
 import { ChartTable } from "@/App/components/table/ChartTable";
 import { DialogBase } from "@/App/components/UI/dialog/DialogBase";
-import { Box } from "@mui/material";
 
 export const Component: React.FC = (props) => {
 	return (
@@ -12,11 +11,7 @@ export const Component: React.FC = (props) => {
 			dialogOptions={ { fullWidth: true, maxWidth: "lg" } }
 			activatorTitle="График платежей"
 		>
-			<Box>
-				<Box>
-					<ChartTable />
-				</Box>
-			</Box>
+			<ChartTable />
 		</DialogBase>
 	);
 };

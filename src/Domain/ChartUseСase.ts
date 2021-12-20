@@ -45,17 +45,25 @@ export class ChartUseCase {
 
   // расчет графика платежей
   private async calcChartList(): Promise<Chart[]> {
-  	const loanPeriodMonths = this.loanPeriodToMonth;
+  	return new Promise((resolve) => {
+  		setTimeout(() => {
 
-  	let now = new Date();
+  			const loanPeriodMonths = this.loanPeriodToMonth;
 
-  	return Array.from({ length: loanPeriodMonths }).map((_, i) => {
-  		const { current, chartItem } = this.getChartItem(now);
+  			let now = new Date();
 
-  		if (i === 0) chartItem.year = new Date().getFullYear();
-  		now = current;
+  			const arr = Array.from({ length: loanPeriodMonths }).map((_, i) => {
+  				const { current, chartItem } = this.getChartItem(now);
 
-  		return chartItem;
+  				if (i === 0) chartItem.year = new Date().getFullYear();
+  				now = current;
+
+  				return chartItem;
+  			});
+
+  			resolve(arr);
+
+  		}, 0);
   	});
   }
 
