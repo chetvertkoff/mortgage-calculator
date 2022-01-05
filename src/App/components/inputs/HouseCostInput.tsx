@@ -5,7 +5,7 @@ import { HouseCost, HouseCostDocument } from "@/App/types/graphql-types";
 import { isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
-import { baseSliderInput } from "@/App/components/inputs/HOC/baseSliderInput";
+import { baseSliderInput } from "@/App/HOC/baseSliderInput";
 
 type Props = {
   min: number,
@@ -36,6 +36,7 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step }) => {
 				step={ step }
 				label="Стоимость недвижимости"
 				onChange={ onChange }
+				mask
 			/>
 		</ApolloRequest>
 	);

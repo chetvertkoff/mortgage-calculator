@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { isNotEmpty } from "@/App/utils/utils";
 import { ChangeInputEvent } from "@/App/types/types";
+import { NumberFormatCustom } from "@/App/utils/NumberFormatCustom";
 
 export type RequiredProps = {
   value: any | null
@@ -14,6 +15,7 @@ type AdditionalProps = {
   itemText?: string
   returnObject?: boolean
   hasBorder?: boolean
+  mask?: boolean
 }
 
 export type BaseProps = {
@@ -31,6 +33,10 @@ export const baseInput = <ChildProps extends BaseInputProps> (InputComponent: Re
 			value: "",
 			onChange: (e) => e
 		};
+
+		const maskComponent = useMemo(() => ({
+			...(props.mask ? { inputComponent: NumberFormatCustom } : {})
+		}), [props.mask]);
 
 		const getItemText = (item: any): any => (
 			(item && props.itemText ? (item as Record<string, any>)[props.itemText as string] : item)
@@ -57,6 +63,7 @@ export const baseInput = <ChildProps extends BaseInputProps> (InputComponent: Re
 				getItemText={ getItemText }
 				getItemValue={ getItemValue }
 				getValue={ getValue }
+				maskComponent={ maskComponent }
 			/>
 		);
 	});

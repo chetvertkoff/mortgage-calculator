@@ -1,10 +1,7 @@
 import "reflect-metadata";
 import React from "react";
 import {
-	HouseCostDocument,
-	InitialPaymentDocument,
 	LoanPeriodDocument,
-	LoanReasonsListDocument
 } from "@/App/types/graphql-types";
 import { render, within } from "@testing-library/react";
 import { Bootstrap } from "@/App/Bootstrap";

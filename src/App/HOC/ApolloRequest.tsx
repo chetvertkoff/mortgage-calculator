@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { ApolloError } from "@apollo/client";
 import { Alert, Box, CircularProgress } from "@mui/material";
+import { isNullish } from "@/App/utils/utils";
 
 type Props = {
   children: ReactNode,
@@ -14,7 +15,7 @@ export const ApolloRequest: React.FC<Props> = ({ children, error, loading, value
 		<Alert severity="error">Ошибка загруки данных</Alert>
 	);
 
-	if (loading || !value) return (
+	if (loading || isNullish(value)) return (
 		<Box sx={ { display: "flex", justifyContent: "center" } }>
 			<CircularProgress />
 		</Box>

@@ -45,6 +45,12 @@ export const calcReducer = (calcEntity: ICalculatorUseCase): CalcReducer<Calcula
 			calcEntity.loanPeriod.value = action.payload;
 			return CalculatorVM.fromModel(calcEntity);
 
+		case "GET_CHART_LIST":
+			return CalculatorVM.fromModel(calcEntity);
+
+		case "IS_INVALID":
+			return { ...state, isInvalid: action.payload };
+
 		default:
 			return state;
 		}

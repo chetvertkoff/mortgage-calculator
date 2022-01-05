@@ -43,9 +43,11 @@ export class CalculatorVM {
   	value: 0
   }
 
-  public getChartList(): Promise<Chart[] | null> | null {
-  	return null;
+  public chartList = {
+  	getChartlist: (): Promise<void | Chart[]> => Promise.resolve()
   }
+
+  public isInvalid = false;
 
   public static defaultValue(): CalculatorVM {
   	return new this();
@@ -68,7 +70,8 @@ export class CalculatorVM {
   		totalSum: entity.totalSum,
   		shouldEarn: entity.shouldEarn,
   		overpayment: entity.overpayment,
-  		getChartList: entity.chartList.getChartlist.bind(entity.chartList),
+  		chartList: entity.chartList,
+  		isInvalid: state.isInvalid
   	});
 
   	return state;

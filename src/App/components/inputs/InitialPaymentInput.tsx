@@ -5,7 +5,7 @@ import { isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { InitialPaymentDocument, InitialPayment } from "@/App/types/graphql-types";
 import { SliderInput } from "@/App/components/UI/input/SliderInput";
-import { baseSliderInput, BaseSliderInputProps } from "@/App/components/inputs/HOC/baseSliderInput";
+import { baseSliderInput, BaseSliderInputProps } from "@/App/HOC/baseSliderInput";
 
 type Props = {
   min: number,
@@ -36,6 +36,7 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step }) => {
 				step={ step }
 				label="Первоначальный взнос"
 				onChange={ onChange }
+				mask
 			/>
 		</ApolloRequest>
 	);

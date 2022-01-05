@@ -4,10 +4,14 @@ import { SliderInput, SliderInputProps } from "@/App/components/UI/input/SliderI
 import { render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { fireEvent } from "@testing-library/dom";
+import { StoreContextProps } from "@/App/HOC/withStoreContext";
+import { CalculatorVM } from "@/App/model/CalculatorVM";
 
 const value = 8;
 
-const withPropsComponent = (Component: ComponentType<BaseInputProps & SliderInputProps>) =>
+type Props = BaseInputProps & SliderInputProps & StoreContextProps
+
+const withPropsComponent = (Component: ComponentType<Props>) =>
 	(props: BaseInputProps): JSX.Element => {
 		const [val, setVal] = useState(8);
 
@@ -18,6 +22,8 @@ const withPropsComponent = (Component: ComponentType<BaseInputProps & SliderInpu
 			step={ 1 }
 			label="test label"
 			onChange={ val => setVal(val) }
+		  dispatch={ () => null }
+			state={ CalculatorVM.defaultValue() }
 		/>;
 	};
 
@@ -58,6 +64,8 @@ describe("Test SliderInput component", () => {
 		const textField = utils.getByTestId("slider-input__text-field");
 
 		const input = within(textField).getByDisplayValue(value);
+
+		userEvent.clear(input);
 
 		userEvent.type(input, "10");
 

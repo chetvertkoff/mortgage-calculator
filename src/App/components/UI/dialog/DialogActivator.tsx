@@ -10,7 +10,8 @@ export const DialogActivator: React.FC<Props> = ({
 	activatorNode,
 	activatorTitle = "Открыть",
 	noActivator,
-	handleClickOpen
+	handleClickOpen,
+	disabled = false
 }) => {
 	if (noActivator) return <></>;
 
@@ -23,6 +24,7 @@ export const DialogActivator: React.FC<Props> = ({
 						size="large"
 						fullWidth
 						onClick={ handleClickOpen }
+						disabled={ disabled }
 					>
 						{ activatorTitle }
 					</Button>

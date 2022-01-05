@@ -6,6 +6,7 @@ import { Bootstrap } from "@/App/Bootstrap";
 import { MockedProvider } from "@apollo/client/testing";
 import { HouseCostInput } from "@/App/components/inputs/HouseCostInput";
 import userEvent from "@testing-library/user-event";
+import { formatNum } from "@/App/utils/format";
 
 const mock = {
 	request: {
@@ -51,7 +52,8 @@ describe("House cost input component testing", () => {
 
 		expect(to).toBeTruthy();
 
-		const textFieldInput = within(utils.getByTestId("slider-input__text-field")).getByDisplayValue(startVal);
+		const textFieldInput = within(utils.getByTestId("slider-input__text-field"))
+			.getByDisplayValue(formatNum(startVal) as string);
 
 		userEvent.clear(textFieldInput);
 

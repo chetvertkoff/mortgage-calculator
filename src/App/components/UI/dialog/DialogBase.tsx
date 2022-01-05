@@ -5,7 +5,9 @@ import { DialogActivator } from "@/App/components/UI/dialog/DialogActivator";
 import { DialogBaseTitle } from "@/App/components/UI/dialog/DialogBaseTitle";
 
 export type BaseDialogProps = {
-  dialogOptions?: Omit<DialogProps, "open">
+  dialogOptions?: Omit<DialogProps, "open">,
+
+  disabled: boolean,
 
   activatorNode?: ReactNode,
   noActivator?: boolean,
@@ -19,7 +21,7 @@ export type BaseDialogProps = {
 
   onOpen?: () => any,
 
-  children: ReactNode
+  children?: ReactNode
 }
 
 export const DialogBase: React.FC<BaseDialogProps> = (props) => {

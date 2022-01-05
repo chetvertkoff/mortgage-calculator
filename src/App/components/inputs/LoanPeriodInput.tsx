@@ -7,7 +7,7 @@ import { SliderInput } from "@/App/components/UI/input/SliderInput";
 import { LoanPeriodDocument, LoanPeriod } from "@/App/types/graphql-types";
 import { Box, Typography } from "@mui/material";
 import { yearPlural } from "@/App/utils/yearPlurals";
-import { baseSliderInput } from "@/App/components/inputs/HOC/baseSliderInput";
+import { baseSliderInput } from "@/App/HOC/baseSliderInput";
 
 type Props = {
   min: number,
