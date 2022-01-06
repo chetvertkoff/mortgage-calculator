@@ -6,7 +6,7 @@ import { NumberFormatCustom } from "@/App/utils/NumberFormatCustom";
 export type RequiredProps = {
   value: any | null
   label: string
-  onChange: (val: any) => any
+  onChange: (val: any, isErr?: boolean) => any
 };
 
 type AdditionalProps = {
@@ -15,7 +15,9 @@ type AdditionalProps = {
   itemText?: string
   returnObject?: boolean
   hasBorder?: boolean
-  mask?: boolean
+  mask?: boolean,
+  validate?: (inputName: string, isErr: boolean) => void,
+  inputName?: string,
 }
 
 export type BaseProps = {

@@ -10,19 +10,19 @@ export type SliderInputProps = {
   value: number,
   append?: ReactNode,
   step: number,
-  maskComponent?: boolean
+  maskComponent?: boolean,
 } & StoreContextProps
 
 const Component: React.FC<BaseInputProps & SliderInputProps> = ({
-	label, value, max, min, step, onChange, append, maskComponent, dispatch
+	label, value, max, min, step, onChange, append, maskComponent, validate, inputName
 }: BaseInputProps & SliderInputProps ) => {
 	const [error, setError] = useState<boolean>(false);
 
 	const [localVal, setLocalVal] = useState<number>(0);
 
 	const setValid = (isErr: boolean) => {
-		dispatch({ type: "IS_INVALID", payload: isErr });
 		setError(isErr);
+		validate && inputName && validate(inputName, isErr);
 	};
 
 	const onSliderChange = useCallback((e: Event, newVal: typeof value[] | typeof value) => {

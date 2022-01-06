@@ -7,16 +7,16 @@ import { SliderInput } from "@/App/components/UI/input/SliderInput";
 import { LoanPeriodDocument, LoanPeriod } from "@/App/types/graphql-types";
 import { Box, Typography } from "@mui/material";
 import { yearPlural } from "@/App/utils/yearPlurals";
-import { baseSliderInput } from "@/App/HOC/baseSliderInput";
+import { baseSliderInput, BaseSliderInputProps } from "@/App/HOC/baseSliderInput";
 
 type Props = {
   min: number,
   max: number,
   step: number,
   value: number
-} & StoreContextProps
+} & StoreContextProps & BaseSliderInputProps
 
-const Component: React.FC<Props> = ({ value, dispatch, min, max, step }) => {
+const Component: React.FC<Props> = ({ value, dispatch, min, max, step, validate }) => {
 	const { loading, error, data } = useQuery<{ loanPeriod: LoanPeriod }>(LoanPeriodDocument);
 
 	const onChange = useCallback((value: number) => {
@@ -44,6 +44,8 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step }) => {
 				min={ min }
 				step={ step }
 				label="Срок Кредита"
+				validate={ validate }
+				inputName="LoanPeriodInput"
 				onChange={ onChange }
 				append={ append }
 			/>

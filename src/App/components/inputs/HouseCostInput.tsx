@@ -5,16 +5,16 @@ import { HouseCost, HouseCostDocument } from "@/App/types/graphql-types";
 import { isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
-import { baseSliderInput } from "@/App/HOC/baseSliderInput";
+import { baseSliderInput, BaseSliderInputProps } from "@/App/HOC/baseSliderInput";
 
 type Props = {
   min: number,
   max: number,
   step: number,
   value: number
-} & StoreContextProps
+} & StoreContextProps & BaseSliderInputProps
 
-const Component: React.FC<Props> = ({ value, dispatch, min, max, step }) => {
+const Component: React.FC<Props> = ({ value, dispatch, min, max, step, validate }) => {
 	const { loading, error, data } = useQuery<{ houseCost: HouseCost }>(HouseCostDocument);
 
 	const onChange = useCallback((value: number) => {
@@ -36,6 +36,8 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step }) => {
 				step={ step }
 				label="Стоимость недвижимости"
 				onChange={ onChange }
+				validate={ validate }
+				inputName="HouseCostInput"
 				mask
 			/>
 		</ApolloRequest>

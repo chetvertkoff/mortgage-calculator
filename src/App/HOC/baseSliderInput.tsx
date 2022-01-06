@@ -6,7 +6,8 @@ type SliderProps = {
   min?: number,
   max?: number,
   step?: number,
-  value?: number
+  value?: number,
+  validate?: (inputName: string, isErr: boolean) => void,
 }
 
 export type BaseSliderInputProps = SliderProps & StoreContextProps;

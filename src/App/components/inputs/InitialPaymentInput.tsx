@@ -12,9 +12,9 @@ type Props = {
   max: number,
   step: number,
   value: number
-} & StoreContextProps
+} & StoreContextProps & BaseSliderInputProps
 
-const Component: React.FC<Props> = ({ value, dispatch, min, max, step }) => {
+const Component: React.FC<Props> = ({ value, dispatch, min, max, step, validate }) => {
 	const { loading, error, data } = useQuery<{ initialPayment: InitialPayment }>(InitialPaymentDocument);
 
 	const onChange = useCallback((value: number) => {
@@ -35,6 +35,8 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step }) => {
 				min={ min }
 				step={ step }
 				label="Первоначальный взнос"
+				validate={ validate }
+				inputName="InitialPaymentInput"
 				onChange={ onChange }
 				mask
 			/>

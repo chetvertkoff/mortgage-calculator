@@ -4,15 +4,23 @@ import { HasSalaryCardInput } from "@/App/components/inputs/HasSalaryCardInput";
 import { HouseCostInput } from "@/App/components/inputs/HouseCostInput";
 import { InitialPaymentInput } from "@/App/components/inputs/InitialPaymentInput";
 import { LoanPeriodInput } from "@/App/components/inputs/LoanPeriodInput";
+import { useFormValidate } from "@/App/hooks/useFormValidate";
+import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
 
-export const CalculatorForm: React.FC = () => {
+export const CalculatorForm: React.FC<StoreContextProps> = withStoreContext(({ dispatch }) => {
+
+	const { validate } = useFormValidate(
+		["HouseCostInput", "InitialPaymentInput", "LoanPeriodInput"],
+		dispatch
+	);
+
 	return (
 		<form>
 			<LoanReasonInput />
 			<HasSalaryCardInput />
-			<HouseCostInput />
-			<InitialPaymentInput />
-			<LoanPeriodInput />
+			<HouseCostInput validate={ validate } />
+			<InitialPaymentInput validate={ validate } />
+			<LoanPeriodInput validate={ validate } />
 		</form>
 	);
-};
+});
