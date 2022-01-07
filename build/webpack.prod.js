@@ -11,14 +11,14 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
   devtool: false,
   output: {
     path: baseWebpackConfig.externals.paths.dist,
-    publicPath: '/',
+    publicPath: './',
     filename: `${baseWebpackConfig.externals.paths.assets}js/[name].[contenthash].bundle.js`,
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          filename: 'assets/js/vendor[name].js',
+          filename: `${baseWebpackConfig.externals.paths.assets}js/vendor[name].js`,
           test: /node_modules/,
           chunks: 'all',
           enforce: true
