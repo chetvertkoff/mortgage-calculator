@@ -18,7 +18,7 @@ COPY --from=builder /app/dist .
 
 EXPOSE 80
 # Containers run nginx with global directives and daemon off
-ENTRYPOINT ["nginx"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
 # docker build -t mortgage-calculator .
 # docker run --rm -it -p 8080:80 mortgage-calculator
