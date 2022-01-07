@@ -7,12 +7,11 @@ import { LoanPeriodInput } from "@/App/components/inputs/LoanPeriodInput";
 import { useFormValidate } from "@/App/hooks/useFormValidate";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
 
+const inputs = ["HouseCostInput", "InitialPaymentInput", "LoanPeriodInput"];
+
 export const CalculatorForm: React.FC<StoreContextProps> = withStoreContext(({ dispatch }) => {
 
-	const { validate } = useFormValidate(
-		["HouseCostInput", "InitialPaymentInput", "LoanPeriodInput"],
-		dispatch
-	);
+	const { validate } = useFormValidate(inputs, dispatch);
 
 	return (
 		<form>
