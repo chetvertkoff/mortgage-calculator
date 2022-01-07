@@ -24,3 +24,6 @@ pnpm-debug.log*
 e2e/screenshots
 e2e/videos
 /.coverage
+
+# types
+/src/App/types/graphql-types.ts
