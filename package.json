@@ -7,7 +7,7 @@
     "lint": "eslint --fix \"./src/**/*.{ts,tsx}\"",
     "graphql-codegen": "graphql-codegen --config codegen.yml",
     "test:unit": "jest --config ./jest.config.js",
-    "pre-commit": "lint-staged"
+    "postinstall": "husky install"
   },
   "author": "kirill",
   "license": "MIT",
@@ -52,6 +52,7 @@
     "jest": "^27.0.4",
     "lint-staged": "^12.1.7",
     "mini-css-extract-plugin": "^1.4.0",
+    "pinst": "^2.1.6",
     "postcss": "^8.2.9",
     "postcss-import": "^14.0.0",
     "postcss-loader": "^5.2.0",
@@ -91,7 +92,7 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx": [
+    "*.{js,jsx,ts,tsx}": [
       "yarn lint",
       "git add"
     ]
