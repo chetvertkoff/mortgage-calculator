@@ -7,7 +7,7 @@
     "lint": "eslint --fix \"./src/**/*.{ts,tsx}\"",
     "graphql-codegen": "graphql-codegen --config codegen.yml",
     "test:unit": "jest --config ./jest.config.js",
-    "precommit": "lint-staged",
+    "pre-commit": "lint-staged"
   },
   "author": "kirill",
   "license": "MIT",
@@ -85,10 +85,14 @@
     "react-number-format": "^4.9.0",
     "reflect-metadata": "^0.1.13"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "*.{js, jsx, ts, tsx}": [
-      "node_modules/.bin/eslint --max-warnings=0",
-      "prettier --write",
+    "*.{ts,tsx,js,jsx": [
+      "yarn lint",
       "git add"
     ]
   }
