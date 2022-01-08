@@ -7,6 +7,10 @@ COPY . .
 # install node modules and genarate gql types and build assets
 RUN yarn install && yarn graphql-codegen && yarn build
 
+ENV PORT=80
+
+RUN echo $PORT
+
 # nginx state for serving content
 FROM nginx:alpine
 # Set working directory to nginx asset directory
@@ -16,9 +20,12 @@ RUN rm -rf ./*
 # Copy static assets from builder stage
 COPY --from=builder /app/dist .
 
-EXPOSE 80
+COPY --from=builder /app/default.conf.template /etc/nginx/conf.d/default.conf.template
+
+CMD /bin/sh -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+
 # Containers run nginx with global directives and daemon off
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+#ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
 # docker build -t mortgage-calculator .
 # docker run --rm -it -p 8080:80 mortgage-calculator

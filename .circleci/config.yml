@@ -29,17 +29,23 @@ jobs:
           name: test
           command: yarn test:unit
 
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build and push Docker image to Heroku
+          command: |
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a mortgage-calculator-react web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a mortgage-calculator-react web
+
 workflows:
   version: 2
   build_deploy:
     jobs:
       - run_tests
-      - docker/publish:
-          image: gumshoe/$CIRCLE_PROJECT_REPONAME
-          dockerfile: dockerfile
-          requires:
-            - run_tests
-          filters:
-            branches:
-              only:
-                - master
+      - build:
+        requires:
+          - run_tests
