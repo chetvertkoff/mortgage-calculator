@@ -12,7 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["webpack-env", "@types/jest", "@types/graphql"],
+    "types": ["webpack-env", "@types/jest"],
     "paths": {
       "@/*": [
         "src/*"
