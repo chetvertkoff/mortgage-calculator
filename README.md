@@ -1,13 +1,20 @@
 
-<h1>mortgage-calculator</h1>
+<h1>Mortgage-calculator</h1>
 
-## Project layers
+App inspired by Clean Architecture (Inversify used)
 
-App - React app layer (Vue variable https://github.com/chetvertkoff/mortgage-calculator)
+### Project layers
 
-Domain - domain, use case layer
+App - React app layer with useReducer store.
 
-ApolloStore - data layer (Vue apollo usage)
+Domain - domain, use case layer.
+
+Store - Graphql requests.
+
+### CI/CD
+
+GitHub (commit triggered) -> CircleCi -> Heroku (run in Docker container)
+
 ## Project setup
 ```
 yarn install
@@ -26,4 +33,14 @@ yarn build
 ### Lints and fixes files
 ```
 yarn lint
+```
+
+### Run unit tests
+```
+yarn test:unit
+```
+
+### Run Graphql types generator
+```
+yarn graphql-codegen
 ```
