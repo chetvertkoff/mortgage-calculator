@@ -6,17 +6,16 @@ import { Chart } from "@/Domain/Chart";
 import { ChartTableRow } from "@/App/components/table/rows/ChartTableRow";
 
 export const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
-
 	const [chartList, setChartList] = useState<Chart[]>([]);
 
-	const getChartList = async (): Promise<void> => {
-		dispatch({ type: "GET_CHART_LIST" });
-
-		const data = await state.chartList.getChartlist();
-		data && setChartList(data);
-	};
-
 	useEffect(() => {
+		const getChartList = async (): Promise<void> => {
+			dispatch({ type: "GET_CHART_LIST" });
+
+			const data = await state.chartList.getChartlist();
+			data && setChartList(data);
+		};
+
 		!chartList.length && getChartList().then();
 	}, []);
 

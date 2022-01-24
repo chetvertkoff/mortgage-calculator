@@ -5,7 +5,6 @@ import { ChartTable } from "@/App/components/table/ChartTable";
 import { DialogBase } from "@/App/components/UI/dialog/DialogBase";
 
 export const Component: React.FC<StoreContextProps> = ({ state }) => (
-
 	<DialogBase
 		title={ <ChartHeader /> }
 		dialogOptions={ { fullWidth: true, maxWidth: "lg" } }
