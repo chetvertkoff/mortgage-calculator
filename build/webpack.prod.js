@@ -4,21 +4,22 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-
 const buildWebpackConfig = merge(baseWebpackConfig, {
   // BUILD config
   mode: 'production',
   devtool: false,
+
   output: {
     path: baseWebpackConfig.externals.paths.dist,
     publicPath: './',
     filename: `${baseWebpackConfig.externals.paths.assets}js/[name].[contenthash].bundle.js`,
   },
+
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          filename: `${baseWebpackConfig.externals.paths.assets}js/vendor[name].js`,
+          filename: `${baseWebpackConfig.externals.paths.assets}js/vendor.[name].[contenthash].js`,
           test: /node_modules/,
           chunks: 'all',
           enforce: true
@@ -63,6 +64,7 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
       }
     )],
   },
+
   module: {
     rules: [{
       test: /\.(scss|sass|css)$/,
@@ -81,6 +83,7 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
       ]
     }]
   },
+
   plugins: [
     // new BundleAnalyzerPlugin(),
     new CssMinimizerPlugin({

@@ -15,9 +15,7 @@ type Props = {
 }
 
 export const CalculatorForm: React.FC<Props> = withStoreContext(({ dispatch }) => {
-
 	const { validate } = useFormValidate(inputs, dispatch);
-
 	return (
 		<form>
 			<LoanReasonInput />
