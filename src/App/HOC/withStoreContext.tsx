@@ -1,16 +1,16 @@
 import React, { ComponentType, Dispatch, useContext } from "react";
-import { ActionReducer, CalcContext } from "@/App/types/types";
-import { CalculatorVM } from "@/App/model/CalculatorVM";
+import { CalcContext } from "@/App/types/types";
 import { CalcStoreProvider } from "@/App/HOC/CalcStoreProvider";
+import { ICalcState } from "@/App/store/reducer";
 
 export type StoreContextProps = {
-  state: CalculatorVM,
-  dispatch: Dispatch<ActionReducer>
+  state: ICalcState,
+  dispatch: Dispatch<any>
 }
 
-export const withStoreContext = <P extends StoreContextProps>(Component: ComponentType<P>) =>
-	(props: Omit<P, keyof StoreContextProps>): JSX.Element => {
-		const { state, dispatch } = useContext<CalcContext>(CalcStoreProvider);
+export const withStoreContext = <P extends CalcContext>(Component: ComponentType<P>) =>
+	(props: Omit<P, keyof CalcContext>) => {
+		const { state, dispatch } = useContext<CalcContext<ICalcState>>(CalcStoreProvider);
 
 		return (
 			<>

@@ -10,7 +10,7 @@ type SelectItemInputProps = {
 }
 
 export const SelectItemInput: React.FC<BaseInputProps & SelectItemInputProps> = baseInput(({
-	items,
+	items = [],
 	onChange,
 	label,
 	value,
@@ -39,16 +39,14 @@ export const SelectItemInput: React.FC<BaseInputProps & SelectItemInputProps> = 
 				value={ val }
 				onChange={ changeVal }
 			>
-				{
-					items?.length && items.map((item, i) => (
-						<MenuItem key={ i } value={ getItemValue?.(item) }>
-							{ customItem
-								? customItem(item)
-								: <Typography>{ getItemText?.(item) }</Typography>
-							}
-						</MenuItem>
-					))
-				}
+				{items.map((item, i) => (
+					<MenuItem key={ i } value={ getItemValue?.(item) }>
+						{ customItem
+							? customItem(item)
+							: <Typography>{ getItemText?.(item) }</Typography>
+						}
+					</MenuItem>
+				))}
 			</Select>
 		</FormControl>
 	);

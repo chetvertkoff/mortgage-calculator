@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { StoreContextProps } from "@/App/HOC/withStoreContext";
+import { actions } from "@/App/store/actions";
 
 export const useFormValidate = <T extends string>(inputs: T[], dispatch: StoreContextProps["dispatch"]) => {
 
@@ -20,10 +21,7 @@ export const useFormValidate = <T extends string>(inputs: T[], dispatch: StoreCo
 
 		setErr({ ...err });
 
-		dispatch({
-			type: "IS_INVALID",
-			payload: Object.values<boolean>(err).some(val => val)
-		});
+		dispatch(actions.setIsInvalid(Object.values(err).some(val => val)));
 	};
 
 	return {

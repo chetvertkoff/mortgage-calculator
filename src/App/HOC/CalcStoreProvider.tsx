@@ -6,25 +6,29 @@ import React, {
 	ReducerStateWithoutAction,
 	useReducer
 } from "react";
-import { calcReducer } from "@/App/store/CalcReducer";
-import { ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
-import { CalculatorVM } from "@/App/model/CalculatorVM";
-import { CalcContext } from "@/App/types/types";
+import { ActionReducer, CalcContext, Middleware } from "@/App/types/types";
+import { ICalcState, initialState, Payload, reducer } from "@/App/store/reducer";
 
-export const CalcStoreProvider = React.createContext<CalcContext>({
-	state: new CalculatorVM(),
+export const CalcStoreProvider = React.createContext<CalcContext<ICalcState>>({
+	state: initialState,
 	dispatch: () => null
 });
 
-export const initStore = <T extends ICalculatorUseCase>(entity: T) => ({ children }: { children: ReactNode }):
+export const initStore = (middlewares: Array<Middleware> = []) => ({ children }: { children: ReactNode }):
   ReactElement<ProviderProps<[ReducerStateWithoutAction<any>, DispatchWithoutAction]>> => {
 
-	const initialState = CalculatorVM.fromModel(entity);
+	const [state, dispatch] = useReducer(reducer, initialState);
 
-	const [state, dispatch] = useReducer(calcReducer(entity), initialState);
+	const subscribedMiddlewares = [...middlewares].map(cb => cb(dispatch, state));
+
+	const dispatchObserver = (action: ActionReducer<Payload>) => {
+		[...subscribedMiddlewares, dispatch].forEach(dsptch => {
+			dsptch(action);
+		});
+	};
 
 	return (
-		<CalcStoreProvider.Provider value={ { state, dispatch } }>
+		<CalcStoreProvider.Provider value={ { state, dispatch: dispatchObserver } }>
 			{children}
 		</CalcStoreProvider.Provider>
 	);

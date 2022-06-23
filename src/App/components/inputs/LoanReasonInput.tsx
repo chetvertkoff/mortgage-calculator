@@ -5,11 +5,13 @@ import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { LoanReasonsListDocument, LoanReasonList, LoanReason } from "@/App/types/graphql-types";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
 import { Box, Typography } from "@mui/material";
+import { actions } from "@/App/store/actions";
+import { getLoanReasonValueRate } from "@/App/store/selector";
 
-const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
+const Component: React.FC<StoreContextProps> = ({ state: { calcEntity }, dispatch }) => {
 	const { loading, error, data } = useQuery<{ loanReasonsList: LoanReasonList }>(LoanReasonsListDocument);
 
-	const customItem = (item: LoanReason) => (
+	const renderCustomItem = (item: LoanReason) => (
 		<Box className='LoanReasonInput__menuItem'>
 			<Typography>{ item.name }</Typography>
 			<Typography>от { item.rate } %</Typography>
@@ -17,36 +19,30 @@ const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	);
 
 	const onChange = useCallback((val: LoanReason) => {
-		dispatch({ type: "LOAN_REASON_VALUE", payload: val });
-	}, [state.loanReason.value]);
+		dispatch(actions.setLoanReasonValue(val));
+	}, [calcEntity.loanReason.value]);
 
 	useEffect(() => {
-		if (state.loanReason.value.rate === 0 && data?.loanReasonsList.list.length) { // default value
-			dispatch({ type: "LOAN_REASON_LIST", payload: data?.loanReasonsList.list });
-			dispatch({ type: "LOAN_REASON_VALUE", payload: data?.loanReasonsList.list[0] });
-		}
+		dispatch(actions.setLoanReasonList(data?.loanReasonsList.list ?? []));
 	}, [data?.loanReasonsList.list]);
 
 	return (
-		<ApolloRequest value={ state.loanReason.list?.length } error={ error } loading={ loading }>
+		<ApolloRequest value={ calcEntity.loanReason.list?.length } error={ error } loading={ loading }>
 			<SelectItemInput
-				items={ state.loanReason.list }
-				value={ state.loanReason.value }
+				items={ calcEntity.loanReason.list }
+				value={ calcEntity.loanReason.value }
 				itemValue="id"
 				itemText="name"
 				label="Цель кредита"
 				returnObject
 				onChange={ onChange }
-				customItem={ customItem }
+				customItem={ renderCustomItem }
 			/>
 		</ApolloRequest>
 	);
 };
 
-const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => {
-	return (
-		(prevProps.state.loanReason.value.rate === nextProps.state.loanReason.value.rate)
-	);
-};
+const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps) =>
+	(getLoanReasonValueRate(prevProps.state) === getLoanReasonValueRate(nextProps.state));
 
 export const LoanReasonInput = withStoreContext(memo(Component, optimization));

@@ -6,6 +6,8 @@ import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { InitialPaymentDocument, InitialPayment } from "@/App/types/graphql-types";
 import { SliderInput } from "@/App/components/UI/input/SliderInput";
 import { baseSliderInput, BaseSliderInputProps } from "@/App/HOC/baseSliderInput";
+import { actions } from "@/App/store/actions";
+import { getInitialPaymentValue } from "@/App/store/selector";
 
 type Props = {
   min: number,
@@ -18,13 +20,12 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step, validate 
 	const { loading, error, data } = useQuery<{ initialPayment: InitialPayment }>(InitialPaymentDocument);
 
 	const onChange = useCallback((value: number) => {
-		dispatch({ type: "INITIAL_PAYMENT_VALUE", payload: value });
+		dispatch( actions.setInitialPaymentValue(value));
 	}, []);
 
 	useEffect(() => {
-		if (isNullish(data?.initialPayment)) return;
-
-		dispatch({ type: "INITIAL_PAYMENT", payload: data?.initialPayment });
+		if (isNullish(data)) return;
+		dispatch(actions.setInitialPayment(data.initialPayment));
 	}, [data?.initialPayment]);
 
 	return (
@@ -44,9 +45,9 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step, validate 
 	);
 };
 
-const optimization = (prevProps: BaseSliderInputProps, nextProps: BaseSliderInputProps): boolean => {
-	return (prevProps.state.initialPayment.value === nextProps.state.initialPayment.value);
-};
+const optimization = (prevProps: BaseSliderInputProps, nextProps: BaseSliderInputProps) => (
+	getInitialPaymentValue(prevProps.state) === getInitialPaymentValue(nextProps.state)
+);
 
 export const InitialPaymentInput =
   withStoreContext(

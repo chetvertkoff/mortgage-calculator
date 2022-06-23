@@ -2,13 +2,14 @@
   "name": "mortgage-calculator",
   "description": "mortgage-calculator with react",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack serve --config ./build/webpack.dev.js",
+    "dev": "vite",
     "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.prod.js",
     "lint": "eslint --fix \"./src/**/*.{ts,tsx}\"",
     "graphql-codegen": "graphql-codegen --config codegen.yml",
     "test:unit": "jest --config ./jest.config.js",
     "precommit": "lint-staged",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typecheck": "tsc --noEmit --skipLibCheck"
   },
   "author": "kirill",
   "license": "MIT",
@@ -99,7 +100,7 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "yarn lint",
-      "bash -c tsc"
+      "typecheck"
     ]
   }
 }

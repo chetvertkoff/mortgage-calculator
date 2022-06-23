@@ -5,20 +5,21 @@ import { HasSalaryCard, HasSalaryCardDocument } from "@/App/types/graphql-types"
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { isNullish } from "@/App/utils/utils";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
+import { actions } from "@/App/store/actions";
+import { getHasSalaryCardRate, getHasSalaryCardSelected } from "@/App/store/selector";
 
-export const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
+const Component: React.FC<StoreContextProps> = ({ state: { calcEntity }, dispatch }) => {
 	const { loading, error, data } = useQuery<{ hasSalaryCard: HasSalaryCard }>(HasSalaryCardDocument);
 
-	const val = useMemo(() => (state.hasSalaryCard), [state.hasSalaryCard]);
+	const val = useMemo(() => (calcEntity.hasSalaryCard), [calcEntity.hasSalaryCard]);
 
 	const onChange = useCallback((val: boolean) => {
-		dispatch({ type: "HAS_SALARY_CARD_SELECTED", payload: val });
-	}, [state.hasSalaryCard]);
+		dispatch(actions.setHasSalaryCardSelected(val));
+	}, [calcEntity.hasSalaryCard]);
 
 	useEffect(() => {
-		if (isNullish(data?.hasSalaryCard)) return;
-
-		dispatch({ type: "HAS_SALARY_CARD", payload: data?.hasSalaryCard });
+		if (isNullish(data)) return;
+		dispatch(actions.setHasSalaryCard(data.hasSalaryCard));
 	}, [data?.hasSalaryCard.rate]);
 
 	return (
@@ -33,11 +34,10 @@ export const Component: React.FC<StoreContextProps> = ({ state, dispatch }) => {
 	);
 };
 
-const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => (
-	(prevProps.state.hasSalaryCard.rate === nextProps.state.hasSalaryCard.rate
-	&&
-	prevProps.state.hasSalaryCard.selected === nextProps.state.hasSalaryCard.selected
-	)
+const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps) => (
+	getHasSalaryCardRate(prevProps.state) === getHasSalaryCardRate(nextProps.state)
+  &&
+  getHasSalaryCardSelected(prevProps.state) === getHasSalaryCardSelected(nextProps.state)
 );
 
 export const HasSalaryCardInput = withStoreContext(

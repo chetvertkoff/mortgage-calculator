@@ -6,6 +6,8 @@ import { isNullish } from "@/App/utils/utils";
 import { ApolloRequest } from "@/App/HOC/ApolloRequest";
 import { StoreContextProps, withStoreContext } from "@/App/HOC/withStoreContext";
 import { baseSliderInput, BaseSliderInputProps } from "@/App/HOC/baseSliderInput";
+import { actions } from "@/App/store/actions";
+import { getHouseCostValue } from "@/App/store/selector";
 
 type Props = {
   min: number,
@@ -18,13 +20,12 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step, validate 
 	const { loading, error, data } = useQuery<{ houseCost: HouseCost }>(HouseCostDocument);
 
 	const onChange = useCallback((value: number) => {
-		dispatch({ type: "HOUSE_COST_VALUE", payload: value });
+		dispatch(actions.setHouseCostValue(value));
 	}, []);
 
 	useEffect(() => {
-		if (isNullish(data?.houseCost)) return;
-
-		dispatch({ type: "HOUSE_COST", payload: data?.houseCost });
+		if (isNullish(data)) return;
+		dispatch(actions.setHouseCost(data.houseCost));
 	}, [data?.houseCost]);
 
 	return (
@@ -44,9 +45,9 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step, validate 
 	);
 };
 
-const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => {
-	return (prevProps.state.houseCost.value === nextProps.state.houseCost.value);
-};
+const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => (
+	 getHouseCostValue(prevProps.state) === getHouseCostValue(nextProps.state)
+);
 
 export const HouseCostInput =
   withStoreContext(

@@ -1,13 +1,11 @@
 import React from "react";
-import { container } from "@/App/сontainer-DI";
-import { CalculatorDI, CalculatorUseCase, ICalculatorUseCase } from "@/Domain/CalculatorUseCase";
 import { ReactNode } from "react";
-import { ApolloStore } from "@/Store/ApolloStore";
 import { ApolloProvider } from "@apollo/client";
-import { InjectProvider } from "@/App/HOC/InjectProvider";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { initStore } from "@/App/HOC/CalcStoreProvider";
 import { TypeText } from "@mui/material/styles/createPalette";
+import { ApolloStore } from "@/App/graphql/store/ApolloStore";
+import { effects } from "@/App/store/effects/calc-effects";
 
 type Text = Partial<{
   grey: string
@@ -23,19 +21,15 @@ const theme = createTheme({
 	}
 });
 
-const entity = container.get<CalculatorUseCase>(CalculatorDI);
-
-const StoreProvider = initStore<ICalculatorUseCase>(entity);
+const StoreProvider = initStore([effects]);
 
 export const Bootstrap: React.FC<{ children: ReactNode }> = ({ children }) => (
 	(
 		<ThemeProvider theme={ theme }>
 			<ApolloProvider client={ ApolloStore.initApolloClient() }>
-				<InjectProvider container={ container }>
-					<StoreProvider>
-						{ children }
-					</StoreProvider>
-				</InjectProvider>
+				<StoreProvider>
+					{ children }
+				</StoreProvider>
 			</ApolloProvider>
 		</ThemeProvider>
 	)

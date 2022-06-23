@@ -8,6 +8,8 @@ import { LoanPeriodDocument, LoanPeriod } from "@/App/types/graphql-types";
 import { Box, Typography } from "@mui/material";
 import { yearPlural } from "@/App/utils/yearPlurals";
 import { baseSliderInput, BaseSliderInputProps } from "@/App/HOC/baseSliderInput";
+import { getLoanPeriodValue } from "@/App/store/selector";
+import { actions } from "@/App/store/actions";
 
 type Props = {
   min: number,
@@ -20,13 +22,12 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step, validate 
 	const { loading, error, data } = useQuery<{ loanPeriod: LoanPeriod }>(LoanPeriodDocument);
 
 	const onChange = useCallback((value: number) => {
-		dispatch({ type: "LOAN_PERIOD_VALUE", payload: value });
+		dispatch( actions.setLoanPeriodValue(value));
 	}, []);
 
 	useEffect(() => {
-		if (isNullish(data?.loanPeriod)) return;
-
-		dispatch({ type: "LOAN_PERIOD", payload: data?.loanPeriod });
+		if (isNullish(data)) return;
+		dispatch( actions.setLoanPeriod(data.loanPeriod));
 	}, [data?.loanPeriod]);
 
 	const append = (
@@ -53,9 +54,9 @@ const Component: React.FC<Props> = ({ value, dispatch, min, max, step, validate 
 	);
 };
 
-const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps): boolean => {
-	return (prevProps.state.loanPeriod.value === nextProps.state.loanPeriod.value);
-};
+const optimization = (prevProps: StoreContextProps, nextProps: StoreContextProps) => (
+	 getLoanPeriodValue(prevProps.state) === getLoanPeriodValue(nextProps.state)
+);
 
 export const LoanPeriodInput =
   withStoreContext(

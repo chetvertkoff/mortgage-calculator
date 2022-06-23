@@ -25,7 +25,6 @@ export type BaseDialogProps = {
 }
 
 export const DialogBase: React.FC<BaseDialogProps> = (props) => {
-
 	const [open, setOpen] = React.useState(false);
 
 	const handleClickOpen = () => {

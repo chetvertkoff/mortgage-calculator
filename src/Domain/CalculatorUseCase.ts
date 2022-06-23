@@ -1,13 +1,10 @@
 import { Calculator } from "@/Domain/Calculator";
-import { injectable } from "inversify";
 import { LoanReasonList } from "@/Domain/LoanReasonList";
 import { HasSalaryCard } from "@/Domain/HasSalaryCard";
 import { HouseCost } from "@/Domain/HouseCost";
 import { InitialPayment } from "@/Domain/InitialPayment";
 import { LoanPeriod } from "@/Domain/LoanPeriod";
 import { ChartUseCase } from "@/Domain/ChartUseСase";
-
-export const CalculatorDI = Symbol.for("CalculatorDI");
 
 export interface ICalculatorUseCase {
   loanReasonList: LoanReasonList
@@ -25,7 +22,6 @@ export interface ICalculatorUseCase {
   loanPeriodToMonth: number,
 }
 
-@injectable()
 export class CalculatorUseCase extends Calculator implements ICalculatorUseCase {
 	get chartList (): ChartUseCase {
 		return new ChartUseCase(
@@ -96,3 +92,5 @@ export class CalculatorUseCase extends Calculator implements ICalculatorUseCase 
 		return sum * r / (1 - Math.pow(1 + r, -monthCount));
 	}
 }
+
+export default new CalculatorUseCase();

@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { StoreContextProps } from "@/App/HOC/withStoreContext";
 import { isNotEmpty } from "@/App/utils/utils";
+import { ICalcState } from "@/App/store/reducer";
 
 type SliderProps = {
   min?: number,
@@ -14,11 +15,11 @@ export type BaseSliderInputProps = SliderProps & StoreContextProps;
 
 export const baseSliderInput = <ChildProps extends BaseSliderInputProps>(
 	AbstractSliderComponent: React.ComponentType<ChildProps>,
-	entityName: "houseCost" | "initialPayment" | "loanPeriod"
+	entityName: keyof ICalcState["calcEntity"]
 ) => ((
 		props: Omit<ChildProps, keyof BaseSliderInputProps> & BaseSliderInputProps
-	): JSX.Element => {
-		const entity: SliderProps = props.state[entityName];
+	) => {
+		const entity = props.state.calcEntity[entityName] as SliderProps;
 
 		const value = useMemo<number>(() => ((
 			isNotEmpty(entity.value) ? entity.value : 0
