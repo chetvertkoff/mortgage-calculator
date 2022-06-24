@@ -33,37 +33,37 @@ const effectsCb = (dispatch: Dispatch<ActionReducer>) => {
 		dispatch(actions.setCalcEntity(calcEntity));
 	};
 
-	const setHasSalaryCardSelected = async (action: ActionReducer<boolean>) => {
+	const setHasSalaryCardSelected = (action: ActionReducer<boolean>) => {
 		calcEntity.hasSalaryCard.selected = action.payload;
 		dispatch(actions.setCalcEntity(calcEntity));
 	};
 
-	const setHouseCostValue = async (action: ActionReducer<number>) => {
+	const setHouseCostValue = (action: ActionReducer<number>) => {
 		calcEntity.houseCost.value = action.payload;
 		dispatch(actions.setCalcEntity(calcEntity));
 	};
 
-	const setHouseCost = async (action: ActionReducer<HouseCost>) => {
+	const setHouseCost = (action: ActionReducer<HouseCost>) => {
 		calcEntity.houseCost = action.payload;
 		dispatch(actions.setCalcEntity(calcEntity));
 	};
 
-	const setInitialPayment = async (action: ActionReducer<InitialPayment>) => {
+	const setInitialPayment = (action: ActionReducer<InitialPayment>) => {
 		calcEntity.initialPayment = action.payload;
 		dispatch(actions.setCalcEntity(calcEntity));
 	};
 
-	const setInitialPaymentValue = async (action: ActionReducer<number>) => {
+	const setInitialPaymentValue = (action: ActionReducer<number>) => {
 		calcEntity.initialPayment.value = action.payload;
 		dispatch(actions.setCalcEntity(calcEntity));
 	};
 
-	const setLoanPeriod = async (action: ActionReducer<LoanPeriod>) => {
+	const setLoanPeriod = (action: ActionReducer<LoanPeriod>) => {
 		calcEntity.loanPeriod = action.payload;
 		dispatch(actions.setCalcEntity(calcEntity));
 	};
 
-	const setLoanPeriodValue = async (action: ActionReducer<number>) => {
+	const setLoanPeriodValue = (action: ActionReducer<number>) => {
 		calcEntity.loanPeriod.value = action.payload;
 		dispatch(actions.setCalcEntity(calcEntity));
 	};
