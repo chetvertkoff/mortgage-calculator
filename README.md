@@ -2,15 +2,13 @@
 
 <a> https://mortgage-calculator-react.herokuapp.com </a>
 
-App inspired by Clean Architecture (Inversify used)
+App inspired by Clean Architecture
 
 ### Project layers
 
 App - React app layer with useReducer store.
 
 Domain - domain, use case layer.
-
-Store - Graphql requests.
 
 ### CI/CD
 
