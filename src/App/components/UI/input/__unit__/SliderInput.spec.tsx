@@ -5,7 +5,7 @@ import { render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { fireEvent } from "@testing-library/dom";
 import { StoreContextProps } from "@/App/HOC/withStoreContext";
-import { CalculatorVM } from "@/App/model/CalculatorVM";
+import { initialState } from "@/App/store/reducer";
 
 const value = 8;
 
@@ -23,7 +23,7 @@ const withPropsComponent = (Component: ComponentType<Props>) =>
 			label="test label"
 			onChange={ val => setVal(val) }
 		  dispatch={ () => null }
-			state={ CalculatorVM.defaultValue() }
+			state={ initialState }
 		/>;
 	};
 

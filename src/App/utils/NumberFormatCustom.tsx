@@ -7,6 +7,7 @@ interface NumberFormatCustomProps {
   value: number;
 }
 
+// @ts-ignore
 export const NumberFormatCustom = React.forwardRef<NumberFormat, NumberFormatCustomProps>(
 	function NumberFormatCustom(props, ref) {
 		const { onChange, value, ...other } = props;
